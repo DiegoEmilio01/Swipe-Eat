@@ -7,9 +7,9 @@ Estudiantes: Diego Emilio, Lucas Muñoz y Elias Sabja.
 
 Ayudante: Rodrigo Alonso.
 
-### Link de la [aplicación](https://radiant-shore-36839.herokuapp.com/presentacion) en heroku:
+### Link de la [aplicación](https://radiant-shore-36839.herokuapp.com/presentacion) en heroku
 
-https://radiant-shore-36839.herokuapp.com/presentacion
+### Link de los [relatos de usuarios](https://trello.com/b/1NwNDwc7/todo-list-relatos-de-usuario) en trello
 
 ### Configuación de Rubocop en:
 
