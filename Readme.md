@@ -11,6 +11,6 @@ Ayudante: Rodrigo Alonso.
 
 ### Link de los [relatos de usuarios](https://trello.com/b/1NwNDwc7/todo-list-relatos-de-usuario) en trello
 
-### Configuación de Rubocop en:
+### Configuración de Rubocop en:
 
 `grupo4-proyecto/app/.rubocop.yml`
