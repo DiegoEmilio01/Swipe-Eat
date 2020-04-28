@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Comunas</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Cuarentena</th>
+      <th colspan="3"> Acciones </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @comunas.each do |comuna| %>
+      <tr>
+        <td><%= comuna.nombre %></td>
+        <td><%= comuna.cuarentena %></td>
+        <td><%= link_to 'Ver detalles', comuna_path(comuna.id) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Crear Comuna', comunas_new_path %>
