@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @comuna.nombre %>
+</p>
+
+<p>
+  <strong>Cuarentena:</strong>
+  <%= @comuna.cuarentena %>
+</p>
+
+<%= link_to 'Lista Comunas', lista_comunas_path %>
+<%= link_to 'Editar Comuna', edit_comuna_path(@comuna.id) %>
+<%= link_to 'Eliminar Comuna', comuna_path(@comuna.id), method: :delete, data: {confirm: '¿Estás seguro?'} %>

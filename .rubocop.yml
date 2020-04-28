@@ -42,3 +42,6 @@ Style/HashTransformKeys:
 
 Style/HashTransformValues:
   Enabled: true
+
+Lint/StructNewOverride:
+  Enabled: true
