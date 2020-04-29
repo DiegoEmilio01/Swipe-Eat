@@ -1,5 +1,6 @@
-class ComentariosController < ApplicationController
+# frozen_string_literal: true
 
+class ComentariosController < ApplicationController
   def new
     @comentario = Comentario.new
   end
@@ -9,9 +10,9 @@ class ComentariosController < ApplicationController
     @comentario = Comentario.create(comentario_params)
 
     if @comentario.save
-      redirect_to comentarios_new_path, notice: "Comentario publicado"
+      redirect_to comentarios_new_path, notice: 'Comentario publicado'
     else
-      redirect_to comentarios_new_path, notice: "Error al publicar comentario"
+      redirect_to comentarios_new_path, notice: 'Error al publicar comentario'
     end
   end
 
@@ -32,16 +33,16 @@ class ComentariosController < ApplicationController
     @comentario = Comentario.find(params[:id])
 
     if @comentario.update(comentario_params)
-      redirect_to comentario_path(@comentario.id), notice: "Comentario editado"
+      redirect_to comentario_path(@comentario.id), notice: 'Comentario editado'
     else
-      redirect_to comentario_path(@comentario.id), notice: "Hubo un error al editar el comentario"
+      msg = 'Hubo un error al editar el comentario'
+      redirect_to comentario_path(@comentario.id), notice: msg
     end
-  end 
+  end
 
   def destroy
     @comentario = Comentario.find(params[:id])
     @comentario.destroy
     redirect_to comentarios_path, notice: 'Comentario eliminado definitivamente'
   end
-
 end
