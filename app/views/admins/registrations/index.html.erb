@@ -12,6 +12,7 @@
             <tr>
                 <td><%= admin.nombre %></td>
                 <td><%= admin.email %></td>
+                <td><%= link_to 'Ver detalles', admin_path(admin.id) %></td>
             </tr>
         <%end%>
     </tbody>

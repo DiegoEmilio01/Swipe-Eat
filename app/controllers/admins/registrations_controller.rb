@@ -8,6 +8,10 @@ class Admins::RegistrationsController < Devise::RegistrationsController
     @admins = Admin.all
   end
 
+  def show
+    @admin = Admin.find(params[:id])
+  end
+
   # GET /resource/sign_up
   # def new
   #   super
