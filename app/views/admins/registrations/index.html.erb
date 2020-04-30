@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+<h1>Lista de Admins</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @admins.each do |admin| %>
+            <tr>
+                <td><%= admin.nombre %></td>
+                <td><%= admin.email %></td>
+                <td><%= link_to 'Ver detalles', admin_path(admin.id) %></td>
+            </tr>
+        <%end%>
+    </tbody>
+</table>
+<br>
+
+<% if current_admin %>
+    <p>Hola, <%= current_admin.nombre %></p>
+    <%= link_to "Cerrar sesión", destroy_admin_session_path, method: :delete %><br><br>
+    <%= link_to 'Editar Admin logueado', edit_admin_registration_path %><br><br>
+    <%= link_to "Borrar Admin logueado", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %>
+<% else %>
+    <%= link_to 'Loguearse como Admin', new_admin_session_path %><br><br>
+    <%= link_to 'Crear Admin', new_admin_registration_path %><br><br>
+    <%= link_to 'Volver a la lista de Cruds disponibles', lista_cruds_path %><br>
+    
+<% end %>

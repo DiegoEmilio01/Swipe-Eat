@@ -10,6 +10,9 @@
     <%= @comentario.fecha %>
 </p>
 
+<br>
+
 <%= link_to "Lista comentarios", lista_comentarios_path %><br>
 <%= link_to "Editar comentario", edit_comentario_path(@comentario.id) %><br>
-<%= link_to "Eliminar comentario", comentario_path(@comentario.id), method: :delete, data: {confirm: 'Estás seguro de querer eliminar el comentario?'} %>
+<%= link_to "Eliminar comentario", comentario_path(@comentario.id), method: :delete, data: {confirm: 'Estás seguro de querer eliminar el comentario?'} %><br>
+
