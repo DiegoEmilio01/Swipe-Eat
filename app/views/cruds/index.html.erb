@@ -1,13 +1,8 @@
 <h1>Lista Cruds Disponibles</h1>
 <br>
+<%= link_to 'Lista Admins', lista_admins_path %>
+<br><br>
 <%= link_to 'Lista Comunas', lista_comunas_path %>
 <br><br>
 <%= link_to "Lista Comentarios", lista_comentarios_path %><br>
 <br><br>
-<% if current_admin %>
-    <p>Hola, <%= current_admin.nombre %></p><br>
-    <%= link_to "Cerrar sesión", destroy_admin_session_path, method: :delete %><br>
-<% else %>
-    <%= link_to "Registrarse", new_admin_registration_path %><br>
-    <%= link_to "Ingresar", new_admin_session_path %><br>
-<% end %>

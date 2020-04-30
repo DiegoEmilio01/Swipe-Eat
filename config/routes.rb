@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
   ### RUTAS CRUD ADMIN ###
   devise_for :admins, controllers: {sessions: 'admins/sessions', registrations: 'admins/registrations'}
+  # Rutas adicionales de admins
+  devise_scope :admin do
+    get 'admin_root' => 'admins/registrations#index', as: 'admin_root'
+    #root to: "admins/registrations#index"
+    get 'admins' => 'admins/registrations#index', as: 'lista_admins'
+    #get 'admins/:id/edit' => 'admins/registrations#index', as: 'edit_admins'
+  end
 
   ### RUTA LISTA DE CRUDS ###
   get '/', to: 'cruds#index', as: 'lista_cruds'
