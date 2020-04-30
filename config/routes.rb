@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  ### RUTAS CRUD ADMIN ###
+  devise_for :admins, controllers: {sessions: 'admins/sessions', registrations: 'admins/registrations'}
 
   ### RUTA LISTA DE CRUDS ###
   get '/', to: 'cruds#index', as: 'lista_cruds'
