@@ -11,8 +11,8 @@
 
 AllCops:
   Include:
-    - app/controllers/*.rb
     - app/config/routes.rb
+    - app/controllers/**/*.rb
   Exclude:
     - bin/setup
     - bin/update
@@ -45,3 +45,7 @@ Style/HashTransformValues:
 
 Lint/StructNewOverride:
   Enabled: true
+
+# Si mas adelante se combinan los 2 estilos desactivar este cop.
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
