@@ -1,0 +1,120 @@
+- POSTGRESQL
+
+sudo su - postgres  (alias=psql)							# Entra al servidor.
+sudo -u usuario psql bbdd								# Entra al servidor y bbdd como usuario.
+psql											# Entra a psql dentro del server.
+create user nombre with password 'contraseña';						# Ejecutar en psql. Crea usuario.
+alter user nombre with superuser;							# Le da al usuario permisos de super user.
+ssh grupo99@codd.ing.puc.cl								# Entra al servidor de la U.
+createdb nombre_db									# Crea bbdd.
+psql nombre_db										# Usar esta bbdd.
+\l											# En psql para printear las bbdd.
+\d											# En psql para printear las tablas.
+\du											# En psql para printear los usuarios.
+\COPY paises(pais, telefono) from 'Entrega2/csv/Paises.csv' DELIMITER ',' CSV HEADER    # Con la tabla creada, la pobla de datos desde un csv. Poner los atributos en el orden del csv (se conserva el de creación).
+
+
+- MODIFICAR TABLAS:
+
+CREATE TABLE tabla (atr_1 tipo PRIMARY KEY, ..., atr_n tipo, FOREIGN KEY (atr_i) REFERENCES tabla_2(atr));	# El orden de los atributos es este para siempre.
+INSERT INTO tabla VALUES(0, 'string', 'YYYY-MM-DD', ..., atr_n);						# Insertar una tupla en la tabla. Tanto con INSERT como DELETE se pueden hacer consultas anidadas.
+ALTER TABLE tabla DROP COLUMN atributo;										# Borra una columna.
+ALTER TABLE tabla ADD COLUMN atributo tipo;									# Agrega una columna.
+ALTER TABLE tabla ALTER COLUMN col SET NOT NULL;								# Establece una columna como no nula.
+DELETE FROM tabla WHERE condicion;										# Borrar todas las tuplas que cumplan la condición.
+DROP TABLE IF EXISTS tabla;											# Borra la tabla.
+UPDATE tabla SET atributo=input WHERE condición;								# Actualiza todas las tuplas que cumplan la condición.
+
+
+- SQL RELACIONAL
+
+PROYECCION = SELECT DISTINCT atributo_1, ..., atributo_n INTO tabla	# El DISTINCT para que sean conjuntos. INTO inserta las columnas seleccionadas en otra tabla (IN external_db), tambíen se pueden guardar valores en variables..
+SELECCION = WHERE condicion_1 AND cond_2 OR NOT cond_3			# Condiciones como =, >=, <, <> (distinto), etc.
+	LIKE '_input%' 							# '%' para varios carácteres y '_' uno sólo.
+	atributo IN consulta						# Ve que esté dentro del conjunto. Elimina duplicados.
+	relación_binaria ANY/ALL (subconsulta)				# Usados para comparar un atributo con otra subconsulta. All = para todo (no monótono), ANY = existe un (monónoto).
+	~*								# Permite utilizar regex case-insensitive. (Sin * para case-sensitive).
+	EXISTS (subconsulta)						# Cuando la subconsulta retorna alguna tupla para la tupla de la contulta, el operador retorna TRUE.
+	||								# Concatenar.
+PRODUCTO CRUZ = FROM tabla_1, tabla_2
+JOIN = SELECT atributos FROM tabla_1, tabla_2 WHERE condicion;
+UNION = consulta_1 UNION consulta_2					# Elimina duplicados porque trabaja con conjuntos. UNION ALL no elimina duplicados.
+INTERSECCION = consulta_1 INTERSECT consulta_2
+RENAME = consulta AS nuevo_nombre					# También se puede renombrar una agregación. Renombrar subconsultas.
+DIFERENCIA = consulta_1 EXCEPT consulta_2				# Operador NO monótono.
+
+
+- AGREGACION
+
+COUNT(DISTINT atributo)		# Cuenta el número de elementos diferentes.
+MAX(atributo)			# Arroja el valor máximo de dicha columna.
+MIN(atributo)			# Arroja el valor mínimo de dicha columna.
+SUM(atributo)			# Suma cierto atributo numérico al agrupar por otro atributo. Ej: SUM(precio*cantidad) AS total_gastado.
+ORDER BY atributo		# Ordena por atributo. ASC o DESC al final de la consulta.
+GROUP BY atributo		# Agrupa por atributo, incluir todos los que se proyecten. Se una con el COUNT.
+HAVING condicion		# Después del GROUP BY y antes del ORDER BY. Es para condicionar agregaciones (no los alias). El COUNT se ejecuta después del WHERE.
+
+
+- RECURSION
+
+WITH RECURSIVE tabla_recursiva(atr_1, atr_2) AS
+(
+   SELECT * FROM tabla
+   UNION
+   SELECT T.atr_1, TR.atr_2 FROM tabla AS T, tabla_recursiva AS TR WHERE condición
+)
+SELECT * FROM tabla_recursiva;
+
+
+- FUNCIONES BASICAS
+
+CREATE OR REPLACE FUNCTION nombre_fn (atr_1 tipo_1, ..., atr_n tipo_n)	# Se puede guardar este código en nombre_fn.sql (en cualquier carpeta sin ; al final y la consola se debe correr ahí) y luego para importarla en psql: \i nombre_fn.sql
+RETURNS tipo_retorno AS							# Usar void cuando no se retorna nada. Puede ser INTEGER, TABLE(atr_1 tipo_1,...) , etc.
+$$
+DECLARE
+    declaración_de_var;							# Declara variables propias de la fn y su tipo.
+BEGIN
+    sentencias_sql RETURN var;						# Incluye consultas. RETURN QUERY para asignar la consulta a la tabla declarada como var y después igual viene un RETURN.
+END
+$$ LANGUAGE plpgsql;
+
+SELECT nombre_fn(input_1, ..., input_n)					# Ejecuta la función.
+
+
+- USAR VARIABLE EN LAS SENTENCIAS
+
+var := to_char(i, '999999999');						# Variable declarada anteriormente y se define como el resultado de la otra fn.
+
+
+- ITERACION
+
+FOR var IN a...b LOOP							# Tambien existen WHILE y LOOP. No es necesario declarar var.
+    sentencias_sql
+END LOOP;
+
+FOR var_tipo_record IN consulta_sql LOOP				# Hay que declarar esta variable como RECORD.
+    sentencias_sql
+END LOOP;
+
+
+- CONDICIONALES
+
+IF condición_booleana THEN
+    sentencias_sql
+ELSE
+    sentencias_sql
+END IF;
+
+CASE WHEN condición_booleana THEN sentencias_sql;
+     ...
+     WHEN condición_booleana_n THEN sentencias_sql_n;
+     ELSE sentencias_sql_n+1;
+END CASE;
+
+
+- SQL DINAMICO
+
+EXECUTE 'consulta con $1, ..., $n;' USING atr_1, ..., atr_n;		# El EXECUTE ejecuta el string de una consulta con variables dinámicas que pueden cambiar.
+   
+
+

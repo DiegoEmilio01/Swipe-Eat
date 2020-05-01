@@ -1,0 +1,49 @@
+- SUBIR CAMBIOS AL REPO ORIGINAL:
+
+gs: git status               #Verificar el estado.
+ga: git add --all            #Agregar todo lo nuevo a "querer cambiarlo".
+gc: git commit -m "mensaje"  #Generar el commit y confirmar los cambios con su respectivo mensaje.
+gp: git push                 #Enviar los cambios al repositorio en GitHub
+
+
+- GIT BRANCHES
+
+git checkout -b new_branch	# Crea nueva branch.
+git checkout branch		# Cambiarse de branch.
+git branch -a			# Ver todaas las branches.
+git branch -d branch		# Eliminar branch.
+git push origin branch		# ga, gc y despues este comando para pushear la branch. En github hay que hacer el pull request y el merge.
+
+
+- REVERTIR un commit y que no está el historial (borrar todo el comtenido de ese comando):
+
+git filter-branch -f
+git reset HEAD^ --hard
+git push -f
+
+
+- REVERTIR un commit:
+
+git revert <commit hash>
+
+
+- ACTUALIZAR el repo a un estado anterior de un commit pasado:
+
+git checkout <commit hash>
+
+
+- MERGE:
+
+git stash
+git pull
+git stash pop
+
+
+- EXTENSIONES DE VSCODE
+
+code --list-extensions | xargs -L 1 echo code --install-extension
+
+
+- INSTALAR UN .DEB
+
+sudo dpkg -i package_file.deb
