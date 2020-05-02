@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     get 'admins/:id', to: 'admins/registrations#show', as: 'admin'
   end
 
-  ### RUTA LISTA DE CRUDS ###
+  ### RUTA LISTA DE CRUDS (HOME)###
   get '/', to: 'cruds#index', as: 'lista_cruds'
 
   ### RUTAS CRUD COMUNA ###
@@ -24,7 +24,6 @@ Rails.application.routes.draw do
   patch 'comunas/:id', to: 'comunas#update'
   #DELETE
   delete 'comunas/:id', to: 'comunas#destroy'
-  ### FIN CRUD COMUNA ###
 
   ### RUTAS CRUD COMENTARIO ###
   #CREATE
@@ -38,7 +37,6 @@ Rails.application.routes.draw do
   patch 'comentarios/:id', to: 'comentarios#update'
   #DELETE
   delete 'comentarios/:id', to: 'comentarios#destroy'
-  ### FIN CRUD COMENTARIO ###
 
   ### RUTAS CRUD GUSTO ###
   # CREATE
@@ -52,4 +50,17 @@ Rails.application.routes.draw do
   patch 'gustos/:id', to: 'gustos#update'
   # DELETE
   delete 'gustos/:id', to: 'gustos#destroy'
+
+  ### RUTAS CRUD RESTAURANTE ###
+  # CREATE
+  get 'restaurantes/new', to:'restaurantes#new'
+  post 'restaurantes', to: 'restaurantes#create'
+  # READ
+  get 'restaurantes', to: 'restaurantes#index', as: 'lista_restaurantes'
+  get 'restaurantes/:id', to: 'restaurantes#show', as:'restaurante'
+  # UPDATE
+  get 'restaurantes/:id/edit', to: 'restaurantes#edit', as: 'edit_restaurante'
+  patch 'restaurantes/:id', to: 'restaurantes#update'
+  # DELETE
+  delete 'restaurantes/:id', to: 'restaurantes#destroy'
 end

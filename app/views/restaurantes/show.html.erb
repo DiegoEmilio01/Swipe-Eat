@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @restaurante.nombre %>
+</p>
+
+<p>
+  <strong>Valoración:</strong>
+  <%= @restaurante.valoracion %>
+</p>
+
+<p>
+    <strong>Descripción:</strong>
+    <%= @restaurante.descripcion %>
+  </p>
+
+<br>
+
+<%= link_to 'Lista Restaurantes', lista_restaurantes_path %><br>
+<%= link_to 'Editar Restaurante', edit_restaurante_path(@restaurante.id) %><br>
+<%= link_to 'Eliminar Restaurante', restaurante_path(@restaurante.id), method: :delete, data: {confirm: '¿Estás seguro?'} %><br>
