@@ -7,9 +7,9 @@ Estudiantes: Diego Emilio, Lucas Muñoz y Elias Sabja.
 
 Ayudante: Rodrigo Alonso.
 
-### Link de la [aplicación](https://google.com) en heroku
+### Link de la [aplicación](https://swipe-eat.herokuapp.com/) en Heroku
 
-### Link de los [relatos de usuarios](https://trello.com/b/1NwNDwc7/todo-list-relatos-de-usuario) en trello
+### Link de los [relatos de usuarios](https://trello.com/b/1NwNDwc7/todo-list-relatos-de-usuario) en Trello
 
 ### Configuración de Rubocop en:
 
