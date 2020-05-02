@@ -13,7 +13,22 @@
 <p>
     <strong>Descripción:</strong>
     <%= @restaurante.descripcion %>
-  </p>
+</p>
+<br>
+
+<table>
+    <tbody>
+        <tr>
+            <% @restaurante.imagenes.each do |imagen| %>
+            <td>
+                <div style="width:200px; height:300px;">
+                    <%= image_tag(imagen, style:'width:150px; heigth: 100px') %>
+                </div>
+            </td>
+            <% end %>
+        </tr>
+    </tbody>
+</table>
 
 <br>
 

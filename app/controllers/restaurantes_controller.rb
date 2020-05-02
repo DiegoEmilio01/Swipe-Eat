@@ -6,7 +6,7 @@ class RestaurantesController < ApplicationController
   end
 
   def create
-    restaurante_params = params.require(:restaurante).permit(:nombre, :descripcion, :valoracion)
+    restaurante_params = params.require(:restaurante).permit(:nombre, :descripcion, :valoracion, imagenes: [])
     @restaurante = Restaurante.create restaurante_params
     if @restaurante.save
       redirect_to restaurantes_new_path, notice: 'Restaurante creado exitosamente.'
@@ -28,7 +28,7 @@ class RestaurantesController < ApplicationController
   end
 
   def update
-    restaurante_params = params.require(:restaurante).permit(:nombre, :descripcion, :valoracion)
+    restaurante_params = params.require(:restaurante).permit(:nombre, :descripcion, :valoracion, imagenes: [])
     @restaurante = Restaurante.find params[:id]
     if @restaurante.update restaurante_params
       aviso_exito = 'Restaurante editado exitosamente.'

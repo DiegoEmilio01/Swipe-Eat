@@ -20,6 +20,12 @@
     </div>
 <% end %>
 
+<% @restaurante.imagenes.each do |imagen| %>
+<div style="width:300px; height:300px;"></div>
+    <%= image_tag(imagen, style:'width:100%; height: auto') %>
+</div>
+<% end %>
+
 <br>
 
 <%= link_to 'Lista Restaurantes', lista_restaurantes_path %>
