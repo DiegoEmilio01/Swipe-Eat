@@ -17,6 +17,13 @@
 <br>
 
 <table>
+    <thead>
+        <tr>
+            <% (0...@restaurante.imagenes.count).each do |numero| %>
+                <th>Imagen <%= numero + 1 %> </th>
+            <% end %>
+        </tr>
+      </thead>
     <tbody>
         <tr>
             <% @restaurante.imagenes.each do |imagen| %>

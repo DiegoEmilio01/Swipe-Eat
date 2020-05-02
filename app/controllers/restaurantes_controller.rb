@@ -44,4 +44,10 @@ class RestaurantesController < ApplicationController
     @restaurante.destroy
     redirect_to lista_restaurantes_path, notice: 'Restaurante eliminado exitosamente.'
   end
+
+  def delete_imagen
+    @imagen = ActiveStorage::Attachment.find(params[:id_i])
+    @imagen.purge
+    redirect_to restaurante_path(params[:id_r]), notice: 'Imagen del restaurante eliminada exitosamente.'
+  end
 end

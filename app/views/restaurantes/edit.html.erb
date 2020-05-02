@@ -15,16 +15,44 @@
         <%= form.label :valoracion %>
         <%= form.text_field :valoracion %>
     </div>
+    <div class="field">
+        <%= form.label :imagenes %>
+        <%= form.file_field :imagenes, multiple: true %>
+    </div>
     <div class="actions">
         <%= form.submit %>
     </div>
 <% end %>
 
-<% @restaurante.imagenes.each do |imagen| %>
-<div style="width:300px; height:300px;"></div>
-    <%= image_tag(imagen, style:'width:100%; height: auto') %>
-</div>
-<% end %>
+<br>
+
+<table>
+    <thead>
+        <tr>
+            <% (0...@restaurante.imagenes.count).each do |numero| %>
+                <th>Imagen <%= numero + 1 %> </th>
+            <% end %>
+        </tr>
+      </thead>
+    <tbody>
+        <tr>
+            <% @restaurante.imagenes.each do |imagen| %>
+            <td>
+                <div style="width:200px; height:300px;">
+                    <%= image_tag(imagen, style:'width:150px; heigth: 100px') %>
+                </div>
+            </td>
+            <% end %>
+        </tr>
+        <tr>
+            <% @restaurante.imagenes.each do |imagen| %>
+            <td>
+                <%= link_to "Remover imagen", delete_imagen_restaurante_path(imagen.id, @restaurante.id), method: :delete, data: {confirm: "Are you sure?"} %>
+            </td>
+            <% end %>
+        </tr>
+    </tbody>
+</table>
 
 <br>
 
