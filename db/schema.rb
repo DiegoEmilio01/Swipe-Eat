@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_01_214933) do
+
+ActiveRecord::Schema.define(version: 2020_05_01_215436) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,9 +31,9 @@ ActiveRecord::Schema.define(version: 2020_05_01_214933) do
 
   create_table "comentarios", force: :cascade do |t|
     t.string "contenido"
-    t.string "fecha"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "fecha"
   end
 
   create_table "comunas", force: :cascade do |t|
