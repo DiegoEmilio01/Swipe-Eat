@@ -1,0 +1,2 @@
+class Gusto < ApplicationRecord
+end

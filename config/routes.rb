@@ -38,5 +38,18 @@ Rails.application.routes.draw do
   patch 'comentarios/:id', to: 'comentarios#update'
   #DELETE
   delete 'comentarios/:id', to: 'comentarios#destroy'
-### FIN CRUD COMENTARIO ###
+  ### FIN CRUD COMENTARIO ###
+
+  ### RUTAS CRUD GUSTO ###
+  # CREATE
+  get 'gustos/new', to:'gustos#new'
+  post 'gustos', to: 'gustos#create'
+  # READ
+  get 'gustos', to: 'gustos#index'
+  get 'gustos/:id', to: 'gustos#show', as:'gusto'
+  # UPDATE
+  get 'gustos/:id/edit', to: 'gustos#edit', as: 'edit_gusto'
+  patch 'gustos/:id', to: 'gustos#update'
+  # DELETE
+  delete 'gustos/:id', to: 'gustos#destroy'
 end
