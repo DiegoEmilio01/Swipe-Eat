@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 2020_05_01_215436) do
 
   # These are extensions that must be enabled in order to support this database
@@ -38,6 +39,13 @@ ActiveRecord::Schema.define(version: 2020_05_01_215436) do
   create_table "comunas", force: :cascade do |t|
     t.string "nombre"
     t.boolean "cuarentena"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "gustos", force: :cascade do |t|
+    t.string "nombre"
+    t.string "descripcion"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

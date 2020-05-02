@@ -1,0 +1,2 @@
+module GustosHelper
+end
