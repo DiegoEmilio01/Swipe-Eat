@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Nuevo Restaurante</h1>
+
+<%= form_with(model: @restaurante, method: :post) do |form| %>
+    <div class="field">
+        <%= form.label :nombre %>
+        <%= form.text_field :nombre %>
+    </div>
+    <div class="field">
+        <%= form.label :descripcion %>
+        <%= form.text_field :descripcion %>
+    </div>
+    <div class="field">
+        <%= form.label :valoracion %>
+        <%= form.text_field :valoracion %>
+    </div>
+    <div class="field">
+        <%= form.label :imagenes %>
+        <%= form.file_field :imagenes, multiple: true %>
+    </div>
+    <div class="actions">
+        <%= form.submit %>
+    </div>
+<% end %>
+
+<br>
+
+<%= link_to 'Lista Restaurantes', lista_restaurantes_path %>

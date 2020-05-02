@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Editar Restaurante</h1>
+
+<%= form_with(model: @restaurante, method: :patch) do |form| %>
+    <div class="field">
+        <%= form.label :nombre %>
+        <%= form.text_field :nombre %>
+    </div>
+    <div class="field">
+        <%= form.label :descripcion %>
+        <%= form.text_field :descripcion %>
+    </div>
+    <div class="field">
+        <%= form.label :valoracion %>
+        <%= form.text_field :valoracion %>
+    </div>
+    <div class="field">
+        <%= form.label :imagenes %>
+        <%= form.file_field :imagenes, multiple: true %>
+    </div>
+    <div class="actions">
+        <%= form.submit %>
+    </div>
+<% end %>
+
+<br>
+
+<table>
+    <thead>
+        <tr>
+            <% (0...@restaurante.imagenes.count).each do |numero| %>
+                <th>Imagen <%= numero + 1 %> </th>
+            <% end %>
+        </tr>
+      </thead>
+    <tbody>
+        <tr>
+            <% @restaurante.imagenes.each do |imagen| %>
+            <td>
+                <div style="width:200px; height:300px;">
+                    <%= image_tag(imagen, style:'width:150px; heigth: 100px') %>
+                </div>
+            </td>
+            <% end %>
+        </tr>
+        <tr>
+            <% @restaurante.imagenes.each do |imagen| %>
+            <td>
+                <%= link_to "Remover imagen", delete_imagen_restaurante_path(imagen.id, @restaurante.id), method: :delete, data: {confirm: "Are you sure?"} %>
+            </td>
+            <% end %>
+        </tr>
+    </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Lista Restaurantes', lista_restaurantes_path %>

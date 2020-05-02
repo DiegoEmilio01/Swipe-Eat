@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Restaurantes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Valoración</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @restaurantes.each do |restaurante| %>
+      <tr>
+        <td><%= restaurante.nombre %></td>
+        <td><%= restaurante.valoracion %></td>
+        <td><%= link_to 'Ver detalles', restaurante_path(restaurante.id) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Crear Restaurante', restaurantes_new_path %><br><br>
+<%= link_to 'Volver a la lista de Cruds disponibles', lista_cruds_path %><br>

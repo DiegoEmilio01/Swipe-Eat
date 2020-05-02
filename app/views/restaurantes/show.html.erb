@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @restaurante.nombre %>
+</p>
+
+<p>
+  <strong>Valoración:</strong>
+  <%= @restaurante.valoracion %>
+</p>
+
+<p>
+    <strong>Descripción:</strong>
+    <%= @restaurante.descripcion %>
+</p>
+<br>
+
+<table>
+    <thead>
+        <tr>
+            <% (0...@restaurante.imagenes.count).each do |numero| %>
+                <th>Imagen <%= numero + 1 %> </th>
+            <% end %>
+        </tr>
+      </thead>
+    <tbody>
+        <tr>
+            <% @restaurante.imagenes.each do |imagen| %>
+            <td>
+                <div style="width:200px; height:300px;">
+                    <%= image_tag(imagen, style:'width:150px; heigth: 100px') %>
+                </div>
+            </td>
+            <% end %>
+        </tr>
+    </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Lista Restaurantes', lista_restaurantes_path %><br>
+<%= link_to 'Editar Restaurante', edit_restaurante_path(@restaurante.id) %><br>
+<%= link_to 'Eliminar Restaurante', restaurante_path(@restaurante.id), method: :delete, data: {confirm: '¿Estás seguro?'} %><br>
