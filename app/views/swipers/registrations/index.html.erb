@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+<h1>Lista de Swipers</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Edad</th>
+            <th>Cumpleaños</th>
+            <th>Teléfono</th>
+            <th>Dirección</th>
+            <th>Descripción</th>        
+        </tr>
+    </thead>
+    <tbody>
+        <% @swipers.each do |swiper| %>
+            <tr>
+                <td><%= swiper.nombre %></td>
+                <td><%= swiper.email %></td>
+                <td><%= swiper.edad %></td>
+                <td><%= swiper.cumpleanos %></td>
+                <td><%= swiper.telefono %></td>
+                <td><%= swiper.direccion %></td>
+                <td><%= swiper.descripcion %></td>
+                <td><%= link_to 'Ver detalles', swiper_path(swiper.id) %></td>
+            </tr>
+        <%end%>
+    </tbody>
+</table>
+<br>
+
+<% if current_swiper %>
+    <p>Hola, <%= current_swiper.nombre %></p>
+    <%= link_to "Cerrar sesión", destroy_swiper_session_path, method: :delete, data: {confirm: '¿Estás seguro que quieres cerrar sesión?'}  %><br><br>
+    <%= link_to 'Editar Swiper logueado', edit_swiper_registration_path %><br><br>
+    <%= link_to "Borrar Swiper logueado", registration_path(resource_name), data: { confirm: "Estás seguro" }, method: :delete %><br><br>
+    <%= link_to 'Volver a la lista de Cruds disponibles', destroy_swiper_session_path, method: :delete, data: {confirm: '¿Estás seguro que quieres volver a la lista de cruds?' + "\n" + 'Se cerrará tu sesión.'}  %>
+<% else %>
+    <%= link_to 'Loguearse como Swiper', new_swiper_session_path %><br><br>
+    <%= link_to 'Crear Swiper', new_swiper_registration_path %><br><br>
+    <%= link_to 'Volver a la lista de Cruds disponibles', lista_cruds_path %><br>
+<% end %>

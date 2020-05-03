@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  ### RUTAS CRUD SWIPERS ###
+  devise_for :swipers, controllers: {sessions: 'swipers/sessions', registrations: 'swipers/registrations'}
+  #Rutas adicionales de swipers
+  devise_scope :swiper do
+    get 'swiper_root' => 'swipers/registrations#index', as: 'swiper_root'
+    get 'swipers' => 'swipers/registrations#index', as: 'lista_swipers'
+    get 'swipers/:id' => 'swipers/registrations#show', as: 'swiper'
+  end
 
   ### RUTAS CRUD ADMIN ###
   devise_for :admins, controllers: {sessions: 'admins/sessions', registrations: 'admins/registrations'}
