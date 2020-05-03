@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class GustosController < ApplicationController
   def index
     @gustos = Gusto.all
@@ -19,9 +21,9 @@ class GustosController < ApplicationController
     gusto_params = params.require(:gusto).permit(:nombre, :descripcion)
     @gusto = Gusto.find(params[:id])
     if @gusto.update(gusto_params)
-      redirect_to gusto_path(@gusto.id), notice: "Gusto editado exitosamente"
+      redirect_to gusto_path(@gusto.id), notice: 'Gusto editado exitosamente'
     else
-      redirect_to gusto_path(@gusto.id), notice: "Ocurrió un error al editar el gusto"
+      redirect_to gusto_path(@gusto.id), notice: 'Ocurrió un error al editar el gusto'
     end
   end
 
@@ -29,9 +31,9 @@ class GustosController < ApplicationController
     gusto_params = params.require(:gusto).permit(:nombre, :descripcion)
     @gustos = Gusto.create(gusto_params)
     if @gustos.save
-      redirect_to gustos_new_path, notice: "Gusto agregado exitosamente"
+      redirect_to gustos_new_path, notice: 'Gusto agregado exitosamente'
     else
-      redirect_to gustos_new_path, notice: "Ocurrió un error al agregar el gusto"
+      redirect_to gustos_new_path, notice: 'Ocurrió un error al agregar el gusto'
     end
   end
 

@@ -46,6 +46,10 @@ Style/HashTransformValues:
 Lint/StructNewOverride:
   Enabled: true
 
+Style/EndOfLine:
+  Enabled: false
+  #EnforcedStyle: lf
+
 # Si mas adelante se combinan los 2 estilos desactivar este cop.
 Style/ClassAndModuleChildren:
   EnforcedStyle: compact

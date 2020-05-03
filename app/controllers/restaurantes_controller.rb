@@ -6,7 +6,8 @@ class RestaurantesController < ApplicationController
   end
 
   def create
-    restaurante_params = params.require(:restaurante).permit(:nombre, :descripcion, :valoracion, imagenes: [])
+    restaurante_params = params.require(:restaurante).permit(:nombre, :descripcion,
+                                                             :valoracion, imagenes: [])
     @restaurante = Restaurante.create restaurante_params
     if @restaurante.save
       redirect_to restaurantes_new_path, notice: 'Restaurante creado exitosamente.'
@@ -28,7 +29,8 @@ class RestaurantesController < ApplicationController
   end
 
   def update
-    restaurante_params = params.require(:restaurante).permit(:nombre, :descripcion, :valoracion, imagenes: [])
+    restaurante_params = params.require(:restaurante).permit(:nombre, :descripcion,
+                                                             :valoracion, imagenes: [])
     @restaurante = Restaurante.find params[:id]
     if @restaurante.update restaurante_params
       aviso_exito = 'Restaurante editado exitosamente.'
@@ -48,6 +50,7 @@ class RestaurantesController < ApplicationController
   def delete_imagen
     @imagen = ActiveStorage::Attachment.find(params[:id_i])
     @imagen.purge
-    redirect_to restaurante_path(params[:id_r]), notice: 'Imagen del restaurante eliminada exitosamente.'
+    aviso = 'Imagen del restaurante eliminada exitosamente.'
+    redirect_to restaurante_path(params[:id_r]), notice: aviso
   end
 end
