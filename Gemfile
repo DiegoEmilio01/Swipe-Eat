@@ -16,8 +16,14 @@ gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
 
+# Rubocop (para estandarizar ruby)
 gem 'rubocop', '~> 0.81.0', require: false
+
+# Devise (para implementar los login y sign up)
 gem 'devise', '~> 4.7', '>= 4.7.1'
+
+# Active Storage Amazon
+gem "aws-sdk-s3", require: false
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
