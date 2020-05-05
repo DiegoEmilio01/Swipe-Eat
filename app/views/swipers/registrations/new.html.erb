@@ -38,6 +38,15 @@
     <%= f.text_field :descripcion, autofocus: true, autocomplete: "descripcion" %>
   </div>
 
+  <br>
+
+  <div class="field">
+    <%= f.label :imagenes %>
+    <%= f.file_field :imagenes, multiple: true %>
+  </div>
+
+  <br>
+
   <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>
@@ -51,11 +60,13 @@
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
+  <br>
+
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>
 <% end %>
-
+<br><br>
 <%= render "swipers/shared/links" %>
-
+<br>
 <%= link_to "Volver a lista de Swipers", lista_swipers_path %>

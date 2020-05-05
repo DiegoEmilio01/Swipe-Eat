@@ -12,6 +12,13 @@ class Swipers::RegistrationsController < Devise::RegistrationsController
     @swiper = Swiper.find(params[:id])
   end
 
+  def delete_imagen
+    @imagen = ActiveStorage::Attachment.find(params[:id_i])
+    @imagen.purge
+    aviso = 'Imagen del Swiper eliminada exitosamente.'
+    redirect_to swiper_path(params[:id_s]), notice: aviso
+  end
+
   # GET /resource/sign_up
   # def new
   #   super
@@ -47,18 +54,60 @@ class Swipers::RegistrationsController < Devise::RegistrationsController
   # end
 
   # protected
-
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: %i[nombre edad telefono
-                                                         cumpleanos direccion descripcion])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:nombre, :edad, :telefono, :cumpleanos,
+                                                       :direccion, :descripcion, imagenes: []])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: %i[nombre edad telefono
-                                                                cumpleanos direccion descripcion])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:nombre, :edad, :telefono, :cumpleanos,
+                                                              :direccion, :descripcion, imagenes: []])
   end
+
+  def update
+    new_params = params.require(:swiper).permit(:email, :current_password, :password,
+                                              :password_confirmation, :nombre, :edad, :telefono,
+                                              :cumpleanos, :direccion, :descripcion, imagenes: [])
+    change_password = true
+    if params[:swiper][:password].blank?
+      params[:swiper].delete("password")
+      params[:swiper].delete("password_confirmation")
+      new_params = params.require(:swiper).permit(:email, :nombre, :edad, :telefono, :cumpleanos,
+                                                  :direccion, :descripcion, imagenes: [])
+      change_password = false
+    end
+
+    @swiper = Swiper.find(current_swiper.id)
+    is_valid = false
+
+    if change_password
+      is_valid = @swiper.update_with_password(new_params)
+    else
+      is_valid = @swiper.update_without_password(new_params)
+    end
+
+    if is_valid
+      set_flash_message :notice, :updated
+      sign_in @swiper, :bypass => true
+      redirect_to after_update_path_for(@swiper)
+    else
+      render "edit"
+    end
+  end
+
+  # If you have extra params to permit, append them to the sanitizer.
+  #def configure_sign_up_params
+  #  devise_parameter_sanitizer.permit(:sign_up, keys: %i[nombre edad telefono
+  #                                                       cumpleanos direccion descripcion])
+  #end
+  #
+  ## If you have extra params to permit, append them to the sanitizer.
+  #def configure_account_update_params
+  #  devise_parameter_sanitizer.permit(:account_update, keys: %i[nombre edad telefono
+  #                                                              cumpleanos direccion descripcion])
+  #end
 
   # The path used after sign up.
   # def after_sign_up_path_for(resource)
