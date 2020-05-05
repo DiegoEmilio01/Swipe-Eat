@@ -46,9 +46,14 @@ Style/HashTransformValues:
 Lint/StructNewOverride:
   Enabled: true
 
-Style/EndOfLine:
+Layout/EndOfLine:
   Enabled: false
-  #EnforcedStyle: lf
+
+Metrics/MethodLength:
+  Max: 30
+
+Metrics/AbcSize:
+  Enabled: false
 
 # Si mas adelante se combinan los 2 estilos desactivar este cop.
 Style/ClassAndModuleChildren:
