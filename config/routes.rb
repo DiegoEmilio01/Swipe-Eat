@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     get 'swiper_root' => 'swipers/registrations#index', as: 'swiper_root'
     get 'swipers' => 'swipers/registrations#index', as: 'lista_swipers'
     get 'swipers/:id' => 'swipers/registrations#show', as: 'swiper'
+    delete 'swipers/imagen/:id_i/:id_s' => 'swipers/registrations#delete_imagen', as: 'delete_imagen_swiper'
   end
 
   ### RUTAS CRUD ADMIN ###

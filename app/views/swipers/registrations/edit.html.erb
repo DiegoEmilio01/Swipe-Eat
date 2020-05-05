@@ -37,7 +37,16 @@
     <%= f.label :descripcion %><br />
     <%= f.text_field :descripcion, autofocus: true, autocomplete: "descripcion" %>
   </div>
-  
+
+  <br>
+
+  <div class="field">
+    <%= f.label :imagenes %>
+    <%= f.file_field :imagenes, multiple: true %>
+  </div>
+
+  <br>
+
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
@@ -56,18 +65,46 @@
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
+  <br>
 
   <div class="actions">
     <%= f.submit "Update" %>
   </div>
 <% end %>
 
-<h3>Cancel my account</h3>
+<br>
 
+<table>
+    <thead>
+        <tr>
+            <% (0...current_swiper.imagenes.count).each do |numero| %>
+                <th>Imagen <%= numero + 1 %> </th>
+            <% end %>
+        </tr>
+      </thead>
+    <tbody>
+        <tr>
+            <% current_swiper.imagenes.each do |imagen| %>
+            <td>
+                <div style="width:200px; height:300px;">
+                    <%= image_tag(imagen, style:'width:150px; heigth: 100px') %>
+                </div>
+            </td>
+            <% end %>
+        </tr>
+        <tr>
+            <% current_swiper.imagenes.each do |imagen| %>
+            <td>
+                <%= link_to "Remover imagen", delete_imagen_swiper_path(imagen.id, current_swiper.id), method: :delete, data: {confirm: "Are you sure?"} %>
+            </td>
+            <% end %>
+      </tr>
+    </tbody>
+</table>
+
+<br>
+<br>
+<h3>Cancel my account</h3>
 <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
 
 <%= link_to "Back", :back %>
