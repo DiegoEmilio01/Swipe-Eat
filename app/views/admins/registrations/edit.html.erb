@@ -1,42 +1,78 @@
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+<%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+<table>
+    <thead>
+      <tr>
+          <th>Editar datos</th>
+          <th>Editar contraseña</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+            <div class="field">
+              <%= f.label :email %><br />
+              <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+            </div>
+          
+            <div class="field">
+              <%= f.label :nombre %><br />
+              <%= f.text_field :nombre, autofocus: true, autocomplete: "nombre" %>
+            </div>
+          
+            <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+              <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+            <% end %>
+          
+            <br><br><br><br><br>
+          
+            <div class="actions">
+              <%= f.submit "Enviar datos" %>
+            </div>
+          <% end %>
+        </td>
+        <td>
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+            
 
-  <div class="field">
-    <%= f.label :nombre %><br />
-    <%= f.text_field :nombre, autofocus: true, autocomplete: "nombre" %>
-  </div>
+            <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+              <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+            <% end %>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+            <div class="field">
+              <%= f.label :contraseña%><br />
+              <%= f.password_field :password, autocomplete: "new-password" %>
+              <% if @minimum_password_length %>
+                <br />
+                <em><%= @minimum_password_length %> characters minimum</em>
+              <% end %>
+            </div>
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
+            <div class="field">
+              <%= f.label :confirmación_contraseña %><br />
+              <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+            </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+            <div class="field">
+              <%= f.label :contraseña_actual %><br />
+              <%= f.password_field :current_password, autocomplete: "current-password" %>
+            </div>
 
-  <br>
+            <br>
 
-  <div class="actions">
-    <%= f.submit "Update Admin" %>
-  </div>
-<% end %>
+            <div class="actions" style="margin-top:13px;">
+              <%= f.submit "Enviar nueva contraseña" %>
+            </div>
+          <% end %>
+        </td>
+      </tr>
+    </tbody>
+</table>
+
+
 
 <br>
 <%= link_to "Volver a lista de Admins", lista_admins_path %>

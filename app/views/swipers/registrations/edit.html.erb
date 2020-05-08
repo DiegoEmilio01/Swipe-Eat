@@ -1,81 +1,120 @@
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :nombre %><br />
-    <%= f.text_field :nombre, autofocus: true, autocomplete: "nombre" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :edad %><br />
-    <%= f.text_field :edad, autofocus: true, autocomplete: "edad" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :telefono %><br />
-    <%= f.text_field :telefono, autofocus: true, autocomplete: "telefono" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :cumpleanos %><br />
-    <%= f.date_field :cumpleanos, autofocus: true, autocomplete: "cumpleanos" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :direccion %><br />
-    <%= f.text_field :direccion, autofocus: true, autocomplete: "direccion" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :descripcion %><br />
-    <%= f.text_field :descripcion, autofocus: true, autocomplete: "descripcion" %>
-  </div>
-
-  <br>
-
-  <div class="field">
-    <%= f.label :imagenes %>
-    <%= f.file_field :imagenes, multiple: true %>
-  </div>
-
-  <br>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <br>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<br>
+<%= render "devise/shared/error_messages", resource: resource %>
 
 <table>
     <thead>
+      <tr>
+          <th>Editar datos</th>
+          <th>Editar contraseña</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+            <div class="field">
+              <%= f.label :email %><br />
+              <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+            </div>
+          
+            <div class="field">
+              <%= f.label :nombre %><br />
+              <%= f.text_field :nombre, autofocus: true, autocomplete: "nombre" %>
+            </div>
+          
+            <div class="field">
+              <%= f.label :edad %><br />
+              <%= f.text_field :edad, autofocus: true, autocomplete: "edad" %>
+            </div>
+          
+            <div class="field">
+              <%= f.label :teléfono %><br />
+              <%= f.text_field :telefono, autofocus: true, autocomplete: "telefono" %>
+            </div>
+          
+            <div class="field">
+              <%= f.label :cumpleaños %><br />
+              <%= f.date_select :cumpleanos, autofocus: true, autocomplete: "cumpleanos", discard_year:true %>
+            </div>
+          
+            <div class="field">
+              <%= f.label :dirección %><br />
+              <%= f.text_field :direccion, autofocus: true, autocomplete: "direccion" %>
+            </div>
+          
+            <div class="field">
+              <%= f.label :descripción %><br />
+              <%= f.text_field :descripcion, autofocus: true, autocomplete: "descripcion" %>
+            </div>
+          
+            <br>
+          
+            <div class="field">
+              <%= f.label :imágenes %>
+              <%= f.file_field :imagenes, multiple: true %>
+            </div>
+          
+            <br>
+          
+            <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+              <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+            <% end %>
+          
+            <br>
+          
+            <div class="actions">
+              <%= f.submit "Enviar datos" %>
+            </div>
+          <% end %>
+        </td>
+        <td>
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+            
+
+            <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+              <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+            <% end %>
+
+            <div class="field">
+              <%= f.label :contraseña%><br />
+              <%= f.password_field :password, autocomplete: "new-password" %>
+              <% if @minimum_password_length %>
+                <br />
+                <em><%= @minimum_password_length %> characters minimum</em>
+              <% end %>
+            </div>
+
+            <div class="field">
+              <%= f.label :confirmación_contraseña %><br />
+              <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+            </div>
+
+            <div class="field">
+              <%= f.label :contraseña_actual %><br />
+              <%= f.password_field :current_password, autocomplete: "current-password" %>
+            </div>
+
+            <br><br><br><br><br><br><br><br><br><br><br>
+
+            <div class="actions" style="margin-top:13px;">
+              <%= f.submit "Enviar nueva contraseña" %>
+            </div>
+          <% end %>
+        </td>
+      </tr>
+    </tbody>
+</table>
+
+<br><br><br>
+
+<table>
+    <thead>
+        <tr>
+          <th>
+            Editar Imágenes
+          </th>
+        </tr>
         <tr>
             <% (0...current_swiper.imagenes.count).each do |numero| %>
                 <th>Imagen <%= numero + 1 %> </th>
@@ -86,8 +125,8 @@
         <tr>
             <% current_swiper.imagenes.each do |imagen| %>
             <td>
-                <div style="width:200px; height:300px;">
-                    <%= image_tag(imagen, style:'width:150px; heigth: 100px') %>
+                <div style="width:200px; height:250px;">
+                    <%= image_tag(imagen, style:'width:180px; heigth: 170px') %>
                 </div>
             </td>
             <% end %>
@@ -104,7 +143,4 @@
 
 <br>
 <br>
-<h3>Cancel my account</h3>
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+<%= link_to "Volver a la lista Swipers", lista_swipers_path %>

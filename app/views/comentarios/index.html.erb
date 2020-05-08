@@ -5,6 +5,7 @@
         <tr>
             <th>Contenido</th>
             <th>Fecha</th>
+            <th>Valoración</th>
         </tr>
     </thead>
 
@@ -13,6 +14,7 @@
             <tr>
                 <td><%= comentario.contenido %></td>
                 <td><%= comentario.fecha %></td>
+                <td><%= comentario.valoracion %></td>
                 <td><%= link_to 'Ver detalles', comentario_path(comentario.id) %></td>
             </tr>
         <%end%>
