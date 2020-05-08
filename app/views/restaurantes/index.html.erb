@@ -6,7 +6,6 @@
   <thead>
     <tr>
       <th>Nombre</th>
-      <th>Valoración</th>
     </tr>
   </thead>
 
@@ -14,7 +13,6 @@
     <% @restaurantes.each do |restaurante| %>
       <tr>
         <td><%= restaurante.nombre %></td>
-        <td><%= restaurante.valoracion %></td>
         <td><%= link_to 'Ver detalles', restaurante_path(restaurante.id) %></td>
       </tr>
     <% end %>
