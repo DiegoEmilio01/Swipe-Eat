@@ -1,4 +1,15 @@
 Rails.application.routes.draw do
+
+  ### RUTAS CRUD OWNER ###
+  devise_for :owners, controllers: {sessions: 'owners/sessions', registrations: 'owners/registrations'}
+  #Rutas adicionales de owner
+  devise_scope :owner do
+    get 'owners_root' => 'owners/registrations#index', as: 'owner_root'
+    get 'owners' => 'owners/registrations#index', as: 'lista_owners'
+    get 'owners/:id' => 'owners/registrations#show', as: 'owner'
+  end
+
+
   ### RUTAS CRUD SWIPERS ###
   devise_for :swipers, controllers: {sessions: 'swipers/sessions', registrations: 'swipers/registrations'}
   #Rutas adicionales de swipers
