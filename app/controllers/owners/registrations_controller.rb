@@ -27,11 +27,6 @@ class Owners::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # PUT /resource
-  # def update
-  #   super
-  # end
-
   # DELETE /resource
   # def destroy
   #   super
@@ -56,6 +51,35 @@ class Owners::RegistrationsController < Devise::RegistrationsController
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
     devise_parameter_sanitizer.permit(:account_update, keys: [:nombre])
+  end
+
+  def update
+    new_params = params.require(:owner).permit(:email, :current_password, :password,
+                                               :password_confirmation, :nombre)
+    change_password = true
+    if params[:owner][:password].blank?
+      params[:owner].delete('password')
+      params[:owner].delete('password_confirmation')
+      new_params = params.require(:owner).permit(:email, :nombre)
+      change_password = false
+    end
+
+    @owner = Owner.find(current_owner.id)
+
+    is_valid = if change_password
+                 @owner.update_with_password(new_params)
+               else
+                 @owner.update_without_password(new_params)
+               end
+
+    if is_valid
+      set_flash_message :notice, :updated
+      sign_in @owner, bypass: true
+      aviso = 'Owner editado exitosamente.'
+      redirect_to owner_path(@owner.id), notice: aviso
+    else
+      render 'edit'
+    end
   end
 
   # The path used after sign up.
