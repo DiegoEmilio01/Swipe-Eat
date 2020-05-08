@@ -75,7 +75,8 @@ class Admins::RegistrationsController < Devise::RegistrationsController
     if is_valid
       set_flash_message :notice, :updated
       sign_in @admin, bypass: true
-      redirect_to after_update_path_for(@admin)
+      aviso = 'Admin editado exitosamente.'
+      redirect_to admin_path(@admin.id), notice: aviso
     else
       render 'edit'
     end
