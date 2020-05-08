@@ -6,7 +6,7 @@ class ComentariosController < ApplicationController
   end
 
   def create
-    comentario_params = params.require(:comentario).permit(:contenido, :fecha)
+    comentario_params = params.require(:comentario).permit(:contenido, :fecha, :valoracion)
     @comentario = Comentario.create(comentario_params)
 
     if @comentario.save
@@ -29,7 +29,7 @@ class ComentariosController < ApplicationController
   end
 
   def update
-    comentario_params = params.require(:comentario).permit(:contenido, :fecha)
+    comentario_params = params.require(:comentario).permit(:contenido, :fecha, :valoracion)
     @comentario = Comentario.find(params[:id])
 
     if @comentario.update(comentario_params)
