@@ -21,12 +21,11 @@
           <% elsif message == "Email has already been taken" %>
               <%= "Ya existe un Admin con ese Correo." %><br>
           <% end %>
-          <%= message %><br>
       <% end %>
   <% end %>
 </p>
 
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<h2>Edit Admin</h2>
 
 <table>
     <thead>
@@ -69,11 +68,11 @@
             <% end %>
 
             <div class="field">
-              <%= f.label :contraseña%><br />
+              <%= f.label :contraseña %><br />
               <%= f.password_field :password, autocomplete: "new-password" %>
               <% if @minimum_password_length %>
                 <br />
-                <em><%= @minimum_password_length %> characters minimum</em>
+                <em><%= @minimum_password_length %> carácteres mínimo </em>
               <% end %>
             </div>
 
