@@ -1,4 +1,20 @@
-<p id="notice"><%= notice %></p>
+<p id="notice">
+    <% if (notice != 'Guardado') and (notice)%>
+        <h2>ERROR:</h2>
+        <% if notice["contenido"] %>
+            <%= notice["contenido"][0] %><br>
+        <% end %>
+        <% if notice["fecha"] %>
+            <%= notice["fecha"][0] %><br>
+        <% end %>
+        <% if notice["valoracion"] %>
+            <%= notice["valoracion"][0] %><br>
+        <% end %>
+    <% elsif notice == 'Guardado'%>
+        <%= 'Comentario publicado exitosamente.' %><br>
+    <% end %>
+</p>
+
 
 <h1>Nuevo Comentario</h1>
 <%= form_with(model: @comentario, method: :post) do |form| %>

@@ -9,9 +9,9 @@ class ComunasController < ApplicationController
     comuna_params = params.require(:comuna).permit(:nombre, :cuarentena)
     @comuna = Comuna.create comuna_params
     if @comuna.save
-      redirect_to comunas_new_path, notice: 'Comuna creada exitosamente.'
+      redirect_to comunas_new_path, notice: 'Guardado'
     else
-      redirect_to comunas_new_path, notice: 'Error al intentar crear la Comuna.'
+      redirect_to comunas_new_path, notice: @comuna.errors
     end
   end
 
@@ -34,8 +34,7 @@ class ComunasController < ApplicationController
       aviso_exito = 'Comuna editada exitosamente.'
       redirect_to comuna_path(@comuna.id), notice: aviso_exito
     else
-      aviso_fracaso = 'Error al intentar editar la Comuna.'
-      redirect_to comuna_path(@comuna.id), notice: aviso_fracaso
+      redirect_to edit_comuna_path(@comuna.id), notice: @comuna.errors
     end
   end
 
