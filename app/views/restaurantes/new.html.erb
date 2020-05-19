@@ -1,4 +1,16 @@
-<p id="notice"><%= notice %></p>
+<p id="notice">
+    <% if (notice != 'Guardado') and (notice)%>
+        <h2>ERROR:</h2>
+        <% if notice["nombre"] %>
+            <%= notice["nombre"][0] %><br>
+        <% end %>
+        <% if notice["descripcion"] %>
+            <%= notice["descripcion"][0] %><br>
+        <% end %>
+    <% elsif notice == 'Guardado'%>
+        <%= 'Restaurante guardado exitosamente.' %><br>
+    <% end %>
+  </p>
 
 <h1>Nuevo Restaurante</h1>
 
@@ -8,11 +20,11 @@
         <%= form.text_field :nombre %>
     </div>
     <div class="field">
-        <%= form.label :descripcion %>
+        <%= form.label :descripción %>
         <%= form.text_field :descripcion %>
     </div>
     <div class="field">
-        <%= form.label :imagenes %>
+        <%= form.label :imágenes %>
         <%= form.file_field :imagenes, multiple: true %>
     </div>
     <div class="actions">
