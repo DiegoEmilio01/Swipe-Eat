@@ -3,5 +3,6 @@ class Admin < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  validates :nombre, presence: { message: "Ingresó un Nombre en blanco." }
+  validates :nombre, presence: { message: "vacio" }
+  validates :nombre, uniqueness: { message: "existe" }
 end
