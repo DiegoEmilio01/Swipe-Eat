@@ -1,4 +1,17 @@
-<p id="notice"><%= notice %></p>
+<p id="notice">
+  <% if (notice != 'Guardado') and (notice)%>
+      <h2>ERROR:</h2>
+      <% if notice["nombre"] %>
+          <%= notice["nombre"][0] %><br>
+      <% end %>
+      <% if notice["descripcion"] %>
+          <%= notice["descripcion"][0] %><br>
+      <% end %>
+  <% elsif notice == 'Guardado'%>
+      <%= 'Gusto guardado exitosamente.' %><br>
+  <% end %>
+</p>
+
 <h1>Crear gusto</h1>
 
 <%= form_with(model: @gustos, method: :post) do |form| %>
@@ -7,7 +20,7 @@
   <%= form.text_field :nombre %>
 </div>
 <div class="field">
-  <%= form.label :descripcion %>
+  <%= form.label :descripción %>
   <%= form.text_field :descripcion %>
 </div>
 <div class="actions">

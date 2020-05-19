@@ -13,6 +13,7 @@ AllCops:
   Include:
     - app/config/routes.rb
     - app/controllers/**/*.rb
+    - app/models/*.rb
   Exclude:
     - bin/setup
     - bin/update
@@ -22,6 +23,7 @@ AllCops:
     - bin/spring
     - bin/yarn
     - tmp/**/*
+    - storage/**/**
 
 
 Layout/LineLength:

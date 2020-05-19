@@ -1,4 +1,11 @@
-<p id="notice"><%= notice %></p>
+<p id="notice">
+    <% if notice %>
+        <h2>ERROR:</h2>
+        <% if notice["nombre"] %>
+            <%= notice["nombre"][0] %><br>
+        <% end %>
+    <% end %>
+</p>
 
 <h1>Editar Comuna</h1>
 

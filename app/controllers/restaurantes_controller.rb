@@ -9,9 +9,9 @@ class RestaurantesController < ApplicationController
     restaurante_params = params.require(:restaurante).permit(:nombre, :descripcion, imagenes: [])
     @restaurante = Restaurante.create restaurante_params
     if @restaurante.save
-      redirect_to restaurantes_new_path, notice: 'Restaurante creado exitosamente.'
+      redirect_to restaurantes_new_path, notice: 'Guardado'
     else
-      redirect_to restaurantes_new_path, notice: 'Error al intentar crear el restaurante.'
+      redirect_to restaurantes_new_path, notice: @restaurante.errors
     end
   end
 
@@ -34,8 +34,7 @@ class RestaurantesController < ApplicationController
       aviso_exito = 'Restaurante editado exitosamente.'
       redirect_to restaurante_path(@restaurante.id), notice: aviso_exito
     else
-      aviso_fracaso = 'Error al intentar editar el restaurante.'
-      redirect_to restaurante_path(@restaurante.id), notice: aviso_fracaso
+      redirect_to edit_restaurante_path(@restaurante.id), notice: @restaurante.errors
     end
   end
 

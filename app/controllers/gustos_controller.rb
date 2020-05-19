@@ -21,19 +21,19 @@ class GustosController < ApplicationController
     gusto_params = params.require(:gusto).permit(:nombre, :descripcion)
     @gusto = Gusto.find(params[:id])
     if @gusto.update(gusto_params)
-      redirect_to gusto_path(@gusto.id), notice: 'Gusto editado exitosamente'
+      redirect_to gusto_path(@gusto.id), notice: 'Gusto editado exitosamente.'
     else
-      redirect_to gusto_path(@gusto.id), notice: 'Ocurrió un error al editar el gusto'
+      redirect_to edit_gusto_path(@gusto.id), notice: @gusto.errors
     end
   end
 
   def create
     gusto_params = params.require(:gusto).permit(:nombre, :descripcion)
-    @gustos = Gusto.create(gusto_params)
-    if @gustos.save
-      redirect_to gustos_new_path, notice: 'Gusto agregado exitosamente'
+    @gusto = Gusto.create(gusto_params)
+    if @gusto.save
+      redirect_to gustos_new_path, notice: 'Guardado'
     else
-      redirect_to gustos_new_path, notice: 'Ocurrió un error al agregar el gusto'
+      redirect_to gustos_new_path, notice: @gusto.errors
     end
   end
 

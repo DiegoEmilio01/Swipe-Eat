@@ -10,9 +10,9 @@ class ComentariosController < ApplicationController
     @comentario = Comentario.create(comentario_params)
 
     if @comentario.save
-      redirect_to comentarios_new_path, notice: 'Comentario publicado'
+      redirect_to comentarios_new_path, notice: 'Guardado'
     else
-      redirect_to comentarios_new_path, notice: 'Error al publicar comentario'
+      redirect_to comentarios_new_path, notice: @comentario.errors
     end
   end
 
@@ -33,16 +33,15 @@ class ComentariosController < ApplicationController
     @comentario = Comentario.find(params[:id])
 
     if @comentario.update(comentario_params)
-      redirect_to comentario_path(@comentario.id), notice: 'Comentario editado'
+      redirect_to comentario_path(@comentario.id), notice: 'Comentario editado.'
     else
-      msg = 'Hubo un error al editar el comentario'
-      redirect_to comentario_path(@comentario.id), notice: msg
+      redirect_to edit_comentario_path(@comentario.id), notice: @comentario.errors
     end
   end
 
   def destroy
     @comentario = Comentario.find(params[:id])
     @comentario.destroy
-    redirect_to comentarios_path, notice: 'Comentario eliminado definitivamente'
+    redirect_to comentarios_path, notice: 'Comentario eliminado definitivamente.'
   end
 end

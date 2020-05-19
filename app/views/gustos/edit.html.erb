@@ -1,4 +1,15 @@
-<p id="notice"><%= notice %></p>
+<p id="notice">
+  <% if notice %>
+      <h2>ERROR:</h2>
+      <% if notice["nombre"] %>
+          <%= notice["nombre"][0] %><br>
+      <% end %>
+      <% if notice["descripcion"] %>
+          <%= notice["descripcion"][0] %><br>
+      <% end %>
+  <% end %>
+</p>
+
 <h1>Editar gusto</h1>
 
 <%= form_with(model: @gusto, method: :patch) do |form| %>
@@ -7,7 +18,7 @@
     <%= form.text_field :nombre %>
   </div>
   <div class="field">
-    <%= form.label :descripcion %>
+    <%= form.label :descripción %>
     <%= form.text_field :descripcion %>
   </div>
   <div class="actions">
@@ -15,4 +26,4 @@
   </div>
 <% end %>
 <br>
-<%= link_to 'Atras', gusto_path(@gusto.id) %>
+<%= link_to 'Atrás', gusto_path(@gusto.id) %>
