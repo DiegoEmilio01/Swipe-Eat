@@ -1,25 +1,28 @@
-<p id="notice"><%= notice %></p>
+<% if current_admin %>
+  <p id="notice"><%= notice %></p>
 
-<h1>Restaurantes</h1>
+  <h1>Restaurantes</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Nombre</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @restaurantes.each do |restaurante| %>
+  <table>
+    <thead>
       <tr>
-        <td><%= restaurante.nombre %></td>
-        <td><%= link_to 'Ver detalles', restaurante_path(restaurante.id) %></td>
+        <th>Nombre</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @restaurantes.each do |restaurante| %>
+        <tr>
+          <td><%= restaurante.nombre %></td>
+          <td><%= link_to 'Ver detalles', restaurante_path(restaurante.id) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<%= link_to 'Crear Restaurante', restaurantes_new_path %><br><br>
-<%= link_to 'Volver a la lista de Cruds disponibles', lista_cruds_path %><br>
+  <br>
+
+  <%= link_to 'Volver a la lista de acciones disponibles', admin_root_path %><br>
+<% else %>
+  <% controller.redirect_to new_admin_session_path, notice: 'No tienes permiso para ingresar a la página que intentaste acceder.' %>
+<% end %>

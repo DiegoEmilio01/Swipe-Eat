@@ -20,7 +20,6 @@
 <br>
 
 <% if current_admin %>
-    <p>Hola, <%= current_admin.nombre %></p>
     <%= link_to "Cerrar sesión", destroy_admin_session_path, method: :delete, data: {confirm: '¿Estás seguro que quieres cerrar sesión?'}  %><br><br>
     <%= link_to 'Editar Admin logueado', edit_admin_registration_path %><br><br>
     <%= link_to "Borrar Admin logueado", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %><br><br>

@@ -24,13 +24,13 @@ Rails.application.routes.draw do
   devise_for :admins, controllers: {sessions: 'admins/sessions', registrations: 'admins/registrations'}
   # Rutas adicionales de admins
   devise_scope :admin do
-    get 'admin_root' => 'admins/registrations#index', as: 'admin_root'
+    get 'admin_root' => 'cruds#index', as: 'admin_root'
     get 'admins' => 'admins/registrations#index', as: 'lista_admins'
     get 'admins/:id', to: 'admins/registrations#show', as: 'admin'
   end
 
   ### RUTA LISTA DE CRUDS (HOME)###
-  get '/', to: 'cruds#index', as: 'lista_cruds'
+  #get '/', to: 'cruds#index', as: 'lista_cruds'
 
   ### RUTAS CRUD COMUNA ###
   #CREATE
