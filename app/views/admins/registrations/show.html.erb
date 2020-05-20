@@ -1,15 +1,19 @@
-<p id="notice"><%= notice%></p>
+<% if current_admin %>
+    <p id="notice"><%= notice%></p>
 
-<p>
-    <strong>Nombre</strong>
-    <%= @admin.nombre %>
-</p>
+    <p>
+        <strong>Nombre</strong>
+        <%= @admin.nombre %>
+    </p>
 
-<p>
-    <strong>Email</strong>
-    <%= @admin.email %>
-</p>
-
-
-<br>
-<%= link_to "Volver a lista de Admins", lista_admins_path %>
+    <p>
+        <strong>Email</strong>
+        <%= @admin.email %>
+    </p>
+    <br>
+    <%= link_to 'Editar Admin', admin_edit_admin_path(@admin.id) %><br>
+    <br>
+    <%= link_to "Volver a lista de Admins", lista_admins_path %>
+<% else %>
+    <% controller.redirect_to new_admin_session_path, notice: 'No tienes permiso para ingresar a la página que intentaste acceder.' %>
+<% end %>

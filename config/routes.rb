@@ -27,6 +27,8 @@ Rails.application.routes.draw do
     get 'admin_root' => 'cruds#index', as: 'admin_root'
     get 'admins' => 'admins/registrations#index', as: 'lista_admins'
     get 'admins/:id', to: 'admins/registrations#show', as: 'admin'
+    get 'admins/:id/edit', to: 'admins/registrations#edit_admin', as: 'admin_edit_admin'
+    patch 'admins/:id', to: 'admins/registrations#update_admin'
   end
 
   ### RUTA LISTA DE CRUDS (HOME)###
