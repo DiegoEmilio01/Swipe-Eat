@@ -20,7 +20,7 @@
   </table><br>
   <%= link_to "Agregar gusto", gustos_new_path %>
   <br><br>
-  <%= link_to "Volver a la lista de acciones disponibles", lista_cruds_path %>
+  <%= link_to "Volver a la lista de acciones disponibles", admin_root_path %>
 <% else %>
   <% controller.redirect_to new_admin_session_path, notice: 'No tienes permiso para ingresar a la página que intentaste acceder.' %>
 <% end %>

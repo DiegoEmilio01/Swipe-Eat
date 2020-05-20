@@ -1,27 +1,31 @@
-<p id="notice"><%= notice %></p>
-<h1>Lista de Comentarios</h1>
-<table>
-    <thead>
-        <tr>
-            <th>Contenido</th>
-            <th>Fecha</th>
-            <th>Valoración</th>
-        </tr>
-    </thead>
-
-    <tbody>
-        <% @comentarios.each do |comentario| %>
+<% if current_admin %>
+    <p id="notice"><%= notice %></p>
+    <h1>Lista de Comentarios</h1>
+    <table>
+        <thead>
             <tr>
-                <td><%= comentario.contenido %></td>
-                <td><%= comentario.fecha %></td>
-                <td><%= comentario.valoracion %></td>
-                <td><%= link_to 'Ver detalles', comentario_path(comentario.id) %></td>
+                <th>Contenido</th>
+                <th>Fecha</th>
+                <th>Valoración</th>
             </tr>
-        <%end%>
-    </tbody>
-</table>
+        </thead>
 
-<br>
+        <tbody>
+            <% @comentarios.each do |comentario| %>
+                <tr>
+                    <td><%= comentario.contenido %></td>
+                    <td><%= comentario.fecha %></td>
+                    <td><%= comentario.valoracion %></td>
+                    <td><%= link_to 'Ver detalles', comentario_path(comentario.id) %></td>
+                </tr>
+            <%end%>
+        </tbody>
+    </table>
 
-<%= link_to 'Crear comentario', comentarios_new_path %><br><br>
-<%= link_to 'Volver a la lista de Cruds disponibles', lista_cruds_path %><br>
+    <br>
+
+    <%= link_to 'Crear comentario', comentarios_new_path %><br><br>
+    <%= link_to 'Volver a la lista de acciones disponibles.', admin_root_path %><br>
+<% else %>
+  <% controller.redirect_to new_admin_session_path, notice: 'No tienes permiso para ingresar a la página que intentaste acceder.' %>
+<% end %>

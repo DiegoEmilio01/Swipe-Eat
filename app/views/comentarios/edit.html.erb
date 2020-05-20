@@ -1,40 +1,44 @@
-<p id="notice">
-    <% if notice %>
-        <h2>ERROR:</h2>
-        <% if notice["contenido"] %>
-            <%= notice["contenido"][0] %><br>
+<% if current_admin %>
+    <p id="notice">
+        <% if notice %>
+            <h2>ERROR:</h2>
+            <% if notice["contenido"] %>
+                <%= notice["contenido"][0] %><br>
+            <% end %>
+            <% if notice["fecha"] %>
+                <%= notice["fecha"][0] %><br>
+            <% end %>
+            <% if notice["valoracion"] %>
+                <%= notice["valoracion"][0] %><br>
+            <% end %>
         <% end %>
-        <% if notice["fecha"] %>
-            <%= notice["fecha"][0] %><br>
-        <% end %>
-        <% if notice["valoracion"] %>
-            <%= notice["valoracion"][0] %><br>
-        <% end %>
+    </p>
+
+
+    <h1>Editar comentario</h1>
+
+    <%= form_with(model: @comentario, method: :patch) do |form| %>
+        <div class="field">
+            <%= form.label :contenido %>
+            <%= form.text_field :contenido %>
+        </div>
+
+        <div class="field">
+            <%= form.label :fecha %>
+            <%= form.datetime_field :fecha %>
+        </div>
+
+        <div class='field'>
+            <%= form.label :valoracion %>
+            <%= form.text_field :valoracion %>
+        </div>
+        
+        <div class="actions">
+            <%= form.submit %>
+        </div>
     <% end %>
-</p>
-
-
-<h1>Editar comentario</h1>
-
-<%= form_with(model: @comentario, method: :patch) do |form| %>
-    <div class="field">
-        <%= form.label :contenido %>
-        <%= form.text_field :contenido %>
-    </div>
-
-    <div class="field">
-        <%= form.label :fecha %>
-        <%= form.datetime_field :fecha %>
-    </div>
-
-    <div class='field'>
-        <%= form.label :valoracion %>
-        <%= form.text_field :valoracion %>
-    </div>
-    
-    <div class="actions">
-        <%= form.submit %>
-    </div>
+    <br>
+    <%= link_to "Lista comentarios", lista_comentarios_path %>
+<% else %>
+    <% controller.redirect_to new_admin_session_path, notice: 'No tienes permiso para ingresar a la página que intentaste acceder.' %>
 <% end %>
-
-<%= link_to "Lista comentarios", lista_comentarios_path %>
