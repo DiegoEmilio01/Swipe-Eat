@@ -1,29 +1,33 @@
-<p id="notice">
-  <% if notice %>
-      <h2>ERROR:</h2>
-      <% if notice["nombre"] %>
-          <%= notice["nombre"][0] %><br>
-      <% end %>
-      <% if notice["descripcion"] %>
-          <%= notice["descripcion"][0] %><br>
-      <% end %>
+<% if current_admin %>
+  <p id="notice">
+    <% if notice %>
+        <h2>ERROR:</h2>
+        <% if notice["nombre"] %>
+            <%= notice["nombre"][0] %><br>
+        <% end %>
+        <% if notice["descripcion"] %>
+            <%= notice["descripcion"][0] %><br>
+        <% end %>
+    <% end %>
+  </p>
+
+  <h1>Editar gusto</h1>
+
+  <%= form_with(model: @gusto, method: :patch) do |form| %>
+    <div class="field">
+      <%= form.label :nombre %>
+      <%= form.text_field :nombre %>
+    </div>
+    <div class="field">
+      <%= form.label :descripción %>
+      <%= form.text_field :descripcion %>
+    </div>
+    <div class="actions">
+      <%= form.submit %>
+    </div>
   <% end %>
-</p>
-
-<h1>Editar gusto</h1>
-
-<%= form_with(model: @gusto, method: :patch) do |form| %>
-  <div class="field">
-    <%= form.label :nombre %>
-    <%= form.text_field :nombre %>
-  </div>
-  <div class="field">
-    <%= form.label :descripción %>
-    <%= form.text_field :descripcion %>
-  </div>
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+  <br>
+  <%= link_to 'Atrás', gusto_path(@gusto.id) %>
+<% else %>
+  <% controller.redirect_to new_admin_session_path, notice: 'No tienes permiso para ingresar a la página que intentaste acceder.' %>
 <% end %>
-<br>
-<%= link_to 'Atrás', gusto_path(@gusto.id) %>
