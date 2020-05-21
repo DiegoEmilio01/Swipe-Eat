@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     get 'owners_root' => 'owners/registrations#index', as: 'owner_root'
     get 'owners' => 'owners/registrations#index', as: 'lista_owners'
     get 'owners/:id' => 'owners/registrations#show', as: 'owner'
+    get 'owners/:id/edit', to: 'owners/registrations#edit_admin', as: 'admin_edit_owner'
+    patch 'owners/:id', to: 'owners/registrations#update_admin'
   end
 
 
@@ -17,6 +19,8 @@ Rails.application.routes.draw do
     get 'swiper_root' => 'swipers/registrations#index', as: 'swiper_root'
     get 'swipers' => 'swipers/registrations#index', as: 'lista_swipers'
     get 'swipers/:id' => 'swipers/registrations#show', as: 'swiper'
+    get 'swipers/:id/edit', to: 'swipers/registrations#edit_admin', as: 'admin_edit_swiper'
+    patch 'swipers/:id', to: 'swipers/registrations#update_admin'
     delete 'swipers/imagen/:id_i/:id_s' => 'swipers/registrations#delete_imagen', as: 'delete_imagen_swiper'
   end
 
@@ -24,13 +28,15 @@ Rails.application.routes.draw do
   devise_for :admins, controllers: {sessions: 'admins/sessions', registrations: 'admins/registrations'}
   # Rutas adicionales de admins
   devise_scope :admin do
-    get 'admin_root' => 'admins/registrations#index', as: 'admin_root'
+    get 'admin_root' => 'cruds#index', as: 'admin_root'
     get 'admins' => 'admins/registrations#index', as: 'lista_admins'
     get 'admins/:id', to: 'admins/registrations#show', as: 'admin'
+    get 'admins/:id/edit', to: 'admins/registrations#edit_admin', as: 'admin_edit_admin'
+    patch 'admins/:id', to: 'admins/registrations#update_admin'
   end
 
   ### RUTA LISTA DE CRUDS (HOME)###
-  get '/', to: 'cruds#index', as: 'lista_cruds'
+  #get '/', to: 'cruds#index', as: 'lista_cruds'
 
   ### RUTAS CRUD COMUNA ###
   #CREATE

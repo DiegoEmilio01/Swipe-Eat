@@ -3,6 +3,11 @@
 class Admins::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
+  prepend_before_action :require_no_authentication, only: :cancel
+  # prepend_before_filter :require_no_authentication, only: :cancel
+  # skip_before_action :require_login, only: [:new, :create], raise: false
+  # skip_before_filter :require_login, only: [:new, :create], raise: false
+  # skip_before_action :authorise, only: :new, raise: false
 
   def index
     @admins = Admin.all
@@ -10,6 +15,25 @@ class Admins::RegistrationsController < Devise::RegistrationsController
 
   def show
     @admin = Admin.find(params[:id])
+  end
+
+  def edit_admin
+    @admin = Admin.find params[:id]
+  end
+
+  def sign_up(resource_name, resource); end
+
+  def update_admin
+    params = params.require(:admin).permit(:email, :nombre)
+
+    @admin = Admin.find params[:id]
+
+    if @admin.update_without_password(params)
+      aviso = 'Admin editado exitosamente.'
+      redirect_to admin_path(@admin.id), notice: aviso
+    else
+      redirect_to admin_edit_admin_path(@admin.id), notice: @admin.errors
+    end
   end
 
   # GET /resource/sign_up
@@ -73,7 +97,7 @@ class Admins::RegistrationsController < Devise::RegistrationsController
                end
 
     if is_valid
-      set_flash_message :notice, :updated
+      # set_flash_message :notice, :updated
       sign_in @admin, bypass: true
       aviso = 'Admin editado exitosamente.'
       redirect_to admin_path(@admin.id), notice: aviso

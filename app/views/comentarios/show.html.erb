@@ -1,23 +1,26 @@
-<p id="notice"><%= notice %></p>
+<% if current_admin %>
+    <p id="notice"><%= notice %></p>
 
-<p>
-    <strong>Contenido</strong>
-    <%= @comentario.contenido %>
-</p>
+    <p>
+        <strong>Contenido</strong>
+        <%= @comentario.contenido %>
+    </p>
 
-<p>
-    <strong>Fecha</strong>
-    <%= @comentario.fecha %>
-</p>
+    <p>
+        <strong>Fecha</strong>
+        <%= @comentario.fecha %>
+    </p>
 
-<p>
-    <strong>Valoración</strong>
-    <%= @comentario.valoracion %>
-</p>
+    <p>
+        <strong>Valoración</strong>
+        <%= @comentario.valoracion %>
+    </p>
 
-<br>
+    <br>
 
-<%= link_to "Lista comentarios", lista_comentarios_path %><br>
-<%= link_to "Editar comentario", edit_comentario_path(@comentario.id) %><br>
-<%= link_to "Eliminar comentario", comentario_path(@comentario.id), method: :delete, data: {confirm: 'Estás seguro de querer eliminar el comentario?'} %><br>
-
+    <%= link_to "Lista comentarios", lista_comentarios_path %><br>
+    <%= link_to "Editar comentario", edit_comentario_path(@comentario.id) %><br>
+    <%= link_to "Eliminar comentario", comentario_path(@comentario.id), method: :delete, data: {confirm: 'Estás seguro de querer eliminar el comentario?'} %><br>
+<% else %>
+    <% controller.redirect_to new_admin_session_path, notice: 'No tienes permiso para ingresar a la página que intentaste acceder.' %>
+<% end %>
