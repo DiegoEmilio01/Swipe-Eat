@@ -21,13 +21,12 @@
     <thead>
       <tr>
           <th>Editar datos</th>
-          <th>Editar contraseña</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td>
-          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+          <%= form_with(model: @owner, method: :patch) do |f| %>
             <div class="field">
               <%= f.label :nombre %><br />
               <%= f.text_field :nombre, autofocus: true, autocomplete: "nombre" %>
@@ -37,58 +36,25 @@
               <%= f.label :correo %><br />
               <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
             </div>
-          
+
             <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
               <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
             <% end %>
           
-            <br><br><br><br><br>
+            <br>
           
             <div class="actions">
               <%= f.submit "Enviar datos" %>
             </div>
           <% end %>
-        </td>
-        <td>
-          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-            
-            <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-              <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-            <% end %>
-
-            <div class="field">
-              <%= f.label :contraseña %><br />
-              <%= f.password_field :contraseña, autocomplete: "new-password" %>
-              <% if @minimum_password_length %>
-                <br />
-                <em>(<%= @minimum_password_length %> carácteres mínimo) </em>
-              <% end %>
-            </div>
-
-            <div class="field">
-              <%= f.label :confirmación_contraseña %><br />
-              <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-            </div>
-
-            <div class="field">
-              <%= f.label :contraseña_actual %><br />
-              <%= f.password_field :current_password, autocomplete: "current-password" %>
-            </div>
-
-            <br>
-
-            <div class="actions" style="margin-top:13px;">
-              <%= f.submit "Enviar nueva contraseña" %>
-            </div>
-          <% end %>
-        </td>
+          </td>
       </tr>
     </tbody>
   </table>
 
   <br>
   
-  <%= link_to "Listado de Owners", lista_owners_path %>
+  <%= link_to "Volver a lista de Owners", lista_owners_path %>
 <% else %>
   <% controller.redirect_to new_admin_session_path, notice: 'No tienes permiso para ingresar a la página que intentaste acceder.' %>
 <% end %>

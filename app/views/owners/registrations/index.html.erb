@@ -21,7 +21,7 @@
   </table>
   <br>
 
-  <%= link_to 'Volver a la lista de Cruds disponibles', destroy_owner_session_path, method: :delete, data: {confirm: '¿Estás seguro que quieres volver a la lista de cruds?' + "\n" + 'Se cerrará tu sesión.'}  %>
+  <%= link_to 'Volver a la lista de acciones disponibles', admin_root_path %>
 <% else %>
   <% controller.redirect_to new_admin_session_path, notice: 'No tienes permiso para ingresar a la página que intentaste acceder.' %>
 <% end%>

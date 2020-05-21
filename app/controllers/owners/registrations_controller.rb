@@ -3,6 +3,7 @@
 class Owners::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
+  #prepend_before_action :require_no_authentication, only: [:new, :cancel]
 
   def index
     @owners = Owner.all
@@ -16,13 +17,13 @@ class Owners::RegistrationsController < Devise::RegistrationsController
     @owner = Owner.find params[:id]
   end
 
-
   def sign_up(resource_name, resource); end
 
   def update_admin
-    params = params.require(:owner).permit(:email, :nombre)
-
     @owner = Owner.find params[:id]
+
+    preparams = params.require(:owner)
+    params = preparams.permit(:email, :nombre)
 
     if @owner.update_without_password(params)
       aviso = 'Owner editado exitosamente.'
