@@ -12,6 +12,26 @@ class Owners::RegistrationsController < Devise::RegistrationsController
     @owner = Owner.find(params[:id])
   end
 
+  def edit_admin
+    @owner = Owner.find params[:id]
+  end
+
+
+  def sign_up(resource_name, resource); end
+
+  def update_admin
+    params = params.require(:owner).permit(:email, :nombre)
+
+    @owner = Owner.find params[:id]
+
+    if @owner.update_without_password(params)
+      aviso = 'Owner editado exitosamente.'
+      redirect_to owner_path(@owner.id), notice: aviso
+    else
+      redirect_to admin_edit_owner_path(@owner.id), notice: @owner.errors
+    end
+  end
+
   # GET /resource/sign_up
   # def new
   #   super
@@ -73,7 +93,7 @@ class Owners::RegistrationsController < Devise::RegistrationsController
                end
 
     if is_valid
-      set_flash_message :notice, :updated
+      #set_flash_message :notice, :updated
       sign_in @owner, bypass: true
       aviso = 'Owner editado exitosamente.'
       redirect_to owner_path(@owner.id), notice: aviso

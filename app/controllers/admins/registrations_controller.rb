@@ -25,11 +25,11 @@ class Admins::RegistrationsController < Devise::RegistrationsController
   def sign_up(resource_name, resource); end
 
   def update_admin
-    new_params = params.require(:admin).permit(:email, :nombre)
+    params = params.require(:admin).permit(:email, :nombre)
 
     @admin = Admin.find params[:id]
-    
-    if @admin.update_without_password(new_params)
+
+    if @admin.update_without_password(params)
       aviso = 'Admin editado exitosamente.'
       redirect_to admin_path(@admin.id), notice: aviso
     else

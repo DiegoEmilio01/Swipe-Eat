@@ -1,27 +1,16 @@
-<% if current_owner %>
+<% if current_admin %>
   <p id="notice">
-    <% if resource.errors.any? %>
+    <% if notice %>
         <h2>ERROR:</h2>
-        <% resource.errors.full_messages.each do |message| %>
-            <% if message == "Email can't be blank" %>
-                <%= "Ingresó un Correo en blanco." %><br>
-            <% elsif message == "Password can't be blank" %>
-                <%= "Ingresó una Contraseña en blanco." %><br>
-            <% elsif message == "Current password can't be blank" %>
-                <%= "Ingresó una Contraseña actual en blanco." %><br>
-            <% elsif message == "Current password is invalid" %>
-                <%= "Ingresó una Contraseña actual que no corresponde." %><br>
-            <% elsif message == "Password confirmation doesn't match Password" %>
-                <%= "Ingresó una Confirmación que no corresponde con Contraseña." %><br>
-            <% elsif message == "Password is too short (minimum is 6 characters)" %>
-                <%= "Ingresó una Contraseña demasiado corta (mínimo 6 carácteres)." %><br>
-            <% elsif message == "Nombre vacio" %>
-                <%= "Ingresó un Nombre en blanco." %><br>
-            <% elsif message == "Nombre existe" %>
-                <%= "Ya existe un Owner con ese Nombre." %><br>
-            <% elsif message == "Email has already been taken" %>
-                <%= "Ya existe un Owner con ese Correo." %><br>
-            <% end %>
+        <% if notice["nombre"] == ["vacio"] %>
+          <%= "Ingresó un Nombre en blanco." %><br>
+        <% elsif notice["nombre"] == ["existe"] %>
+          <%= "Ya existe un Admin con ese Nombre." %><br>
+        <% end %>
+        <% if notice["email"] == ["can't be blank"] %>
+          <%= "Ingresó un Correo en blanco." %><br>
+        <% elsif notice["email"] == ["has already been taken"] %>
+          <%= "Ingresó un Correo en blanco." %><br>
         <% end %>
     <% end %>
   </p>
@@ -96,6 +85,10 @@
       </tr>
     </tbody>
   </table>
+
+  <br>
+  
+  <%= link_to "Listado de Owners", lista_owners_path %>
 <% else %>
-  <% controller.redirect_to new_owner_session_path, notice: 'No tienes permiso para ingresar a la página que intentaste acceder.' %>
+  <% controller.redirect_to new_admin_session_path, notice: 'No tienes permiso para ingresar a la página que intentaste acceder.' %>
 <% end %>

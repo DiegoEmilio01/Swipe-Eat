@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     get 'owners_root' => 'owners/registrations#index', as: 'owner_root'
     get 'owners' => 'owners/registrations#index', as: 'lista_owners'
     get 'owners/:id' => 'owners/registrations#show', as: 'owner'
+    get 'owners/:id/edit', to: 'owners/registrations#edit_admin', as: 'admin_edit_owners'
+    patch 'owners/:id', to: 'owners/registrations#update_admin'
   end
 
 
