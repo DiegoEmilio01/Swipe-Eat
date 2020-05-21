@@ -3,7 +3,7 @@
 class Owners::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
-  #prepend_before_action :require_no_authentication, only: [:new, :cancel]
+  # prepend_before_action :require_no_authentication, only: [:new, :cancel]
 
   def index
     @owners = Owner.all
@@ -94,7 +94,7 @@ class Owners::RegistrationsController < Devise::RegistrationsController
                end
 
     if is_valid
-      #set_flash_message :notice, :updated
+      # set_flash_message :notice, :updated
       sign_in @owner, bypass: true
       aviso = 'Owner editado exitosamente.'
       redirect_to owner_path(@owner.id), notice: aviso

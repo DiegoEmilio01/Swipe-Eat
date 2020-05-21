@@ -106,7 +106,7 @@ class Swipers::RegistrationsController < Devise::RegistrationsController
                end
 
     if is_valid
-      #set_flash_message :notice, :updated
+      # set_flash_message :notice, :updated
       sign_in @swiper, bypass: true
       aviso = 'Swiper editado exitosamente.'
       redirect_to swiper_path(@swiper.id), notice: aviso
