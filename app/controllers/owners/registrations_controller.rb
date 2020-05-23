@@ -37,7 +37,6 @@ class Owners::RegistrationsController < Devise::RegistrationsController
     @owner = Owner.find(params[:id])
     nombre = @owner.nombre
     @owner.destroy
-
     redirect_to lista_owners_path, notice: "Se eliminó el Owner: #{nombre}."
   end
 

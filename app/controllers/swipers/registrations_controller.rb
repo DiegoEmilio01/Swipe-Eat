@@ -44,7 +44,6 @@ class Swipers::RegistrationsController < Devise::RegistrationsController
     @swiper = Swiper.find(params[:id])
     nombre = @swiper.nombre
     @swiper.destroy
-
     redirect_to lista_swipers_path, notice: "Se eliminó el Swiper: #{nombre}."
   end
 

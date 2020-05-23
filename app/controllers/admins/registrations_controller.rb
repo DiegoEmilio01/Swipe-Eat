@@ -43,7 +43,6 @@ class Admins::RegistrationsController < Devise::RegistrationsController
     @admin = Admin.find(params[:id])
     nombre = @admin.nombre
     @admin.destroy
-
     redirect_to lista_admins_path, notice: "Se eliminó el Admin: #{nombre}."
   end
 
