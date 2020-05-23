@@ -21,8 +21,6 @@
     <br>
 
     <%= link_to 'Crear Admin', new_admin_registration_path %><br><br>
-    <%= link_to 'Editar Admin logueado', edit_admin_registration_path %><br><br>
-    <%= link_to 'Borrar Admin logueado', registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %><br><br>
     <%= link_to 'Volver a la lista de acciones disponibles.', admin_root_path %><br>
 <% else %>
     <% controller.redirect_to new_admin_session_path, notice: 'No tienes permiso para ingresar a la página que intentaste acceder.' %>

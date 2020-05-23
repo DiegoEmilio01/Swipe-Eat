@@ -11,9 +11,10 @@
 
 AllCops:
   Include:
-    - app/config/routes.rb
+    - config/routes.rb
     - app/controllers/**/*.rb
     - app/models/*.rb
+    - db/seeds.rb
   Exclude:
     - bin/setup
     - bin/update
@@ -60,3 +61,6 @@ Metrics/AbcSize:
 # Si mas adelante se combinan los 2 estilos desactivar este cop.
 Style/ClassAndModuleChildren:
   EnforcedStyle: compact
+
+Metrics/BlockLength:
+  Enabled: false

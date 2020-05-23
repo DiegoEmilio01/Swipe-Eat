@@ -40,6 +40,13 @@ class Swipers::RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def destroy_admin
+    @swiper = Swiper.find(params[:id])
+    nombre = @swiper.nombre
+    @swiper.destroy
+    redirect_to lista_swipers_path, notice: "Se eliminó el Swiper: #{nombre}."
+  end
+
   # GET /resource/sign_up
   # def new
   #   super
