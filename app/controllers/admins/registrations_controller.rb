@@ -28,8 +28,8 @@ class Admins::RegistrationsController < Devise::RegistrationsController
 
     preparams = params.require(:admin)
     params = preparams.permit(:email, :nombre)
-    #params = params.require(:admin).permit(:email, :nombre)
-    #@admin = Admin.find params[:id]
+    # params = params.require(:admin).permit(:email, :nombre)
+    # @admin = Admin.find params[:id]
 
     if @admin.update_without_password(params)
       aviso = 'Admin editado exitosamente.'
@@ -37,6 +37,14 @@ class Admins::RegistrationsController < Devise::RegistrationsController
     else
       redirect_to admin_edit_admin_path(@admin.id), notice: @admin.errors
     end
+  end
+
+  def destroy_admin
+    @admin = Admin.find(params[:id])
+    nombre = @admin.nombre
+    @admin.destroy
+
+    redirect_to lista_admins_path, notice: "Se eliminó el Admin: #{nombre}."
   end
 
   # GET /resource/sign_up

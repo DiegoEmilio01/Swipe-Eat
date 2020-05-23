@@ -63,8 +63,8 @@
 
     
     <% if current_admin %>
-        <%= link_to 'Editar Swiper', admin_edit_swiper_path(@swiper.id) %><br>
-        <br>
+        <%= link_to 'Editar Swiper', admin_edit_swiper_path(@swiper.id) %><br><br>
+        <%= link_to "Borrar Swiper", swiper_path(@swiper.id), method: :delete, data: {confirm: '¿Estás seguro que quieres borrar este Swiper?'}%><br><br>
         <%= link_to "Volver a la lista de Swipers", lista_swipers_path %>
     <% end %>
 
