@@ -88,7 +88,12 @@
               <%= f.label :descripción %><br />
               <%= f.text_field :descripcion, autofocus: true, autocomplete: "descripcion" %>
             </div>
-          
+            
+            <div class="field">
+              <%= f.label :comuna_id %><br />
+              <%= f.select :comuna_id, options_from_collection_for_select(Comuna.all, :id, :nombre) %><br />
+            </div>
+            
             <br>
           
             <div class="field">

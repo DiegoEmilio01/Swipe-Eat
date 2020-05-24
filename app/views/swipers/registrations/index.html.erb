@@ -9,7 +9,8 @@
             <th>Cumpleaños</th>
             <th>Teléfono</th>
             <th>Dirección</th>
-            <th>Descripción</th>        
+            <th>Descripción</th>
+            <th>Comuna</th>        
         </tr>
     </thead>
     <tbody>
@@ -22,7 +23,7 @@
                 <td><%= swiper.telefono %></td>
                 <td><%= swiper.direccion %></td>
                 <td><%= swiper.descripcion %></td>
-                <td><%= swiper.comuna%></td>
+                <td><%= swiper.comuna.nombre%></td>
                 <td><%= link_to 'Ver detalles', swiper_path(swiper.id) %></td>
             </tr>
         <%end%>

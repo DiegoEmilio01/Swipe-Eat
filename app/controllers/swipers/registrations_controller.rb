@@ -52,27 +52,28 @@ class Swipers::RegistrationsController < Devise::RegistrationsController
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
     devise_parameter_sanitizer.permit(:sign_up, keys: [:nombre, :edad, :telefono, :cumpleanos,
-                                                       :direccion, :comuna, :descripcion, imagenes: []])
+                                                       :direccion, :descripcion, :comuna_id, 
+                                                       imagenes: []])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
     devise_parameter_sanitizer.permit(:account_update, keys: [:nombre, :edad, :telefono,
-                                                              :cumpleanos, :direccion, :comuna,
-                                                              :descripcion, imagenes: []])
+                                                              :cumpleanos, :direccion, 
+                                                              :descripcion, :comuna_id, imagenes: []])
   end
 
   def update
     new_params = params.require(:swiper).permit(:email, :current_password, :password,
                                                 :password_confirmation, :nombre, :edad,
-                                                :telefono, :cumpleanos, :direccion, :comuna,
-                                                :descripcion, imagenes: [])
+                                                :telefono, :cumpleanos, :direccion,
+                                                :descripcion, :comuna_id, imagenes: [])
     change_password = true
     if params[:swiper][:password].blank?
       params[:swiper].delete('password')
       params[:swiper].delete('password_confirmation')
       new_params = params.require(:swiper).permit(:email, :nombre, :edad, :telefono, :cumpleanos,
-                                                  :comuna, :direccion, :descripcion, imagenes: [])
+                                                  :direccion, :descripcion, :comuna_id, imagenes: [])
       change_password = false
     end
 
