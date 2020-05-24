@@ -2,6 +2,37 @@
 
 class Swiper < ApplicationRecord
   has_many_attached :imagenes
+  #------------------------------------------------------
+  #Relaciones 
+  #Acepta Swiper-Swiper
+  has_and_belongs_to_many(:aceptados,
+  :class_name => 'Swiper',
+  :join_table => "aceptados", 
+  :foreign_key => "swiper_acepta_id", 
+  :association_foreign_key => "swiper_aceptado_id")
+  #Bloquea Swiper-Swiper
+  has_and_belongs_to_many(:bloqueados,
+  :class_name => 'Swiper',
+  :join_table => "bloqueados",
+  :foreign_key => "swiper_bloquea_id",
+  :association_foreign_key => "swiper_bloqueado_id")
+  #Match Swiper-Swiper
+  has_and_belongs_to_many(:matchs,
+  :class_name => 'Swiper',
+  :join_table => "matchs",
+  :foreign_key => "swiper_match_id",
+  :association_foreign_key => "swiper_matched_id")
+  #Reporta Swiper-Swiper
+  has_many :reportes, :foreign_key => :swiper_reporta_id
+  has_many :swipers, :through => :reportes, :source => :swiper_reportado
+  #Tiene Swiper-Gustos:n-n
+  has_and_belongs_to_many :gustos, :join_table => "gustos_swiper", :class_name => "Gusto"
+  #Pertenece Swiper-Comuna:n-1
+  belongs_to :comuna
+  #Favorece Swiper-Restaurante:n-n
+  has_and_belongs_to_many :favoritos, :join_table => "favorecidos", :class_name => "Restaurante"
+  #Comenta Swiper-Restaurante-Comentario ###Por verse
+  #------------------------------------------------------
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -17,4 +48,5 @@ class Swiper < ApplicationRecord
   validates :telefono, format: { with: /\A\+569\d{8}\z/, message: 'formato' }
   validates :direccion, presence: { message: 'vacio' }
   validates :direccion, format: { with: /\A[a-zA-ZÀ-úñÑ ]+\d+\z/, message: 'formato' }
+
 end
