@@ -32,10 +32,11 @@ class Swiper < ApplicationRecord
   #Favorece Swiper-Restaurante:n-n
   has_and_belongs_to_many :favoritos, :join_table => "favorecidos", :class_name => "Restaurante"
   #Mensajea Swiper-Swiper:n-n
-  has_many :mensajes, :foreign_key => :swiper_origen
+  has_many :mensajes, :foreign_key => :swiper_origen_id
   has_many :swipers, :through => :mensajes, :source => :swiper_destino
   #Cita Swiper-Swiper-Restaurante
-  #has_many :citas
+  has_many :meets, :foreign_key => :swiper_cita_id
+  has_many :swipers, :through => :meets, :source => :swiper_citado
   #Comenta Swiper-Restaurante-Comentario ###Por verse
   #------------------------------------------------------
   # Include default devise modules. Others available are:

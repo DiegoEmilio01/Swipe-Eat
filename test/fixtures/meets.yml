@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  swiper_cita_id: 1
+  swiper_citado_id: 1
+  estado: false
+  fecha: 2020-05-24 23:14:16
+
+two:
+  swiper_cita_id: 1
+  swiper_citado_id: 1
+  estado: false
+  fecha: 2020-05-24 23:14:16
