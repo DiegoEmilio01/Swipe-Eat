@@ -1,6 +1,14 @@
 # frozen_string_literal: true
 
 class Owner < ApplicationRecord
+  #------------------------------------------------------
+  #Relaciones
+  #Owns Owner-Restaurante:1-1
+  has_one :restaurante
+  #Reporta Owner-Comentario:1-n
+  has_many :comentarios
+  #------------------------------------------------------
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,

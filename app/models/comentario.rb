@@ -1,6 +1,13 @@
 # frozen_string_literal: true
 
 class Comentario < ApplicationRecord
+  #------------------------------------------------------
+  #Relaciones
+  #Reporta Owner-Comentario:1-n
+  belongs_to :owner
+  #------------------------------------------------------
+
+
   validates :contenido, presence: { message: 'Ingresó un Contenido en blanco.' }
   validates :fecha, presence: { message: 'Ingresó una Fecha en blanco.' }
   validates :valoracion, presence: { message: 'Ingresó una Valoración en blanco.' }
