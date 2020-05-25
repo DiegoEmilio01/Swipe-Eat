@@ -2,10 +2,10 @@
 
 class Owner < ApplicationRecord
   #------------------------------------------------------
-  #Relaciones
-  #Owns Owner-Restaurante:1-1
+  # Relaciones
+  # Owns Owner-Restaurante:1-1
   has_one :restaurante
-  #Reporta Owner-Comentario:1-n
+  # Reporta Owner-Comentario:1-n
   has_many :comentarios
   #------------------------------------------------------
 

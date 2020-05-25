@@ -1,6 +1,6 @@
 class CreateTableCitas < ActiveRecord::Migration[5.2]
   def change
-    drop_table :citas
+    drop_table (:citas, if_exists: true)
     
     create_table :citas do |t|
       t.integer "swiper_cita_id", :null => false

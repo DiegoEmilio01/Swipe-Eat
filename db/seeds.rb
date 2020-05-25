@@ -43,15 +43,17 @@
 
 @diego = Swiper.create nombre: 'Diego', email: 'diego@uc.cl', edad: 20, telefono: '+56912345678',
                        cumpleanos: '2020-06-14', direccion: 'Av Siempre Viva 742',
-                       descripcion: 'Yo programé esta aplicación.', password: '123456'
+                       comuna_id: 1, descripcion: 'Yo programé esta aplicación.', password: '123456'
 @diego.save
 @lucas = Swiper.create nombre: 'Lucas', email: 'lucas@uc.cl', edad: 20, telefono: '+56912345678',
                        cumpleanos: '2020-04-10', direccion: 'Av Siempre Viva 742',
-                       descripcion: 'Yo programé esta aplicación.', password: '123456'
+                       comuna_id: 1, descripcion: 'Yo programé esta aplicación.',
+                       password: '123456'
 @lucas.save
 @elias = Swiper.create nombre: 'Elias', email: 'elias@uc.cl', edad: 20, telefono: '+56912345678',
                        cumpleanos: '2020-05-21', direccion: 'Av Siempre Viva 742',
-                       descripcion: 'Yo programé esta aplicación.', password: '123456'
+                       comuna_id: 1, descripcion: 'Yo programé esta aplicación.',
+                       password: '123456'
 @elias.save
 
 # OWNER PRECARGADO

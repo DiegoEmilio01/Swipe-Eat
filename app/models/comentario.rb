@@ -2,11 +2,10 @@
 
 class Comentario < ApplicationRecord
   #------------------------------------------------------
-  #Relaciones
-  #Reporta Owner-Comentario:1-n
+  # Relaciones
+  # Reporta Owner-Comentario:1-n
   belongs_to :owner
   #------------------------------------------------------
-
 
   validates :contenido, presence: { message: 'Ingresó un Contenido en blanco.' }
   validates :fecha, presence: { message: 'Ingresó una Fecha en blanco.' }

@@ -2,14 +2,14 @@
 
 class Restaurante < ApplicationRecord
   #------------------------------------------------------
-  #Relaciones
-  #Pertenece Restaurante-Comuna:n-1
+  # Relaciones
+  # Pertenece Restaurante-Comuna:n-1
   belongs_to :comuna
-  #Owns Owner-Restaurante:1-1 
+  # Owns Owner-Restaurante:1-1
   belongs_to :owner
-  #Favorece Swiper-Restaurante:n-n
-  has_and_belongs_to_many :swipers, :join_table => "favorecidos", :class_name => "Swiper"
-  #Cita Swiper-Swiper-Restaurante
+  # Favorece Swiper-Restaurante:n-n
+  has_and_belongs_to_many :swipers, join_table: 'favorecidos', class_name: 'Swiper'
+  # Cita Swiper-Swiper-Restaurante
   has_many :meets
   #------------------------------------------------------
   has_many_attached :imagenes
