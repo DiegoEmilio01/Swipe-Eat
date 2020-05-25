@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_23_210322) do
+ActiveRecord::Schema.define(version: 2020_05_25_005744) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -100,6 +100,14 @@ ActiveRecord::Schema.define(version: 2020_05_23_210322) do
   create_table "matchs", id: false, force: :cascade do |t|
     t.integer "swiper_match_id", null: false
     t.integer "swiper_matched_id", null: false
+  end
+
+  create_table "mensajes", force: :cascade do |t|
+    t.integer "swiper_origen_id", null: false
+    t.integer "swiper_destino_id", null: false
+    t.string "contenido"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "owners", force: :cascade do |t|
