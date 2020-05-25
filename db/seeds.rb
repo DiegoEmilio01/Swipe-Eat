@@ -5,16 +5,22 @@
 @comuna1 = Comuna.create nombre: 'Las Condes', cuarentena: true
 @comuna1.save
 @comuna2 = Comuna.create nombre: 'Santiago', cuarentena: true
+@id2 = @comuna2.id
 @comuna2.save
 @comuna3 = Comuna.create nombre: 'Ñuñoa', cuarentena: true
+@id3 = @comuna3.id
 @comuna3.save
 @comuna4 = Comuna.create nombre: 'Temuco', cuarentena: false
+@id4 = @comuna4.id
 @comuna4.save
 @comuna5 = Comuna.create nombre: 'La Reina', cuarentena: true
+@id5 = @comuna5.id
 @comuna5.save
 @comuna6 = Comuna.create nombre: 'Providencia', cuarentena: false
+@id6 = @comuna6.id
 @comuna6.save
 @comuna7 = Comuna.create nombre: 'San Miguel', cuarentena: false
+@id7 = @comuna7.id
 @comuna7.save
 
 # GUSTOS PRECARGADOS
@@ -43,17 +49,19 @@
 
 @diego = Swiper.create nombre: 'Diego', email: 'diego@uc.cl', edad: 20, telefono: '+56912345678',
                        cumpleanos: '2020-06-14', direccion: 'Av Siempre Viva 742',
-                       comuna_id: 1, descripcion: 'Yo programé esta aplicación.', password: '123456'
+                       comuna_id: Comuna.find_by_nombre('Ñuñoa').id,
+                       descripcion: 'Yo programé esta aplicación.', password: '123456'
 @diego.save
 @lucas = Swiper.create nombre: 'Lucas', email: 'lucas@uc.cl', edad: 20, telefono: '+56912345678',
                        cumpleanos: '2020-04-10', direccion: 'Av Siempre Viva 742',
-                       comuna_id: 1, descripcion: 'Yo programé esta aplicación.',
-                       password: '123456'
+                       comuna_id: Comuna.find_by_nombre('La Reina').id,
+                       descripcion: 'Yo programé esta aplicación.', password: '123456'
 @lucas.save
+
 @elias = Swiper.create nombre: 'Elias', email: 'elias@uc.cl', edad: 20, telefono: '+56912345678',
                        cumpleanos: '2020-05-21', direccion: 'Av Siempre Viva 742',
-                       comuna_id: 1, descripcion: 'Yo programé esta aplicación.',
-                       password: '123456'
+                       comuna_id: Comuna.find_by_nombre('Las Condes').id,
+                       descripcion: 'Yo programé esta aplicación.', password: '123456'
 @elias.save
 
 # OWNER PRECARGADO
