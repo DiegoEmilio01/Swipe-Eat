@@ -1,70 +1,83 @@
-Rails.application.routes.draw do
+# frozen_string_literal: true
 
+Rails.application.routes.draw do
   ### RUTAS CRUD OWNER ###
-  devise_for :owners, controllers: {sessions: 'owners/sessions', registrations: 'owners/registrations'}
-  #Rutas adicionales de owner
+  devise_for :owners, controllers: { sessions: 'owners/sessions',
+                                     registrations: 'owners/registrations' }
+  # Rutas adicionales de owner
   devise_scope :owner do
     get 'owners_root' => 'owners/registrations#index', as: 'owner_root'
     get 'owners' => 'owners/registrations#index', as: 'lista_owners'
     get 'owners/:id' => 'owners/registrations#show', as: 'owner'
+    get 'owners/:id/edit', to: 'owners/registrations#edit_admin', as: 'admin_edit_owner'
+    patch 'owners/:id', to: 'owners/registrations#update_admin'
+    delete 'owners/:id', to: 'owners/registrations#destroy_admin'
   end
 
-
   ### RUTAS CRUD SWIPERS ###
-  devise_for :swipers, controllers: {sessions: 'swipers/sessions', registrations: 'swipers/registrations'}
-  #Rutas adicionales de swipers
+  devise_for :swipers, controllers: { sessions: 'swipers/sessions',
+                                      registrations: 'swipers/registrations' }
+  # Rutas adicionales de swipers
   devise_scope :swiper do
     get 'swiper_root' => 'swipers/registrations#index', as: 'swiper_root'
     get 'swipers' => 'swipers/registrations#index', as: 'lista_swipers'
     get 'swipers/:id' => 'swipers/registrations#show', as: 'swiper'
-    delete 'swipers/imagen/:id_i/:id_s' => 'swipers/registrations#delete_imagen', as: 'delete_imagen_swiper'
+    get 'swipers/:id/edit', to: 'swipers/registrations#edit_admin', as: 'admin_edit_swiper'
+    patch 'swipers/:id', to: 'swipers/registrations#update_admin'
+    delete 'swipers/:id', to: 'swipers/registrations#destroy_admin'
+    delete 'swipers/imagen/:id_i/:id_s' => 'swipers/registrations#delete_imagen', as: 'delete_'\
+                                                                                  'imagen_swiper'
   end
 
   ### RUTAS CRUD ADMIN ###
-  devise_for :admins, controllers: {sessions: 'admins/sessions', registrations: 'admins/registrations'}
+  devise_for :admins, controllers: { sessions: 'admins/sessions',
+                                     registrations: 'admins/registrations' }
   # Rutas adicionales de admins
   devise_scope :admin do
-    get 'admin_root' => 'admins/registrations#index', as: 'admin_root'
+    get 'admin_root' => 'cruds#index', as: 'admin_root'
     get 'admins' => 'admins/registrations#index', as: 'lista_admins'
     get 'admins/:id', to: 'admins/registrations#show', as: 'admin'
+    get 'admins/:id/edit', to: 'admins/registrations#edit_admin', as: 'admin_edit_admin'
+    patch 'admins/:id', to: 'admins/registrations#update_admin'
+    delete 'admins/:id', to: 'admins/registrations#destroy_admin'
   end
 
   ### RUTA LISTA DE CRUDS (HOME)###
-  get '/', to: 'cruds#index', as: 'lista_cruds'
+  # get '/', to: 'cruds#index', as: 'lista_cruds'
 
   ### RUTAS CRUD COMUNA ###
-  #CREATE
+  # CREATE
   get 'comunas/new', to: 'comunas#new'
   post 'comunas', to: 'comunas#create'
-  #READ
+  # READ
   get 'comunas', to: 'comunas#index', as: 'lista_comunas'
   get 'comunas/:id', to: 'comunas#show', as: 'comuna'
-  #UPDATE
+  # UPDATE
   get 'comunas/:id/edit', to: 'comunas#edit', as: 'edit_comuna'
   patch 'comunas/:id', to: 'comunas#update'
-  #DELETE
+  # DELETE
   delete 'comunas/:id', to: 'comunas#destroy'
 
   ### RUTAS CRUD COMENTARIO ###
-  #CREATE
+  # CREATE
   get 'comentarios/new', to: 'comentarios#new'
   post 'comentarios', to: 'comentarios#create'
-  #READ
+  # READ
   get 'comentarios', to: 'comentarios#index', as: 'lista_comentarios'
   get 'comentarios/:id', to: 'comentarios#show', as: 'comentario'
-  #UPDATE
+  # UPDATE
   get 'comentarios/:id/edit', to: 'comentarios#edit', as: 'edit_comentario'
   patch 'comentarios/:id', to: 'comentarios#update'
-  #DELETE
+  # DELETE
   delete 'comentarios/:id', to: 'comentarios#destroy'
 
   ### RUTAS CRUD GUSTO ###
   # CREATE
-  get 'gustos/new', to:'gustos#new'
+  get 'gustos/new', to: 'gustos#new'
   post 'gustos', to: 'gustos#create'
   # READ
   get 'gustos', to: 'gustos#index'
-  get 'gustos/:id', to: 'gustos#show', as:'gusto'
+  get 'gustos/:id', to: 'gustos#show', as: 'gusto'
   # UPDATE
   get 'gustos/:id/edit', to: 'gustos#edit', as: 'edit_gusto'
   patch 'gustos/:id', to: 'gustos#update'
@@ -73,15 +86,16 @@ Rails.application.routes.draw do
 
   ### RUTAS CRUD RESTAURANTE ###
   # CREATE
-  get 'restaurantes/new', to:'restaurantes#new'
+  get 'restaurantes/new', to: 'restaurantes#new'
   post 'restaurantes', to: 'restaurantes#create'
   # READ
   get 'restaurantes', to: 'restaurantes#index', as: 'lista_restaurantes'
-  get 'restaurantes/:id', to: 'restaurantes#show', as:'restaurante'
+  get 'restaurantes/:id', to: 'restaurantes#show', as: 'restaurante'
   # UPDATE
   get 'restaurantes/:id/edit', to: 'restaurantes#edit', as: 'edit_restaurante'
   patch 'restaurantes/:id', to: 'restaurantes#update'
   # DELETE
   delete 'restaurantes/:id', to: 'restaurantes#destroy'
-  delete 'restaurantes/imagen/:id_i/:id_r', to: 'restaurantes#delete_imagen', as: 'delete_imagen_restaurante'
+  delete 'restaurantes/imagen/:id_i/:id_r', to: 'restaurantes#delete_imagen', as: 'delete_'\
+                                                                              'imagen_restaurante'
 end

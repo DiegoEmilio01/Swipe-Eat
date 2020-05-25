@@ -1,68 +1,83 @@
-<p id="notice"><%= notice%></p>
+<% if current_admin or current_swiper %>
+    <p id="notice"><%= notice%></p>
 
-<p>
-    <strong>Nombre</strong>
-    <%= @swiper.nombre %>
-</p>
+    <p>
+        <strong>Nombre</strong>
+        <%= @swiper.nombre %>
+    </p>
 
-<p>
-    <strong>Email</strong>
-    <%= @swiper.email%>
-</p>
+    <p>
+        <strong>Email</strong>
+        <%= @swiper.email%>
+    </p>
 
-<p>
-    <strong>Edad</strong>
-    <%= @swiper.edad%>
-</p>
+    <p>
+        <strong>Edad</strong>
+        <%= @swiper.edad%>
+    </p>
 
-<p>
-    <strong>Cumpleaños</strong>
-    <%= @swiper.cumpleanos.strftime("%d/%m")%>
-</p>
+    <p>
+        <strong>Cumpleaños</strong>
+        <%= @swiper.cumpleanos.strftime("%d/%m")%>
+    </p>
 
-<p>
-    <strong>Teléfono</strong>
-    <%= @swiper.telefono%>
-</p>
+    <p>
+        <strong>Teléfono</strong>
+        <%= @swiper.telefono%>
+    </p>
 
-<p>
-    <strong>Dirección</strong>
-    <%= @swiper.direccion%>
-</p>
+    <p>
+        <strong>Dirección</strong>
+        <%= @swiper.direccion%>
+    </p>
+    
+    <p>
+        <strong>Comuna</strong>
+        <%= @swiper.comuna.nombre %>
+    </p>
 
-<p>
-    <strong>Descripción</strong>
-    <%= @swiper.descripcion%>
-</p>
+    <p>
+        <strong>Descripción</strong>
+        <%= @swiper.descripcion%>
+    </p>
 
-<p>
-    <strong>Comuna</strong>
-    <%= @swiper.comuna.nombre %>
-</p>
+    <br>
 
-<br>
+    <table>
+        <thead>
+            <tr>
+                <% (0...@swiper.imagenes.count).each do |numero| %>
+                    <th>Imagen <%= numero + 1 %> </th>
+                <% end %>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <% @swiper.imagenes.each do |imagen| %>
+                <td>
+                    <div style="width:200px; height:300px;">
+                        <%= image_tag(imagen, style:'width:180px; heigth: 170px') %>
+                    </div>
+                </td>
+                <% end %>
+            </tr>
+        </tbody>
+    </table>
 
-<table>
-    <thead>
-        <tr>
-            <% (0...@swiper.imagenes.count).each do |numero| %>
-                <th>Imagen <%= numero + 1 %> </th>
-            <% end %>
-        </tr>
-      </thead>
-    <tbody>
-        <tr>
-            <% @swiper.imagenes.each do |imagen| %>
-            <td>
-                <div style="width:200px; height:300px;">
-                    <%= image_tag(imagen, style:'width:180px; heigth: 170px') %>
-                </div>
-            </td>
-            <% end %>
-        </tr>
-    </tbody>
-</table>
+    <br>
 
-<br>
+    
+    <% if current_admin %>
+        <%= link_to 'Editar Swiper', admin_edit_swiper_path(@swiper.id) %><br><br>
+        <%= link_to "Borrar Swiper", swiper_path(@swiper.id), method: :delete, data: {confirm: '¿Estás seguro que quieres borrar este Swiper?'}%><br><br>
+        <%= link_to "Volver a la lista de Swipers", lista_swipers_path %>
+    <% end %>
 
-<%= link_to "Volver a la lista de Swipers", lista_swipers_path %><br>
+    <% if current_swiper %>
+        <%= link_to "Cerrar sesión", destroy_swiper_session_path, method: :delete, data: {confirm: '¿Estás seguro que quieres cerrar sesión?'}  %><br><br>
+        <%= link_to 'Editar Swiper logueado', edit_swiper_registration_path %><br><br>
+        <%= link_to "Borrar Swiper logueado", registration_path(resource_name), data: { confirm: "Estás seguro" }, method: :delete %><br><br>
+    <% end %>
+<% else %>
+    <% controller.redirect_to new_admin_session_path, notice: 'No tienes permiso para ingresar a la página que intentaste acceder.' %>
+<% end %>

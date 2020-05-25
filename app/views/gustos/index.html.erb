@@ -1,23 +1,26 @@
-<p id="notice"><%= notice %></p>
-<h1>Gustos</h1>
-<table>
-  <thead>
-    <tr>
-      <th>Nombre</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @gustos.each do |gusto| %>
+<% if current_admin %>
+  <p id="notice"><%= notice %></p>
+  <h1>Gustos</h1>
+  <table>
+    <thead>
       <tr>
-        <td><%= gusto.nombre %></td>
-        <td><%= link_to "Ver detalles", gusto_path(gusto.id) %></td>
-
+        <th>Nombre</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table><br>
-<%= link_to "Agregar gusto", gustos_new_path %>
-<br><br>
-<%= link_to "Volver a lista de cruds", lista_cruds_path %>
+    </thead>
+    <tbody>
+      <% @gustos.each do |gusto| %>
+        <tr>
+          <td><%= gusto.nombre %></td>
+          <td><%= link_to "Ver detalles", gusto_path(gusto.id) %></td>
 
+        </tr>
+      <% end %>
+    </tbody>
+  </table><br>
+  <%= link_to "Agregar gusto", gustos_new_path %>
+  <br><br>
+  <%= link_to "Volver a la lista de acciones disponibles", admin_root_path %>
+<% else %>
+  <% controller.redirect_to new_admin_session_path, notice: 'No tienes permiso para ingresar a la página que intentaste acceder.' %>
+<% end %>

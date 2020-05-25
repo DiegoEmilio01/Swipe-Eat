@@ -1,3 +1,5 @@
+<p id="notice"><%= notice %></p>
+
 <h2>Log in</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -24,6 +26,3 @@
 <% end %>
 <br>
 <%= render "admins/shared/links" %>
-<br>
-
-<%= link_to "Volver a lista de Admins", lista_admins_path %>

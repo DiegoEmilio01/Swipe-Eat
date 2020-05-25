@@ -12,11 +12,39 @@ class Swipers::RegistrationsController < Devise::RegistrationsController
     @swiper = Swiper.find(params[:id])
   end
 
+  def edit_admin
+    @swiper = Swiper.find params[:id]
+  end
+
+  def sign_up(resource_name, resource); end
+
   def delete_imagen
     @imagen = ActiveStorage::Attachment.find(params[:id_i])
     @imagen.purge
     aviso = 'Imagen del Swiper eliminada exitosamente.'
     redirect_to swiper_path(params[:id_s]), notice: aviso
+  end
+
+  def update_admin
+    @swiper = Swiper.find params[:id]
+
+    preparams = params.require(:swiper)
+    params = preparams.permit(:email, :nombre, :edad, :telefono, :cumpleanos,
+                              :direccion, :descripcion, imagenes: [])
+
+    if @swiper.update_without_password(params)
+      aviso = 'Swiper editado exitosamente.'
+      redirect_to swiper_path(@swiper.id), notice: aviso
+    else
+      redirect_to admin_edit_swiper_path(@swiper.id), notice: @swiper.errors
+    end
+  end
+
+  def destroy_admin
+    @swiper = Swiper.find(params[:id])
+    nombre = @swiper.nombre
+    @swiper.destroy
+    redirect_to lista_swipers_path, notice: "Se eliminó el Swiper: #{nombre}."
   end
 
   # GET /resource/sign_up
@@ -86,7 +114,7 @@ class Swipers::RegistrationsController < Devise::RegistrationsController
                end
 
     if is_valid
-      set_flash_message :notice, :updated
+      # set_flash_message :notice, :updated
       sign_in @swiper, bypass: true
       aviso = 'Swiper editado exitosamente.'
       redirect_to swiper_path(@swiper.id), notice: aviso

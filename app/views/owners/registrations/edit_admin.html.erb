@@ -1,0 +1,60 @@
+<% if current_admin %>
+  <p id="notice">
+    <% if notice %>
+        <h2>ERROR:</h2>
+        <% if notice["nombre"] == ["vacio"] %>
+          <%= "Ingresó un Nombre en blanco." %><br>
+        <% elsif notice["nombre"] == ["existe"] %>
+          <%= "Ya existe un Admin con ese Nombre." %><br>
+        <% end %>
+        <% if notice["email"] == ["can't be blank"] %>
+          <%= "Ingresó un Correo en blanco." %><br>
+        <% elsif notice["email"] == ["has already been taken"] %>
+          <%= "Ingresó un Correo en blanco." %><br>
+        <% end %>
+    <% end %>
+  </p>
+
+  <h2>Editar Owner</h2>
+
+  <table>
+    <thead>
+      <tr>
+          <th>Editar datos</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <%= form_with(model: @owner, method: :patch) do |f| %>
+            <div class="field">
+              <%= f.label :nombre %><br />
+              <%= f.text_field :nombre, autofocus: true, autocomplete: "nombre" %>
+            </div>
+
+            <div class="field">
+              <%= f.label :correo %><br />
+              <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+            </div>
+
+            <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+              <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+            <% end %>
+          
+            <br>
+          
+            <div class="actions">
+              <%= f.submit "Enviar datos" %>
+            </div>
+          <% end %>
+          </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <br>
+  
+  <%= link_to "Volver a lista de Owners", lista_owners_path %>
+<% else %>
+  <% controller.redirect_to new_admin_session_path, notice: 'No tienes permiso para ingresar a la página que intentaste acceder.' %>
+<% end %>

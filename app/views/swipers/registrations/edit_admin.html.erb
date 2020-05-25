@@ -1,0 +1,149 @@
+<% if current_admin %>
+  <p id="notice">
+    <% if notice %>
+        <h2>ERROR:</h2>
+        <% if notice["nombre"] == ["vacio"] %>
+          <%= "Ingresó un Nombre en blanco." %><br>
+        <% elsif notice["nombre"] == ["existe"] %>
+          <%= "Ya existe un Admin con ese Nombre." %><br>
+        <% end %>
+        <% if notice["email"] == ["can't be blank"] %>
+          <%= "Ingresó un Correo en blanco." %><br>
+        <% elsif notice["email"] == ["has already been taken"] %>
+          <%= "Ingresó un Correo en blanco." %><br>
+        <% end %>
+        <% if notice["descripcion"] == ["vacio"] %>
+          <%= "Ingresó una Descripción en blanco." %><br>
+        <% elsif notice["descripcion"] == ["largo"] %>
+          <%= "La Descripción debe tener un largo entre 10 a 100 carácteres inclusive." %><br>
+        <% end %>
+        <% if notice["edad"] == ["vacio"] %>
+          <%= "Ingresó una Edad en blanco." %><br>
+        <% elsif notice["edad"] == ["formato"] %>
+          <%= "La Edad debe ser un entero mayor o igual a 18." %><br>
+        <% end %>
+        <% if notice["telefono"] == ["vacio"] %>
+          <%= "Ingresó un Teléfono en blanco." %><br>
+        <% elsif notice["telefono"] == ["formato"] %>
+          <%= "El Teléfono debe ingresarse en formato: +56912345678" %><br>
+        <% end %>
+        <% if notice["direccion"] == ["vacio"] %>
+          <%= "Ingresó una Dirección en blanco." %><br>
+        <% elsif notice["direccion"] == ["formato"] %>
+          <%= "La Dirección debe ingresarse en formato: Callejón Vicuña Mackenna 4860" %><br>
+        <% end %>
+    <% end %>
+  </p>
+
+  <h2>Edit Swiper</h2>
+
+  <table>
+      <thead>
+        <tr>
+            <th>Editar datos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <%= form_with(model: @swiper, method: :patch) do |f| %>
+              <div class="field">
+                <%= f.label :nombre %><br />
+                <%= f.text_field :nombre, autofocus: true, autocomplete: "nombre" %>
+              </div>
+
+              <div class="field">
+                <%= f.label :correo %><br />
+                <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+              </div>
+            
+              <div class="field">
+                <%= f.label :edad %><br />
+                <%= f.text_field :edad, autofocus: true, autocomplete: "edad" %>
+              </div>
+            
+              <div class="field">
+                <%= f.label :teléfono %><br />
+                <%= f.text_field :telefono, autofocus: true, autocomplete: "telefono" %>
+              </div>
+            
+              <div class="field">
+                <%= f.label :cumpleaños %><br />
+                <%= f.date_select :cumpleanos, autofocus: true, autocomplete: "cumpleanos", discard_year:true %>
+              </div>
+            
+              <div class="field">
+                <%= f.label :dirección %><br />
+                <%= f.text_field :direccion, autofocus: true, autocomplete: "direccion" %>
+              </div>
+            
+              <div class="field">
+                <%= f.label :descripción %><br />
+                <%= f.text_field :descripcion, autofocus: true, autocomplete: "descripcion" %>
+              </div>
+            
+              <br>
+            
+              <div class="field">
+                <%= f.label :imágenes %>
+                <%= f.file_field :imagenes, multiple: true %>
+              </div>
+            
+              <br>
+            
+              <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+              <% end %>
+            
+              <br>
+            
+              <div class="actions">
+                <%= f.submit "Enviar datos" %>
+              </div>
+            <% end %>
+          </td>
+        </tr>
+      </tbody>
+  </table>
+
+  <br><br><br>
+
+  <table>
+      <thead>
+          <tr>
+            <th>
+              Editar Imágenes
+            </th>
+          </tr>
+          <tr>
+              <% (0...@swiper.imagenes.count).each do |numero| %>
+                  <th>Imagen <%= numero + 1 %> </th>
+              <% end %>
+          </tr>
+        </thead>
+      <tbody>
+          <tr>
+              <% @swiper.imagenes.each do |imagen| %>
+              <td>
+                  <div style="width:200px; height:250px;">
+                    <%= image_tag(imagen, style:'width:180px; heigth: 170px') %>
+                  </div>
+              </td>
+              <% end %>
+          </tr>
+          <tr>
+              <% @swiper.imagenes.each do |imagen| %>
+              <td>
+                <%= link_to "Remover imagen", delete_imagen_swiper_path(imagen.id, @swiper.id), method: :delete, data: {confirm: "Are you sure?"} %>
+              </td>
+              <% end %>
+        </tr>
+      </tbody>
+  </table>
+  
+  <br>
+  
+  <%= link_to "Volver a la lista de Swipers", lista_swipers_path %>
+<% else %>
+  <% controller.redirect_to new_admin_session_path, notice: 'No tienes permiso para ingresar a la página que intentaste acceder.' %>
+<% end %>
