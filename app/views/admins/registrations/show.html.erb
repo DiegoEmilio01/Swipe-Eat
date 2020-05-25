@@ -11,7 +11,6 @@
         <%= @admin.email %>
     </p>
     <br>
-    <%= resource_name %>
     <%= link_to 'Editar Admin', admin_edit_admin_path(@admin.id) %><br><br>
     <%= link_to "Borrar Admin", admin_path(@admin.id), method: :delete, data: {confirm: '¿Estás seguro que quieres borrar este Swiper?'}%><br><br>
     <%= link_to "Volver a lista de Admins", lista_admins_path %>
