@@ -9,7 +9,7 @@
             </tr>
         </thead>
         <tbody>
-            <% @admins.each do |admin| %>
+            <% @filtrados.each do |admin| %>
                 <tr>
                     <td><%= admin.nombre %></td>
                     <td><%= admin.email %></td>
@@ -19,7 +19,7 @@
         </tbody>
     </table>
     <br>
-
+    
     <%= form_tag(controller: 'admins/registrations', action: "filtro", method: "post") do %>
         <h3> Filtrar por nombre </h3>
         <div class="field">

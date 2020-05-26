@@ -4,6 +4,7 @@ class Admins::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
   prepend_before_action :require_no_authentication, only: :cancel
+  # skip_before_action :verify_authenticity_token, :only => [:filtro]
   # prepend_before_filter :require_no_authentication, only: :cancel
   # skip_before_action :require_login, only: [:new, :create], raise: false
   # skip_before_filter :require_login, only: [:new, :create], raise: false
@@ -44,6 +45,16 @@ class Admins::RegistrationsController < Devise::RegistrationsController
     nombre = @admin.nombre
     @admin.destroy
     redirect_to lista_admins_path, notice: "Se eliminó el Admin: #{nombre}."
+  end
+
+  def filtro
+    if params[:filtro] == "nombre"
+      @filtrados = Admin.where("nombre ~* ?", ".*"+ params[:input] + ".*")
+      #@filtrados = Admin.where("nombre = ?", params[:input])
+      #puts @filtrados
+      #redirect_to lista_admins_path
+      #redirect_to filtro_admins_path
+    end
   end
 
   # GET /resource/sign_up

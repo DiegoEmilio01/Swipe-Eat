@@ -40,6 +40,8 @@ Rails.application.routes.draw do
     get 'admins/:id/edit', to: 'admins/registrations#edit_admin', as: 'admin_edit_admin'
     patch 'admins/:id', to: 'admins/registrations#update_admin'
     delete 'admins/:id', to: 'admins/registrations#destroy_admin'
+    #post 'admins/filtro', to: 'admins/registrations#filtro', as: 'filtro_admins'
+    post 'admins-filtrados' => 'admins/registrations#filtro', as: 'filtro_admins'
   end
 
   ### RUTA LISTA DE CRUDS (HOME)###
