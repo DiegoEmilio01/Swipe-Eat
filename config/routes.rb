@@ -105,4 +105,6 @@ Rails.application.routes.draw do
   delete 'restaurantes/:id', to: 'restaurantes#destroy'
   delete 'restaurantes/imagen/:id_i/:id_r', to: 'restaurantes#delete_imagen', as: 'delete_'\
                                                                               'imagen_restaurante'
+  # FILTRO
+  post 'restaurantes-filtrados' => 'restaurantes#filtro'
 end

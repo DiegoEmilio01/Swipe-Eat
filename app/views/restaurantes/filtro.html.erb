@@ -29,7 +29,7 @@
     </thead>
 
     <tbody>
-      <% @restaurantes.each do |restaurante| %>
+      <% @filtrados.each do |restaurante| %>
         <tr>
           <td><%= restaurante.nombre %></td>
           <td><%= link_to 'Ver detalles', restaurante_path(restaurante.id) %></td>
