@@ -45,12 +45,12 @@ class ComunasController < ApplicationController
   end
 
   def filtro
-    if params[:filtro] == "nombre"
-      @filtrados = Comuna.where("nombre ~* ?", ".*" + params[:input] + ".*")
-    elsif params[:filtro] == "o_nombre"
+    if params[:filtro] == 'nombre'
+      @filtrados = Comuna.where('nombre ~* ?', '.*' + params[:input] + '.*')
+    elsif params[:filtro] == 'o_nombre'
       @filtrados = Comuna.order(:nombre)
-    elsif params[:filtro] == "cuarentena"
-      @filtrados = Comuna.where("cuarentena = ?", params[:input])
+    elsif params[:filtro] == 'cuarentena'
+      @filtrados = Comuna.where('cuarentena = ?', params[:input])
     end
   end
 end

@@ -41,13 +41,13 @@ class Owners::RegistrationsController < Devise::RegistrationsController
   end
 
   def filtro
-    if params[:filtro] == "nombre"
-      @filtrados = Owner.where("nombre ~* ?", ".*" + params[:input] + ".*")
-    elsif params[:filtro] == "correo"
-      @filtrados = Owner.where("email ~* ?", ".*" + params[:input] + ".*")
-    elsif params[:filtro] == "o_nombre"
+    if params[:filtro] == 'nombre'
+      @filtrados = Owner.where('nombre ~* ?', '.*' + params[:input] + '.*')
+    elsif params[:filtro] == 'correo'
+      @filtrados = Owner.where('email ~* ?', '.*' + params[:input] + '.*')
+    elsif params[:filtro] == 'o_nombre'
       @filtrados = Owner.order(:nombre)
-    elsif params[:filtro] == "o_correo"
+    elsif params[:filtro] == 'o_correo'
       @filtrados = Owner.order(:email)
     end
   end

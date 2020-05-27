@@ -43,17 +43,17 @@ class Admins::RegistrationsController < Devise::RegistrationsController
   end
 
   def filtro
-    if params[:filtro] == "nombre"
-      @filtrados = Admin.where("nombre ~* ?", ".*" + params[:input] + ".*")
-      #@filtrados = Admin.where("nombre = ?", params[:input])
-      #puts @filtrados
-      #redirect_to lista_admins_path
-      #redirect_to filtro_admins_path
-    elsif params[:filtro] == "correo"
-      @filtrados = Admin.where("email ~* ?", ".*" + params[:input] + ".*")
-    elsif params[:filtro] == "o_nombre"
+    if params[:filtro] == 'nombre'
+      @filtrados = Admin.where('nombre ~* ?', '.*' + params[:input] + '.*')
+      # @filtrados = Admin.where("nombre = ?", params[:input])
+      # puts @filtrados
+      # redirect_to lista_admins_path
+      # redirect_to filtro_admins_path
+    elsif params[:filtro] == 'correo'
+      @filtrados = Admin.where('email ~* ?', '.*' + params[:input] + '.*')
+    elsif params[:filtro] == 'o_nombre'
       @filtrados = Admin.order(:nombre)
-    elsif params[:filtro] == "o_correo"
+    elsif params[:filtro] == 'o_correo'
       @filtrados = Admin.order(:email)
     end
   end

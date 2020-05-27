@@ -52,9 +52,9 @@ class RestaurantesController < ApplicationController
   end
 
   def filtro
-    if params[:filtro] == "nombre"
-      @filtrados = Restaurante.where("nombre ~* ?", ".*" + params[:input] + ".*")
-    elsif params[:filtro] == "o_nombre"
+    if params[:filtro] == 'nombre'
+      @filtrados = Restaurante.where('nombre ~* ?', '.*' + params[:input] + '.*')
+    elsif params[:filtro] == 'o_nombre'
       @filtrados = Restaurante.order(:nombre)
     end
   end

@@ -48,17 +48,16 @@ class Swipers::RegistrationsController < Devise::RegistrationsController
   end
 
   def filtro
-    if params[:filtro] == "nombre"
-      @filtrados = Swiper.where("nombre ~* ?", ".*" + params[:input] + ".*")
-    elsif params[:filtro] == "correo"
-      @filtrados = Swiper.where("email ~* ?", ".*" + params[:input] + ".*")
-    elsif params[:filtro] == "o_nombre"
+    if params[:filtro] == 'nombre'
+      @filtrados = Swiper.where('nombre ~* ?', '.*' + params[:input] + '.*')
+    elsif params[:filtro] == 'correo'
+      @filtrados = Swiper.where('email ~* ?', '.*' + params[:input] + '.*')
+    elsif params[:filtro] == 'o_nombre'
       @filtrados = Swiper.order(:nombre)
-    elsif params[:filtro] == "o_correo"
+    elsif params[:filtro] == 'o_correo'
       @filtrados = Swiper.order(:email)
     end
   end
-
 
   # GET /resource/sign_up
   # def new

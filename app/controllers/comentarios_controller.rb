@@ -46,8 +46,7 @@ class ComentariosController < ApplicationController
   end
 
   def filtro
-    if params[:filtro] == "contenido"
-      @filtrados = Comentario.where("contenido ~* ?", ".*" + params[:input] + ".*")
-    end
+    input = '.*' + params[:input] + '.*'
+    @filtrados = Comentario.where('contenido ~* ?', input) if params[:filtro] == 'contenido'
   end
 end
