@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     get 'owners/:id/edit', to: 'owners/registrations#edit_admin', as: 'admin_edit_owner'
     patch 'owners/:id', to: 'owners/registrations#update_admin'
     delete 'owners/:id', to: 'owners/registrations#destroy_admin'
+    post 'owners-filtrados' => 'owners/registrations#filtro'
   end
 
   ### RUTAS CRUD SWIPERS ###
@@ -27,6 +28,7 @@ Rails.application.routes.draw do
     delete 'swipers/:id', to: 'swipers/registrations#destroy_admin'
     delete 'swipers/imagen/:id_i/:id_s' => 'swipers/registrations#delete_imagen', as: 'delete_'\
                                                                                   'imagen_swiper'
+    post 'swipers-filtrados' => 'swipers/registrations#filtro'
   end
 
   ### RUTAS CRUD ADMIN ###
@@ -40,6 +42,7 @@ Rails.application.routes.draw do
     get 'admins/:id/edit', to: 'admins/registrations#edit_admin', as: 'admin_edit_admin'
     patch 'admins/:id', to: 'admins/registrations#update_admin'
     delete 'admins/:id', to: 'admins/registrations#destroy_admin'
+    post 'admins-filtrados' => 'admins/registrations#filtro'
   end
 
   ### RUTA LISTA DE CRUDS (HOME)###
@@ -57,6 +60,8 @@ Rails.application.routes.draw do
   patch 'comunas/:id', to: 'comunas#update'
   # DELETE
   delete 'comunas/:id', to: 'comunas#destroy'
+  # FILTRO
+  post 'comunas-filtradas' => 'comunas#filtro'
 
   ### RUTAS CRUD COMENTARIO ###
   # CREATE
@@ -70,6 +75,8 @@ Rails.application.routes.draw do
   patch 'comentarios/:id', to: 'comentarios#update'
   # DELETE
   delete 'comentarios/:id', to: 'comentarios#destroy'
+  # FILTRO
+  post 'comentarios-filtrados' => 'comentarios#filtro'
 
   ### RUTAS CRUD GUSTO ###
   # CREATE
@@ -98,4 +105,6 @@ Rails.application.routes.draw do
   delete 'restaurantes/:id', to: 'restaurantes#destroy'
   delete 'restaurantes/imagen/:id_i/:id_r', to: 'restaurantes#delete_imagen', as: 'delete_'\
                                                                               'imagen_restaurante'
+  # FILTRO
+  post 'restaurantes-filtrados' => 'restaurantes#filtro'
 end

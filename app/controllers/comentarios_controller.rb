@@ -44,4 +44,9 @@ class ComentariosController < ApplicationController
     @comentario.destroy
     redirect_to comentarios_path, notice: 'Comentario eliminado definitivamente.'
   end
+
+  def filtro
+    input = '.*' + params[:input] + '.*'
+    @filtrados = Comentario.where('contenido ~* ?', input) if params[:filtro] == 'contenido'
+  end
 end

@@ -43,4 +43,14 @@ class ComunasController < ApplicationController
     @comuna.destroy
     redirect_to lista_comunas_path, notice: 'Comuna eliminada exitosamente.'
   end
+
+  def filtro
+    if params[:filtro] == 'nombre'
+      @filtrados = Comuna.where('nombre ~* ?', '.*' + params[:input] + '.*')
+    elsif params[:filtro] == 'o_nombre'
+      @filtrados = Comuna.order(:nombre)
+    elsif params[:filtro] == 'cuarentena'
+      @filtrados = Comuna.where('cuarentena = ?', params[:input])
+    end
+  end
 end

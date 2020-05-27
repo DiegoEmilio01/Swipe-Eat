@@ -3,6 +3,24 @@
 
   <h1>Restaurantes</h1>
 
+  <h3 style="margin: 0px; margin-bottom: -17px;"> Ordenar por: </h3>
+  <table>
+      <tbody>
+          <tr>
+              <td>
+                  <%= form_tag(controller: 'restaurantes', action: "filtro", method: "post") do %>
+                      <div class="field">
+                          <%= hidden_field_tag(:filtro, "o_nombre") %><br>
+                      </div>
+                      <div class="actions">
+                          <%= submit_tag("Nombre") %><br><br>
+                      </div>
+                  <% end %>
+              </td>
+          </tr>
+      </tbody>
+  </table>
+
   <table>
     <thead>
       <tr>
@@ -17,6 +35,34 @@
           <td><%= link_to 'Ver detalles', restaurante_path(restaurante.id) %></td>
         </tr>
       <% end %>
+    </tbody>
+  </table>
+  <br><br>
+  <table>
+    <thead>
+        <tr>
+            <th>Filtrar por nombre</th>
+            <th>Filtrar por comuna</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <%= form_tag(controller: 'restaurantes', action: "filtro", method: "post") do %>
+                    <div class="field">
+                        <%= text_field_tag(:input) %>
+                    </div>
+                    <div class="field">
+                        <%= hidden_field_tag(:filtro, "nombre") %><br>
+                    </div>
+                    <div class="actions">
+                        <%= submit_tag("Filtrar") %><br><br>
+                    </div>
+                <% end %>
+            </td>
+            <td>
+            </td>
+        </tr>
     </tbody>
   </table>
 

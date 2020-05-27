@@ -1,13 +1,13 @@
 <% if current_admin %>
     <p id="notice"><%= notice %></p>
-    <h1>Lista de Swipers</h1>
+    <h1>Lista de Admins</h1>
 
     <h3 style="margin: 0px; margin-bottom: -17px;"> Ordenar por: </h3>
     <table>
         <tbody>
             <tr>
                 <td>
-                    <%= form_tag(controller: 'swipers/registrations', action: "filtro", method: "post") do %>
+                    <%= form_tag(controller: 'admins/registrations', action: "filtro", method: "post") do %>
                         <div class="field">
                             <%= hidden_field_tag(:filtro, "o_nombre") %><br>
                         </div>
@@ -17,7 +17,7 @@
                     <% end %>
                 </td>
                 <td>
-                    <%= form_tag(controller: 'swipers/registrations', action: "filtro", method: "post") do %>
+                    <%= form_tag(controller: 'admins/registrations', action: "filtro", method: "post") do %>
                         <div class="field">
                             <%= hidden_field_tag(:filtro, "o_correo") %><br>
                         </div>
@@ -34,27 +34,15 @@
         <thead>
             <tr>
                 <th>Nombre</th>
-                <th>Email</th>
-                <th>Edad</th>
-                <th>Cumpleaños</th>
-                <th>Teléfono</th>
-                <th>Dirección</th>
-                <th>Comuna</th> 
-                <th>Descripción</th>        
+                <th>Correo</th>
             </tr>
         </thead>
         <tbody>
-            <% @swipers.each do |swiper| %>
+            <% @filtrados.each do |admin| %>
                 <tr>
-                    <td><%= swiper.nombre %></td>
-                    <td><%= swiper.email %></td>
-                    <td><%= swiper.edad %></td>
-                    <td><%= swiper.cumpleanos.strftime("%d/%m") %></td>
-                    <td><%= swiper.telefono %></td>
-                    <td><%= swiper.direccion %></td>
-                    <td><%= swiper.comuna.nombre%></td>
-                    <td><%= swiper.descripcion %></td>
-                    <td><%= link_to 'Ver detalles', swiper_path(swiper.id) %></td>
+                    <td><%= admin.nombre %></td>
+                    <td><%= admin.email %></td>
+                    <td><%= link_to 'Ver detalles', admin_path(admin.id) %></td>
                 </tr>
             <%end%>
         </tbody>
@@ -71,7 +59,7 @@
         <tbody>
             <tr>
                 <td>
-                    <%= form_tag(controller: 'swipers/registrations', action: "filtro", method: "post") do %>
+                    <%= form_tag(controller: 'admins/registrations', action: "filtro", method: "post") do %>
                         <div class="field">
                             <%= text_field_tag(:input) %>
                         </div>
@@ -84,7 +72,7 @@
                     <% end %>
                 </td>
                 <td>
-                    <%= form_tag(controller: 'swipers/registrations', action: "filtro", method: "post") do %>
+                    <%= form_tag(controller: 'admins/registrations', action: "filtro", method: "post") do %>
                         <div class="field">
                             <%= text_field_tag(:input) %>
                         </div>
@@ -99,8 +87,10 @@
             </tr>
         </tbody>
     </table>
+    
 
-    <%= link_to 'Volver a la lista de acciones disponibles', admin_root_path %>
+    <%= link_to 'Crear Admin', new_admin_registration_path %><br><br>
+    <%= link_to 'Volver a la lista de acciones disponibles.', admin_root_path %><br>
 <% else %>
     <% controller.redirect_to new_admin_session_path, notice: 'No tienes permiso para ingresar a la página que intentaste acceder.' %>
 <% end %>

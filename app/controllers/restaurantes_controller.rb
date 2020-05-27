@@ -50,4 +50,12 @@ class RestaurantesController < ApplicationController
     aviso = 'Imagen del restaurante eliminada exitosamente.'
     redirect_to restaurante_path(params[:id_r]), notice: aviso
   end
+
+  def filtro
+    if params[:filtro] == 'nombre'
+      @filtrados = Restaurante.where('nombre ~* ?', '.*' + params[:input] + '.*')
+    elsif params[:filtro] == 'o_nombre'
+      @filtrados = Restaurante.order(:nombre)
+    end
+  end
 end
