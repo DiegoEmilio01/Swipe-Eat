@@ -4,11 +4,6 @@ class Admins::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
   prepend_before_action :require_no_authentication, only: :cancel
-  # skip_before_action :verify_authenticity_token, :only => [:filtro]
-  # prepend_before_filter :require_no_authentication, only: :cancel
-  # skip_before_action :require_login, only: [:new, :create], raise: false
-  # skip_before_filter :require_login, only: [:new, :create], raise: false
-  # skip_before_action :authorise, only: :new, raise: false
 
   def index
     @admins = Admin.all
@@ -49,11 +44,17 @@ class Admins::RegistrationsController < Devise::RegistrationsController
 
   def filtro
     if params[:filtro] == "nombre"
-      @filtrados = Admin.where("nombre ~* ?", ".*"+ params[:input] + ".*")
+      @filtrados = Admin.where("nombre ~* ?", ".*" + params[:input] + ".*")
       #@filtrados = Admin.where("nombre = ?", params[:input])
       #puts @filtrados
       #redirect_to lista_admins_path
       #redirect_to filtro_admins_path
+    elsif params[:filtro] == "correo"
+      @filtrados = Admin.where("email ~* ?", ".*" + params[:input] + ".*")
+    elsif params[:filtro] == "o_nombre"
+      @filtrados = Admin.order(:nombre)
+    elsif params[:filtro] == "o_correo"
+      @filtrados = Admin.order(:email)
     end
   end
 
