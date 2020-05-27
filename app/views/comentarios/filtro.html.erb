@@ -11,7 +11,7 @@
         </thead>
 
         <tbody>
-            <% @comentarios.each do |comentario| %>
+            <% @filtrados.each do |comentario| %>
                 <tr>
                     <td><%= comentario.contenido %></td>
                     <td><%= comentario.fecha %></td>
@@ -31,7 +31,12 @@
         <tbody>
             <tr>
                 <td>
-                    <h5 style="margin: 0px;">(Solo los comentarios con el texto dentro de su contenido serán mostrados.)</h5>
+                    <h5 style="margin: 0px; text-align: center;">(solo los comentarios con el texto dentro de su contenido)</h5>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h5 style="margin: 0px; text-align: center;">(Filtrar blanco para mostrar toda la lista.)</h5>
                 </td>
             </tr>
             <tr>

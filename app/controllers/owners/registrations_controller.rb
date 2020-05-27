@@ -40,6 +40,18 @@ class Owners::RegistrationsController < Devise::RegistrationsController
     redirect_to lista_owners_path, notice: "Se eliminó el Owner: #{nombre}."
   end
 
+  def filtro
+    if params[:filtro] == "nombre"
+      @filtrados = Owner.where("nombre ~* ?", ".*" + params[:input] + ".*")
+    elsif params[:filtro] == "correo"
+      @filtrados = Owner.where("email ~* ?", ".*" + params[:input] + ".*")
+    elsif params[:filtro] == "o_nombre"
+      @filtrados = Owner.order(:nombre)
+    elsif params[:filtro] == "o_correo"
+      @filtrados = Owner.order(:email)
+    end
+  end
+
   # GET /resource/sign_up
   # def new
   #   super
