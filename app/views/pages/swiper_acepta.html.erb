@@ -1,1 +1,31 @@
 <h1>Lista de putos</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Edad</th>
+            <th>Cumpleaños</th>
+            <th>Teléfono</th>
+            <th>Dirección</th>
+            <th>Comuna</th> 
+            <th>Descripción</th>        
+        </tr>
+    </thead>
+    <tbody>
+        <% @swipers_recomendados.each do |swiper| %>
+            <tr>
+                <td><%= swiper.nombre %></td>
+                <td><%= swiper.email %></td>
+                <td><%= swiper.edad %></td>
+                <td><%= swiper.cumpleanos.strftime("%d/%m") %></td>
+                <td><%= swiper.telefono %></td>
+                <td><%= swiper.direccion %></td>
+                <td><%= swiper.comuna.nombre%></td>
+                <td><%= swiper.descripcion %></td>
+                <td><%= link_to 'Ver detalles', swiper_path(swiper.id) %></td>
+            </tr>
+        <%end%>
+    </tbody>
+</table>
+<br>

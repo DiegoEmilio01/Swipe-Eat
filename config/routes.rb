@@ -47,7 +47,7 @@ Rails.application.routes.draw do
 
   ### RUTA LISTA DE CRUDS (HOME)###
   root to: 'pages#home', as: "home_root"
-  get 'pages/swiper_acepta', to: 'pages#swiper_acepta', as: 'aceptando'
+  get 'pages/swiper_acepta/:id', to: 'pages#swiper_acepta', as: 'aceptando'
 
   ### RUTAS CRUD COMUNA ###
   # CREATE
