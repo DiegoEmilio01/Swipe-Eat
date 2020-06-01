@@ -2,4 +2,7 @@
 
 <% if current_swiper %>
 <%= link_to "Ver posible gente", aceptando_path %>
-<%end%>
+<% else %>
+<% link_to "Registrate", new_swiper_registration %>
+<% link_to "Registrate", new_swiper_registration %>  
+<% end %>
