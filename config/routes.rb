@@ -45,9 +45,10 @@ Rails.application.routes.draw do
     post 'admins-filtrados' => 'admins/registrations#filtro'
   end
 
-  ### RUTA LISTA DE CRUDS (HOME)###
+  ### RUTAS NAVEGACIÓN SWIPER(HOME)###
   root to: 'pages#home', as: "home_root"
   get 'pages/swiper_acepta/:id', to: 'pages#swiper_acepta', as: 'aceptando'
+  get 'pages/gustos/:id', to: 'pages#gustos', as: 'add_gustos'
 
   ### RUTAS CRUD COMUNA ###
   # CREATE

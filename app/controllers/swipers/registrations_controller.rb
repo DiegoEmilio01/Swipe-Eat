@@ -16,7 +16,9 @@ class Swipers::RegistrationsController < Devise::RegistrationsController
     @swiper = Swiper.find params[:id]
   end
 
-  def sign_up(resource_name, resource); end
+  def sign_up(resource_name, resource)
+    sign_in(resource_name, resource)
+  end
 
   def delete_imagen
     @imagen = ActiveStorage::Attachment.find(params[:id_i])
@@ -30,7 +32,7 @@ class Swipers::RegistrationsController < Devise::RegistrationsController
 
     preparams = params.require(:swiper)
     params = preparams.permit(:email, :nombre, :edad, :telefono, :cumpleanos,
-                              :direccion, :comuna_id, :descripcion, imagenes: [])
+                              :direccion, :comuna_id, :descripcion, imagenes: []).permit(gusto_ids: [])
 
     if @swiper.update_without_password(params)
       aviso = 'Swiper editado exitosamente.'
@@ -65,9 +67,36 @@ class Swipers::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    gustos = sign_up_params[:gusto_ids]
+    logger.info "GUSTOS"
+    logger.info gustos
+    logger.info "GUSTOS"
+    sign_up_params.delete(:gusto_ids)
+    build_resource(sign_up_params)
+    
+    gustos.each do |gusto_id|
+      gusto = Gusto.find(gusto_id)
+      @swiper.gustos << gusto
+    end
+    resource.save
+    yield resource if block_given?
+    if resource.persisted?
+      if resource.active_for_authentication?
+        set_flash_message! :notice, :signed_up
+        sign_up(resource_name, resource)
+        respond_with resource, location: after_sign_up_path_for(resource)
+      else
+        set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
+        expire_data_after_sign_in!
+        respond_with resource, location: after_inactive_sign_up_path_for(resource)
+      end
+    else
+      clean_up_passwords resource
+      set_minimum_password_length
+      respond_with resource
+    end
+  end
 
   # GET /resource/edit
   # def edit
@@ -93,7 +122,7 @@ class Swipers::RegistrationsController < Devise::RegistrationsController
   def configure_sign_up_params
     devise_parameter_sanitizer.permit(:sign_up, keys: [:nombre, :edad, :telefono, :cumpleanos,
                                                        :direccion, :descripcion, :comuna_id,
-                                                       imagenes: []])
+                                                       imagenes: [], gusto_ids: []])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
@@ -101,21 +130,22 @@ class Swipers::RegistrationsController < Devise::RegistrationsController
     devise_parameter_sanitizer.permit(:account_update, keys: [:nombre, :edad, :telefono,
                                                               :cumpleanos, :direccion,
                                                               :descripcion, :comuna_id,
-                                                              imagenes: []])
+                                                              imagenes: [], gusto_ids: []])
   end
 
   def update
     new_params = params.require(:swiper).permit(:email, :current_password, :password,
                                                 :password_confirmation, :nombre, :edad,
                                                 :telefono, :cumpleanos, :direccion,
-                                                :descripcion, :comuna_id, imagenes: [])
+                                                :descripcion, :comuna_id, 
+                                                imagenes: [], gusto_ids: [])
     change_password = true
     if params[:swiper][:password].blank?
       params[:swiper].delete('password')
       params[:swiper].delete('password_confirmation')
       new_params = params.require(:swiper).permit(:email, :nombre, :edad, :telefono, :cumpleanos,
                                                   :direccion, :descripcion, :comuna_id,
-                                                  imagenes: [])
+                                                  imagenes: [], gusto_ids: [])
       change_password = false
     end
 
