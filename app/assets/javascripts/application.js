@@ -15,6 +15,5 @@
 //= require bootstrap
 //= require turbolinks
 //= require_tree .
-//= require slider
 //= require jquery
-
+//= require slider
