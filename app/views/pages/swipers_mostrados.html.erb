@@ -1,33 +1,33 @@
 <h1>Lista de putos</h1>
-<h2><%= @swiper.id%></h2>
-<table>
-    <thead>
-        <tr>
-            <th>Nombre</th>
-            <th>Email</th>
-            <th>Edad</th>
-            <th>Cumpleaños</th>
-            <th>Teléfono</th>
-            <th>Dirección</th>
-            <th>Comuna</th> 
-            <th>Descripción</th>        
-        </tr>
-    </thead>
-    <tbody>
-        <% @swipers_recomendados.each do |swiper| %>
-            <tr>
-                <td><%= swiper.nombre %></td>
-                <td><%= swiper.email %></td>
-                <td><%= swiper.edad %></td>
-                <td><%= swiper.cumpleanos.strftime("%d/%m") %></td>
-                <td><%= swiper.telefono %></td>
-                <td><%= swiper.direccion %></td>
-                <td><%= swiper.comuna.nombre%></td>
-                <td><%= swiper.descripcion %></td>
-                <td><%= link_to 'Ver detalles', swiper_path(swiper.id) %></td>
-                <td><%= link_to 'Aceptar', aceptado_path(@swiper.id, swiper.id)%></td>
-            </tr>
-        <%end%>
-    </tbody>
-</table>
-<br>
+<% i = 0 %>
+<% @swipers_recomendados.each do |swiper| %>
+  <% if (i == 0) %>
+    <div class ="first current">  
+  <% elsif (i == @swipers_recomendados.length() - 1)%>
+    <div class="last" style="display:none;"> 
+  <% else %>
+    <div class="box" style="display:none;">
+  <% end %>
+    <article class="media">
+          <p>
+            <strong><%= swiper.nombre %></strong> <small><%= swiper.edad %></small>
+            <br>
+            <%= swiper.descripcion %>
+          </p>
+          <%= link_to 'Ver más', swiper_path(swiper.id), class: 'button' %><br>
+          <%= link_to 'Aceptar', aceptado_path(@swiper.id, swiper.id), class: 'button' %>
+    </article>
+  </div>
+  <% i += 1 %>
+<% end %>
+<button id="next">Next Swiper</button><br>
+<%= link_to "Home", home_root_path%>
+<script>
+    $('#next').click(function() {
+        $('.current').removeClass('current').hide()
+            .next().show().addClass('current');
+        if ($('.current').hasClass('last')) {
+            $('#next').attr('disabled', true);
+        }
+      });
+</script>

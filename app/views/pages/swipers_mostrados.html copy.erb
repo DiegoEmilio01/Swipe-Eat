@@ -1,0 +1,67 @@
+<h1>Lista de putos</h1>
+<h2><%= @swiper.id%></h2>
+<table>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Edad</th>
+            <th>Cumpleaños</th>
+            <th>Teléfono</th>
+            <th>Dirección</th>
+            <th>Comuna</th> 
+            <th>Descripción</th>        
+        </tr>
+    </thead>
+    <tbody>
+        <% @swipers_recomendados.each do |swiper| %>
+            <tr>
+                <td><%= swiper.nombre %></td>
+                <td><%= swiper.email %></td>
+                <td><%= swiper.edad %></td>
+                <td><%= swiper.cumpleanos.strftime("%d/%m") %></td>
+                <td><%= swiper.telefono %></td>
+                <td><%= swiper.direccion %></td>
+                <td><%= swiper.comuna.nombre%></td>
+                <td><%= swiper.descripcion %></td>
+                <td><%= link_to 'Ver detalles', swiper_path(swiper.id) %></td>
+                <td><%= link_to 'Aceptar', aceptado_path(@swiper.id, swiper.id)%></td>
+            </tr>
+        <%end%>
+    </tbody>
+</table>
+<br>
+
+<% i = 0 %>
+<% @swipers_recomendados.each do |swiper| %>
+  <% if (i == 0) %>
+    <div class ="first current">  
+  <% else %>
+    <div class="box">
+  <% end %>
+    <article class="media">
+      <div class="media-content">
+        <div class="content">
+          <p>
+            <strong><%= swiper.nombre %></strong> <small><%= swiper.edad %></small>
+            <br>
+            <%= swiper.descripcion %>
+          </p>
+          <%= link_to 'Ver más', swiper_path(swiper.id), class: 'button' %>
+        </div>
+      </div>
+    </article>
+  </div>
+  <% i += 1 %>
+<% end %>
+<div id="main">   
+    <div id="div1" class="first current">Div 1
+    <div class ="patata">
+     <h2>
+     lOL
+     </h2>
+    </div></div>
+    <div id="div2" style="display:none;">Div 2</div>
+    <div id="div3" class="last" style="display:none;">Div 3</div>    
+</div>
+<button id="next">Next</button>
