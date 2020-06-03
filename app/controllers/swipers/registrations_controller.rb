@@ -32,7 +32,8 @@ class Swipers::RegistrationsController < Devise::RegistrationsController
 
     preparams = params.require(:swiper)
     params = preparams.permit(:email, :nombre, :edad, :telefono, :cumpleanos,
-                              :direccion, :comuna_id, :descripcion, imagenes: []).permit(gusto_ids: [])
+                              :direccion, :comuna_id, :descripcion,
+                              imagenes: []).permit(gusto_ids: [])
 
     if @swiper.update_without_password(params)
       aviso = 'Swiper editado exitosamente.'
@@ -71,12 +72,10 @@ class Swipers::RegistrationsController < Devise::RegistrationsController
     gustos = sign_up_params[:gusto_ids]
     sign_up_params.delete(:gusto_ids)
     build_resource(sign_up_params)
-    
+
     gustos.each do |gusto_id|
       gusto = Gusto.find(gusto_id)
-      if (not @swiper.gustos.include?(gusto))
-        @swiper.gustos << gusto
-      end
+      @swiper.gustos << gusto unless @swiper.gustos.include?(gusto)
     end
     resource.save
     yield resource if block_given?
@@ -136,7 +135,7 @@ class Swipers::RegistrationsController < Devise::RegistrationsController
     new_params = params.require(:swiper).permit(:email, :current_password, :password,
                                                 :password_confirmation, :nombre, :edad,
                                                 :telefono, :cumpleanos, :direccion,
-                                                :descripcion, :comuna_id, 
+                                                :descripcion, :comuna_id,
                                                 imagenes: [], gusto_ids: [])
     change_password = true
     if params[:swiper][:password].blank?

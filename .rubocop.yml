@@ -31,6 +31,9 @@ Layout/LineLength:
   Enabled: true
   Max: 100
 
+ClassLength:
+  Max: 150
+
 Style/Documentation:
   Enabled: false
 

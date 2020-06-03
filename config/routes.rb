@@ -45,9 +45,10 @@ Rails.application.routes.draw do
     post 'admins-filtrados' => 'admins/registrations#filtro'
   end
 
-  ### RUTAS NAVEGACIÓN SWIPER(HOME)###
-  root to: 'pages#home', as: "home_root"
-  get 'pages/swiper_acepta/:id', to: 'pages#swiper_acepta', as: 'aceptando'
+  ### RUTAS NAVEGACION SWIPER(HOME)###
+  root to: 'pages#home', as: 'home_root'
+  get 'pages/swiper_mostrados/:id', to: 'pages#swipers_mostrados', as: 'aceptando'
+  get 'pages/swiper_mostrados/:id/aceptar/:id_a', to: 'pages#aceptar', as: 'aceptado'
   get 'pages/gustos/:id', to: 'pages#gustos', as: 'add_gustos'
 
   ### RUTAS CRUD COMUNA ###
