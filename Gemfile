@@ -25,6 +25,9 @@ gem 'devise', '~> 4.7', '>= 4.7.1'
 # Active Storage Amazon
 gem "aws-sdk-s3", require: false
 
+# Bootstrap (para que la página se vea bonita)
+gem 'bootstrap-sass', '~> 2.3.1.0'
+
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
