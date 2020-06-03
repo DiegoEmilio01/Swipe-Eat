@@ -8,15 +8,11 @@ class PagesController < ApplicationController
         @swipers_recomendados = Array.new
         @swipers_all.each do |swiper_all|
             added = false
-            swiper_all.gustos do |gusto|
-                if @swiper.gustos.include?(gusto)
+            swiper_all.gustos.each do |gusto|
+                if (@swiper.gustos.include?(gusto)) && (not added)
                     @swipers_recomendados << swiper_all
                     added = true
                 end
-            end
-            if (swiper_all.comuna.nombre == @swiper.comuna.nombre) && (not added) && 
-                (@swiper.id != swiper_all.id)
-                @swipers_recomendados << swiper_all
             end
         end
 

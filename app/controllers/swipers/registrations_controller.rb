@@ -69,15 +69,14 @@ class Swipers::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     gustos = sign_up_params[:gusto_ids]
-    logger.info "GUSTOS"
-    logger.info gustos
-    logger.info "GUSTOS"
     sign_up_params.delete(:gusto_ids)
     build_resource(sign_up_params)
     
     gustos.each do |gusto_id|
       gusto = Gusto.find(gusto_id)
-      @swiper.gustos << gusto
+      if (not @swiper.gustos.include?(gusto))
+        @swiper.gustos << gusto
+      end
     end
     resource.save
     yield resource if block_given?
