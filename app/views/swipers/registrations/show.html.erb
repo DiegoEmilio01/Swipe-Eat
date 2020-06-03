@@ -37,6 +37,26 @@
     </p>
 
     <p>
+        <strong>Gustos</strong>
+        <% @swiper.gustos.each do |gusto| %>
+        <div class="box">
+            <article class="media">
+            <div class="media-content">
+                <div class="content">
+                <p>
+                    <strong><%= gusto.nombre %></strong>
+                    <br>
+                    <%= gusto.descripcion%>
+                </p>
+                </div>
+            </div>
+            </article>
+        <% end %>
+        </div>
+
+    </p>
+
+    <p>
         <strong>Descripción</strong>
         <%= @swiper.descripcion%>
     </p>

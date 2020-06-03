@@ -76,6 +76,28 @@
   <div class="field">
     <%= f.label :comuna_id %><br />
     <%= f.select :comuna_id, options_from_collection_for_select(Comuna.all, :id, :nombre) %><br />
+  </div> <br>
+
+  <div class="field">
+    <%= f.label :gustos %><br />
+    <% @gustos = Gusto.all %>
+    <% @gustos.each do |gusto| %>
+    <div class="box">
+        <article class="media">
+        <div class="media-content">
+            <div class="content">
+            <p>
+                <strong><%= gusto.nombre %></strong>
+                <br>
+                <%= gusto.descripcion%>
+                <%= f.check_box :gusto_ids, { multiple: true}, gusto.id, nil %>
+            </p>
+            </div>
+        </div>
+        </article>
+    </div>
+    <% end %>
+    
   </div>
 
   <div class="field">

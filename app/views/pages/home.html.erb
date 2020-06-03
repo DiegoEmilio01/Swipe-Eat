@@ -1,0 +1,10 @@
+<h1>Bienvenidos al himalaya</h1>
+
+<% if current_swiper %>
+<%= link_to "Ver posible gente", aceptando_path(current_swiper.id) %><br>
+<%= link_to "Cerrar sesión", destroy_swiper_session_path, method: :delete, data: {confirm: '¿Estás seguro que quieres cerrar sesión?'} %><br> 
+<% else %>
+<%= link_to "Log in", new_swiper_session_path %><br> 
+<%= link_to "Registrate", new_swiper_registration_path %><br>
+<% end %>
+<h2> LoL</h2>
