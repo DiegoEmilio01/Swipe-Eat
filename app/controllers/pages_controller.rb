@@ -1,25 +1,38 @@
+# frozen_string_literal: true
+
 class PagesController < ApplicationController
-    def home
-    end
+  def home; end
 
-    def swiper_acepta
-        @swiper = Swiper.find params[:id]
-        @swipers_all = Swiper.all
-        @swipers_recomendados = Array.new
-        @swipers_all.each do |swiper_all|
-            added = false
-            swiper_all.gustos do |gusto|
-                if @swiper.gustos.include?(gusto)
-                    @swipers_recomendados << swiper_all
-                    added = true
-                end
-            end
-            if (swiper_all.comuna.nombre == @swiper.comuna.nombre) && (not added) && 
-                (@swiper.id != swiper_all.id)
-                @swipers_recomendados << swiper_all
-            end
+  def swipers_mostrados
+    @swiper = Swiper.find params[:id]
+    @swipers_all = Swiper.all
+    @swipers_recomendados = []
+    @swipers_all.each do |swiper_all|
+      added = false
+      swiper_all.gustos.each do |gusto|
+        if @swiper.gustos.include?(gusto) && (!added) && (!@swiper.aceptados.include?(swiper_all))
+          @swipers_recomendados << swiper_all unless @swiper == swiper_all
+          added = true
         end
+      end
 
+      if !added && (@swiper.comuna == swiper_all.comuna) &&
+         (@swipers_recomendados.length < 5) && (@swiper == swiper_all)
+        @swipers_recomendados << swiper_all unless @swiper.aceptados.inlude?(swiper_all)
+      end
     end
+    @swipers_recomendados.shuffle
+  end
 
+  def aceptar
+    @swiper = Swiper.find params[:id]
+    @aceptado = Swiper.find params[:id_a]
+    @swiper.aceptados << @aceptado
+    #Se verifica si el otro usuario también nos aceptó para hacer match
+    if (@aceptado.aceptados.include?(@swiper))
+        @swiper.matchs << @aceptado
+        @aceptado.matchs << @swiper
+    end
+    redirect_to aceptando_path(@swiper.id)
+  end
 end
