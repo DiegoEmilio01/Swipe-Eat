@@ -12,6 +12,22 @@
           <p>
             <strong><%= swiper.nombre %></strong> <small><%= swiper.edad %></small>
             <br>
+            <div class="imagenes">
+              <% img = 0 %>
+              <% swiper.imagenes.each do |imagen| %>
+                    <% if (img == 0) %>
+                      <div class="first_foto current_foto" style="width:200px; height:200px;">
+                    <% elsif (img == swiper.imagenes.length() - 1) %>
+                      <div class="last_foto" style="width:200px; height:200px;display:none;">
+                    <% else %>
+                      <div class="foto" style="width:200px; height:200px;display:none;">
+                    <% end %>
+                        <%= image_tag(imagen, style:'width:200px; heigth: 100px') %>
+                      </div>
+                    <% img += 1 %>
+              <% end %>
+              <button class="next_foto">Next Image</button><br>
+            </div>
             <%= swiper.descripcion %>
           </p>
           <%= link_to 'Ver más', swiper_path(swiper.id), class: 'button' %><br>
@@ -20,14 +36,33 @@
   </div>
   <% i += 1 %>
 <% end %>
-<button id="next">Next Swiper</button><br>
+<button class="next">Next Swiper</button><br>
 <%= link_to "Home", home_root_path%>
 <script>
-    $('#next').click(function() {
-        $('.current').removeClass('current').hide()
-            .next().show().addClass('current');
-        if ($('.current').hasClass('last')) {
-            $('#next').attr('disabled', true);
-        }
-      });
+  $('.next').click(function() {
+    $('.current').removeClass('current').hide()
+        .next().show().addClass('current');
+    if ($('.current').hasClass('last')) {
+        $('.next').attr('disabled', true);
+    }
+  });
+  
+  $('.next_foto').click(function() {
+    if ($('.current_foto').hasClass('last_foto')) {
+      $('.current_foto').removeClass('current_foto').hide();
+      $('.first_foto').addClass('current_foto').show().focus();
+    } else {
+    $('.current_foto').removeClass('current_foto').hide()
+        .next().show().addClass('current_foto');
+    }
+  });
+
+//   $('.prev_foto').click(function() {
+//     $('.current_foto').removeClass('current_foto').hide()
+//         .prev().show().addClass('current_foto');
+//     if ($('.current_foto').hasClass('first_foto')) {
+//         $('.prev_Foto').attr('disabled', true);
+//     }
+//     $('.next_foto').attr('disabled', null);
+// });
 </script>
