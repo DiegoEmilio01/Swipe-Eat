@@ -10,16 +10,16 @@ class PagesController < ApplicationController
     @swipers_all.each do |swiper_all|
       added = false
       swiper_all.gustos.each do |gusto|
-        if @swiper.gustos.include?(gusto) && (!added) && (!@swiper.aceptados.include?(swiper_all))
+        if @swiper.gustos.include?(gusto) && !added && !@swiper.aceptados.include?(swiper_all)
           @swipers_recomendados << swiper_all unless @swiper == swiper_all
           added = true
         end
       end
 
-      if !added && (@swiper.comuna == swiper_all.comuna) &&
-         (@swipers_recomendados.length < 5) && (@swiper == swiper_all)
-        @swipers_recomendados << swiper_all unless @swiper.aceptados.inlude?(swiper_all)
-      end
+      # if !added && (@swiper.comuna == swiper_all.comuna) &&
+      #   (@swipers_recomendados.length < 5) && (@swiper == swiper_all)
+      #  @swipers_recomendados << swiper_all unless @swiper.aceptados.inlude?(swiper_all)
+      # end
     end
     @swipers_recomendados.shuffle
   end
@@ -28,10 +28,10 @@ class PagesController < ApplicationController
     @swiper = Swiper.find params[:id]
     @aceptado = Swiper.find params[:id_a]
     @swiper.aceptados << @aceptado
-    #Se verifica si el otro usuario también nos aceptó para hacer match
-    if (@aceptado.aceptados.include?(@swiper))
-        @swiper.matchs << @aceptado
-        @aceptado.matchs << @swiper
+    # Se verifica si el otro usuario tambien nos acepto para hacer match
+    if @aceptado.aceptados.include?(@swiper)
+      @swiper.matchs << @aceptado
+      @aceptado.matchs << @swiper
     end
     redirect_to aceptando_path(@swiper.id)
   end
