@@ -13,7 +13,13 @@
         <td><%= swiper.edad %> años</td>
         <td><%= link_to 'Ir al perfil', swiper_path(swiper.id)%></td>
         <td><%= link_to 'Eliminar match', eliminar_match_path(@swiper.id, swiper.id) %></td>
-        <td><%= image_tag(swiper.imagenes[0], style:'width:200px; heigth: 100px') %></td>
+        <% i = 0 %>
+        <% swiper.imagenes.each do |imagen| %>
+          <% if (i == 0) %>
+            <td><%= image_tag(imagen, style:'width:200px; heigth: 100px') %></td>
+          <% end %>
+          <% i += 1 %>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

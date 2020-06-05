@@ -12,22 +12,23 @@
           <p>
             <strong><%= swiper.nombre %></strong> <small><%= swiper.edad %></small>
             <br>
-            <div class="imagenes">
-              <% img = 0 %>
-              <% swiper.imagenes.each do |imagen| %>
-                    <% if (img == 0) %>
-                      <div class="first_foto current_foto" style="width:200px; height:200px;">
-                    <% elsif (img == swiper.imagenes.length() - 1) %>
-                      <div class="last_foto" style="width:200px; height:200px;display:none;">
-                    <% else %>
-                      <div class="foto" style="width:200px; height:200px;display:none;">
-                    <% end %>
-                        <%= image_tag(imagen, style:'width:200px; heigth: 100px') %>
-                      </div>
-                    <% img += 1 %>
-              <% end %>
-              <button class="next_foto">Next Image</button><br>
-            </div>
+              <h1> <%= swiper.imagenes %></h1>
+              <div class="imagenes">
+                <% img = 0 %>
+                <% swiper.imagenes.each do |imagen| %>
+                      <% if (img == 0) %>
+                        <div class="first_foto current_foto" style="width:200px; height:200px;">
+                      <% elsif (img == swiper.imagenes.length() - 1) %>
+                        <div class="last_foto" style="width:200px; height:200px;display:none;">
+                      <% else %>
+                        <div class="foto" style="width:200px; height:200px;display:none;">
+                      <% end %>
+                          <%= image_tag(imagen, style:'width:200px; heigth: 100px') %>
+                        </div>
+                      <% img += 1 %>
+                <% end %>
+                <button class="next_foto">Next Image</button><br>
+              </div>
             <%= swiper.descripcion %>
           </p>
           <%= link_to 'Ver más', swiper_path(swiper.id), class: 'button' %><br>
