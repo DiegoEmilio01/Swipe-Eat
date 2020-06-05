@@ -26,7 +26,11 @@ gem 'devise', '~> 4.7', '>= 4.7.1'
 gem "aws-sdk-s3", require: false
 
 # Bootstrap (para que la página se vea bonita)
-gem 'bootstrap-sass', '~> 2.3.1.0'
+gem 'bootstrap-sass', '~> 3.4.1'
+# Jquery-rails (Para que funcione Bootstrap)
+gem 'jquery-rails'
+# jquery-turbolinks (Para que Jquery-rails)
+gem 'jquery-turbolinks'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'

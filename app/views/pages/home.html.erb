@@ -1,10 +1,26 @@
-<h1>Bienvenidos al himalaya</h1>
+
+
+
 
 <% if current_swiper %>
 <%= link_to "Ver posible gente", aceptando_path(current_swiper.id) %><br>
-<%= link_to "Cerrar sesión", destroy_swiper_session_path, method: :delete, data: {confirm: '¿Estás seguro que quieres cerrar sesión?'} %><br> 
+<%= link_to "Cerrar sesión", destroy_swiper_session_path, method: :delete, data: {confirm: '¿Estás seguro que quieres cerrar sesión?'} %><br>
+<%= link_to "Perfil", swiper_path(current_swiper.id) %>
+
 <% else %>
-<%= link_to "Log in", new_swiper_session_path %><br> 
-<%= link_to "Registrate", new_swiper_registration_path %><br>
+  <div class="row text-center">
+    <h1>Bienvenidos al himalaya</h1>
+  </div>
+    <div class="row text-center">
+      <div class="col-md-6">
+        <h1>Foto</h1>
+      </div>
+      <div class="col-md-6">
+        <div class="row"><%= link_to "Log in", new_swiper_session_path, :class => "btn btn-primary" %></div>
+        <div class="row"><%= link_to "Registrate", new_swiper_registration_path, :class => "btn btn-primary" %></div>
+      </div>
+    </div>
+    <div class="row">
+  </div>
 <% end %>
-<h2> LoL</h2>
+<h2> </h2>
