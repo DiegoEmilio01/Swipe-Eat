@@ -73,7 +73,7 @@
 
           <% if current_swiper %>
             <li><%= link_to "Cerrar sesión", destroy_swiper_session_path, method: :delete, data: {confirm: '¿Estás seguro que quieres cerrar sesión?'}  %><br><br></li>
-            <li><%= link_to 'Editar Swiper', edit_swiper_registration_path %><br><br></li>
+            <li><%= link_to 'Editar datos del perfil', edit_swiper_registration_path %><br><br></li>
             <li><%= link_to "Borrar cuenta", registration_path(resource_name), data: { confirm: "Estás seguro" }, method: :delete %><br><br></li>
           <% end %>
         </ul>
