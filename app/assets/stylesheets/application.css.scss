@@ -1,1 +1,16 @@
 @import "bootstrap";
+
+:root {
+  --main-rojo: FireBrick ;
+}
+header, footer {
+   background: var(--main-rojo) !important;
+   color: white;
+
+ }
+header {
+  min-height: 15vh;
+}
+main {
+  min-height: 85vh;
+}
