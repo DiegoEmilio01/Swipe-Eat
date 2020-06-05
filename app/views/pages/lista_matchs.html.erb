@@ -1,12 +1,20 @@
-<% @swiper.matchs.each do |swiper| %>
-    <div>
-        <h2><%= swiper.nombre %></h2> <small> <%= swiper.edad %> </small>
-        <div class="imagen">
-            <% if swiper.imagenes.any?%>
-                <%= image_tag(swiper.imagenes[0], style:'width:200px; heigth: 100px') %>
-            <% end %>
-            <%= link_to 'Ir al perfil', swiper_path(swiper.id) %>
-            <%= link_to 'Eliminar match', eliminar_match_path(@swiper.id, swiper.id) %>
-        </div>
-    </div>
-<% end %>
+<table class="table">
+  <thead>
+   <th>Nombre</th>
+   <th>Edad</th>
+   <th></th>
+   <th></th>
+   <th>Foto</th>
+  </thead>
+  <tbody>
+    <% @swiper.matchs.each do |swiper| %>
+      <tr>
+        <td><%= swiper.nombre %></td>
+        <td><%= swiper.edad %> años</td>
+        <td><%= link_to 'Ir al perfil', swiper_path(swiper.id)%></td>
+        <td><%= link_to 'Eliminar match', eliminar_match_path(@swiper.id, swiper.id) %></td>
+        <td><%= image_tag(swiper.imagenes[0], style:'width:200px; heigth: 100px') %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
