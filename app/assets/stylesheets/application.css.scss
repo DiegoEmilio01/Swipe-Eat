@@ -4,18 +4,24 @@
   --main-rojo: FireBrick ;
   --main-darko-rojo: #000000;
 }
+html,body {
+  height:100%;
+}
 header, footer {
   background: var(--main-rojo) !important;
-  color: white;
+  color: white !important;
 
 }
 header {
   min-height: 15vh;
 }
+footer {
+  padding: 10px;
+}
 main {
-  height: 85vh;
   min-height: 85vh;
 }
+
 a.titulo {
   color: white !important;
 }
@@ -27,8 +33,12 @@ a.titulo {
   background-color: var(--main-rojo);
   border: none;
   padding: 12px 24px;
-  font-size: 16px;
+  font-size: 30px;
   margin: 3px;
+  width: 50%;
+}
+.btn-menu {
+  width: 80% !important;
 }
 
 .tall-1{
@@ -38,5 +48,50 @@ a.titulo {
   height: 10vh;
 }
 .tall-content{
-  height: 70vh;
+  height: 60vh;
+}
+.align-middle {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: stretch;
+}
+.align-z {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: flex-start;
+}
+.align-w {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: flex-start;
+}
+.margin-left {
+  align-items: flex-start !important;
+}
+
+.big {
+  font-size: xx-large !important;
+}
+.bigbig{
+  font-size: 50px !important;
+}
+.small{
+  font-size: large !important;
+}
+
+
+.checkbox {
+  height: 25px;
+  width: 25px;
+  margin-right: -300px !important;
+
+}
+.nopadding {
+  padding: 0 !important;
+  margin: 0 !important;
 }
