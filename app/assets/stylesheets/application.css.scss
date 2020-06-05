@@ -39,16 +39,26 @@ a.titulo {
 }
 .btn-menu {
   width: 80% !important;
+  margin-bottom: 20px;
+}
+.btn-white{
+  background-color: white;
+  color: #333333;
+  border: none;
+  padding: 12px 24px;
+  font-size: 22px;
+  margin: 3px;
+  width: 40%;
 }
 
 .tall-1{
-  height: 80vh;
+  min-height: 80vh;
 }
 .tall-title{
-  height: 10vh;
+  min-height: 10vh;
 }
 .tall-content{
-  height: 60vh;
+  min-height: 60vh;
 }
 .align-middle {
   display: flex;

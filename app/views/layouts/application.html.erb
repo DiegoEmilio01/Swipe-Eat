@@ -40,17 +40,19 @@
 
     <footer class="">
       <div class="container">
-        <!--<div class="row">
+        <%if current_page?(home_root_path) and not current_swiper and not current_admin %>
+        <div class="row text-center">
           <div class="col-md-4 col-ms-4">
-            <h3>Sitios</h3>
           </div>
           <div class="col-md-4">
-            <h3>Autores</h3>
           </div>
           <div class="col-md-4">
-            <h3>Admins</h3>
+            <h4>Admins</h4>
+            <%= link_to "Log in", new_admin_session_path, :class => "btn btn-white"%>
+
           </div>
-        </div>-->
+        </div>
+        <%end %>
         <div class="text-center">
           <p>Copyright &copy; <script>document.write(new Date().getFullYear());</script>, DEL corp</p>
         </div>
