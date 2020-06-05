@@ -47,6 +47,6 @@ class PagesController < ApplicationController
     @swiper.matchs.delete(eliminado)
     eliminado.matchs.delete(@swiper)
 
-    redirect_to swiper_path(@swiper.id)
+    redirect_to lista_matchs_path(@swiper.id)
   end
 end
