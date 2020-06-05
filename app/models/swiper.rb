@@ -54,5 +54,5 @@ class Swiper < ApplicationRecord
   validates :telefono, format: { with: /\A\+569\d{8}\z/, message: 'formato' }
   validates :direccion, presence: { message: 'vacio' }
   validates :direccion, format: { with: /\A[a-zA-ZÀ-úñÑ ]+\d+\z/, message: 'formato' }
-  validates :gustos, presence: { message: 'vacio'}
+  validates :gustos, presence: { message: 'vacio' }
 end

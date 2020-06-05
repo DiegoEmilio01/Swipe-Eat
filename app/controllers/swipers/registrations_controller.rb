@@ -72,11 +72,9 @@ class Swipers::RegistrationsController < Devise::RegistrationsController
     gustos = sign_up_params[:gusto_ids]
     sign_up_params.delete(:gusto_ids)
     build_resource(sign_up_params)
-    if (gustos)
-      gustos.each do |gusto_id|
-        gusto = Gusto.find(gusto_id)
-        @swiper.gustos << gusto unless @swiper.gustos.include?(gusto)
-      end
+    gustos&.each do |gusto_id|
+      gusto = Gusto.find(gusto_id)
+      @swiper.gustos << gusto unless @swiper.gustos.include?(gusto)
     end
     resource.save
     yield resource if block_given?
@@ -154,7 +152,7 @@ class Swipers::RegistrationsController < Devise::RegistrationsController
     @swiper.gustos.each do |gusto|
       @swiper.gustos.delete(gusto)
     end
-    
+
     is_valid = if change_password
                  @swiper.update_with_password(new_params)
                else
