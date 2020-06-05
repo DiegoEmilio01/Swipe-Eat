@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     get 'swiper_root' => 'swipers/registrations#index', as: 'swiper_root'
     get 'swipers' => 'swipers/registrations#index', as: 'lista_swipers'
     get 'swipers/:id' => 'swipers/registrations#show', as: 'swiper'
+    get 'swipers/:id' => 'pages#mostrar_matchs', as: 'lista_matchs'
     get 'swipers/:id/edit', to: 'swipers/registrations#edit_admin', as: 'admin_edit_swiper'
     patch 'swipers/:id', to: 'swipers/registrations#update_admin'
     delete 'swipers/:id', to: 'swipers/registrations#destroy_admin'

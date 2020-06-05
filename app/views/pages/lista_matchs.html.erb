@@ -1,0 +1,9 @@
+<% @swiper.matchs.each do |swiper| %>
+    <div>
+        <h2><%= swiper.nombre %></h2> <small> <%= swiper.edad %> </small>
+        <div class="imagen">
+            <%= image_tag(swiper.imagenes[0], style:'width:200px; heigth: 100px') %>
+            <%= link_to 'Ir al perfil', swiper_path(swiper.id) %>
+        </div>
+    </div>
+<% end %>

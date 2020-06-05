@@ -35,4 +35,8 @@ class PagesController < ApplicationController
     end
     redirect_to aceptando_path(@swiper.id)
   end
+
+  def lista_matchs
+    @swiper = Swiper.find params[:id]
+  end
 end

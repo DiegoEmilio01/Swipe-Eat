@@ -94,9 +94,12 @@
     <% end %>
 
     <% if current_swiper %>
+
+        <%= link_to "Ver mis matchs", lista_matchs_path %><br><br>
         <%= link_to "Cerrar sesión", destroy_swiper_session_path, method: :delete, data: {confirm: '¿Estás seguro que quieres cerrar sesión?'}  %><br><br>
         <%= link_to 'Editar Swiper logueado', edit_swiper_registration_path %><br><br>
         <%= link_to "Borrar Swiper logueado", registration_path(resource_name), data: { confirm: "Estás seguro" }, method: :delete %><br><br>
+
     <% end %>
 <% else %>
     <% controller.redirect_to new_admin_session_path, notice: 'No tienes permiso para ingresar a la página que intentaste acceder.' %>
