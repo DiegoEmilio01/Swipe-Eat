@@ -111,13 +111,6 @@
             
               <br>
             
-              <div class="field">
-                <%= f.label :imágenes %>
-                <%= f.file_field :imagenes, multiple: true %>
-              </div>
-            
-              <br>
-            
               <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
                 <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
               <% end %>
