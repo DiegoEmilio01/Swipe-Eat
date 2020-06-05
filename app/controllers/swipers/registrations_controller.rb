@@ -139,6 +139,7 @@ class Swipers::RegistrationsController < Devise::RegistrationsController
                                                 :descripcion, :comuna_id,
                                                 imagenes: [], gusto_ids: [])
     change_password = true
+
     if params[:swiper][:password].blank?
       params[:swiper].delete('password')
       params[:swiper].delete('password_confirmation')
@@ -150,6 +151,10 @@ class Swipers::RegistrationsController < Devise::RegistrationsController
 
     @swiper = Swiper.find(current_swiper.id)
 
+    @swiper.gustos.each do |gusto|
+      @swiper.gustos.delete(gusto)
+    end
+    
     is_valid = if change_password
                  @swiper.update_with_password(new_params)
                else
