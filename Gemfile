@@ -26,7 +26,7 @@ gem 'devise', '~> 4.7', '>= 4.7.1'
 gem "aws-sdk-s3", require: false
 
 # Bootstrap (para que la página se vea bonita)
-gem 'bootstrap-sass', '~> 3.4.1'
+gem 'bootstrap', '~> 4.3.1'
 # Jquery-rails (Para que funcione Bootstrap)
 gem 'jquery-rails'
 # jquery-turbolinks (Para que Jquery-rails)
