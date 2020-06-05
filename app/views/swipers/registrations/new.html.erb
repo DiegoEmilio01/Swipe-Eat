@@ -3,7 +3,6 @@
       <h2>ERROR:</h2>
   
       <% resource.errors.full_messages.each do |message| %>
-          <h1><%= message %></h1>
           <% if message == "Email can't be blank" %>
               <%= "Ingresó un Correo en blanco." %><br>
           <% elsif message == "Password can't be blank" %>

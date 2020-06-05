@@ -1,43 +1,52 @@
-<h1>Lista de candidatos</h1>
+<div class="row text-center tall-tittle">
+  <h1>Lista de candidatos</h1>
+</div>
 <% i = 0 %>
-<% @swipers_recomendados.each do |swiper| %>
-  <% if (i == 0) %>
-    <div class ="first current">  
-  <% elsif (i == @swipers_recomendados.length() - 1)%>
-    <div class="last" style="display:none;"> 
-  <% else %>
-    <div class="box" style="display:none;">
-  <% end %>
-    <article class="media">
-          <p>
-            <strong><%= swiper.nombre %></strong> <small><%= swiper.edad %></small>
-            <br>
-              <div class="imagenes">
-                <% img = 0 %>
-                <% swiper.imagenes.each do |imagen| %>
-                      <% if (img == 0) %>
-                        <div class="first_foto current_foto" style="width:200px; height:200px;">
-                      <% elsif (img == swiper.imagenes.length() - 1) %>
-                        <div class="last_foto" style="width:200px; height:200px;display:none;">
-                      <% else %>
-                        <div class="foto" style="width:200px; height:200px;display:none;">
-                      <% end %>
-                          <%= image_tag(imagen, style:'width:200px; heigth: 100px') %>
-                        </div>
-                      <% img += 1 %>
-                <% end %>
-                <button class="next_foto">Next Image</button><br>
+
+<div class="row">
+  <div class="col-md-3 tall-content align-middle" ></div>
+  <div class="col-md-6 tall-content align-middle" style="align-items: center">
+      <% @swipers_recomendados.each do |swiper| %>
+        <% if (i == 0) %>
+          <div class ="first current col-md-12">
+        <% elsif (i == @swipers_recomendados.length() - 1)%>
+          <div class="last col-md-12" style="display:none;">
+        <% else %>
+          <div class="box col-md-12" style="display:none;">
+        <% end %>
+        <article class="media">
+          <strong>Nombre: <%= swiper.nombre %></strong> <small>Edad: <%= swiper.edad %></small>
+          <br>
+          <div class="imagenes align-middle " style="align-items: center">
+            <% img = 0 %>
+            <% swiper.imagenes.each do |imagen| %>
+              <% if (img == 0) %>
+                <div class="first_foto current_foto" style="width:525px; height:300px; margin:10px 0px;">
+              <% elsif (img == swiper.imagenes.length() - 1) %>
+                <div class="last_foto" style="width:525px; height:300px; margin:10px 0px;display:none;">
+              <% else %>
+                <div class="foto" style="width:525px; height:300px; margin:10px 0px;display:none;">
+              <% end %>
+              <%= image_tag(imagen, style:' height:300px;') %>
               </div>
-            <%= swiper.descripcion %>
-          </p>
-          <%= link_to 'Ver más', swiper_path(swiper.id), class: 'button' %><br>
-          <%= link_to 'Aceptar', aceptado_path(@swiper.id, swiper.id), class: 'button' %>
-    </article>
+              <% img += 1 %>
+            <% end %>
+            <button class="next_foto">Next Image >></button><br>
+          </div><!--/imagenes-->
+          <div><%= swiper.descripcion %></div>
+          <div>
+            <%= link_to 'Ver más', swiper_path(swiper.id), class: 'btn btn-primary' %>
+            <%= link_to 'Aceptar', aceptado_path(@swiper.id, swiper.id), class: 'btn btn-primary' %>
+          </div>
+        </article>
+      </div>
+      <% i += 1 %>
+    <% end %>
+    <button class="next">Next Swiper</button><br>
+    <%= link_to "Home", home_root_path%>
   </div>
-  <% i += 1 %>
-<% end %>
-<button class="next">Next Swiper</button><br>
-<%= link_to "Home", home_root_path%>
+  <div class="col-md-3 tall-content align-middle" ></div>
+</div>
 <script>
   $('.next').click(function() {
     $('.current').removeClass('current').hide()
