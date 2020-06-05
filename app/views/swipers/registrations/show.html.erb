@@ -1,106 +1,89 @@
 <% if current_admin or current_swiper %>
-    <p id="notice"><%= notice%></p>
 
-    <p>
-        <strong>Nombre</strong>
-        <%= @swiper.nombre %>
-    </p>
+  <div class="row" >
 
-    <p>
-        <strong>Email</strong>
-        <%= @swiper.email%>
-    </p>
+    <div class="col-md-7">
+      <div class="row text-left tall-tittle">
+        <h1>Perfil</h1>
+        <p id="notice"><%= notice%></p>
+      </div>
+      <div class="row">
+        <table class="table">
+          <tbody>
+            <tr>
+              <th>Nombre</th><th><%= @swiper.nombre %></th>
+            </tr>
+            <tr>
+              <th>Email</th><th><%= @swiper.email%></th>
+            </tr>
+            <tr>
+              <th>Edad</th><th><%= @swiper.edad%></th>
+            </tr>
+            <tr>
+              <th>Cumpleaños</th><th><%= @swiper.cumpleanos.strftime("%d/%m")%></th>
+            </tr>
+            <tr>
+              <th>Teléfono</th><th><%= @swiper.telefono%></th>
+            </tr>
+            <tr>
+              <th>Dirección</th><th><%= @swiper.direccion%></th>
+            </tr>
+            <tr>
+              <th>Comuna</th><th><%= @swiper.comuna.nombre %></th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row">
+        <div class="row">
+          <div class="col-md-6">
+            <strong>Descripción</strong><br>
+            <div class="align-z">
+              <div>
+                <% @swiper.gustos.each do |gusto| %>
 
-    <p>
-        <strong>Edad</strong>
-        <%= @swiper.edad%>
-    </p>
-
-    <p>
-        <strong>Cumpleaños</strong>
-        <%= @swiper.cumpleanos.strftime("%d/%m")%>
-    </p>
-
-    <p>
-        <strong>Teléfono</strong>
-        <%= @swiper.telefono%>
-    </p>
-
-    <p>
-        <strong>Dirección</strong>
-        <%= @swiper.direccion%>
-    </p>
-    
-    <p>
-        <strong>Comuna</strong>
-        <%= @swiper.comuna.nombre %>
-    </p>
-
-    <p>
-        <strong>Gustos</strong>
-        <% @swiper.gustos.each do |gusto| %>
-        <div class="box">
-            <article class="media">
-            <div class="media-content">
-                <div class="content">
-                <p>
-                    <strong><%= gusto.nombre %></strong>
-                    <br>
-                    <%= gusto.descripcion%>
-                </p>
-                </div>
+                  <p> <%= gusto.nombre %> | <%= gusto.descripcion%> </p>
+                <% end %>
+              </div>
             </div>
-            </article>
-        <% end %>
+          </div>
+          <div class="col-md-6">
+              <strong>Descripción</strong><br>
+              <p><%= @swiper.descripcion%></p>
+          </div>
         </div>
+      </div>
+    </div>
 
-    </p>
+    <div class="col-md-5">
+      <div class="align-w" style="height: 50vh">
+        <% @swiper.imagenes.each do |imagen| %>
+          <div style="padding: 10px 10px 0 10px">
+            <%= image_tag(imagen, style:'width:180px; heigth: 170px') %>
+          </div>
+        <% end %>
+      </div>
+      <div>
+        <ul class="nav nav-pills">
+          <% if current_admin %>
+            <li><%= link_to 'Editar Swiper', admin_edit_swiper_path(@swiper.id) %><br><br></li>
+            <li><%= link_to "Borrar Swiper", swiper_path(@swiper.id), method: :delete, data: {confirm: '¿Estás seguro que quieres borrar este Swiper?'}%><br><br></li>
+            <li><%= link_to "Volver a la lista de Swipers", lista_swipers_path %></li>
+          <% end %>
 
-    <p>
-        <strong>Descripción</strong>
-        <%= @swiper.descripcion%>
-    </p>
+          <% if current_swiper %>
+            <li><%= link_to "Cerrar sesión", destroy_swiper_session_path, method: :delete, data: {confirm: '¿Estás seguro que quieres cerrar sesión?'}  %><br><br></li>
+            <li><%= link_to 'Editar Swiper', edit_swiper_registration_path %><br><br></li>
+            <li><%= link_to "Borrar cuenta", registration_path(resource_name), data: { confirm: "Estás seguro" }, method: :delete %><br><br></li>
+          <% end %>
+        </ul>
 
-    <br>
+      </div>
 
-    <table>
-        <thead>
-            <tr>
-                <% (0...@swiper.imagenes.count).each do |numero| %>
-                    <th>Imagen <%= numero + 1 %> </th>
-                <% end %>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <% @swiper.imagenes.each do |imagen| %>
-                <td>
-                    <div style="width:200px; height:300px;">
-                        <%= image_tag(imagen, style:'width:180px; heigth: 170px') %>
-                    </div>
-                </td>
-                <% end %>
-            </tr>
-        </tbody>
-    </table>
+    </div>
+  </div>
 
-    <br>
 
-    
-    <% if current_admin %>
-        <%= link_to 'Editar Swiper', admin_edit_swiper_path(@swiper.id) %><br><br>
-        <%= link_to "Borrar Swiper", swiper_path(@swiper.id), method: :delete, data: {confirm: '¿Estás seguro que quieres borrar este Swiper?'}%><br><br>
-        <%= link_to "Volver a la lista de Swipers", lista_swipers_path %>
-    <% end %>
-
-    <% if current_swiper %>
-
-        <%= link_to "Ver mis matchs", lista_matchs_path %><br><br>
-        <%= link_to "Cerrar sesión", destroy_swiper_session_path, method: :delete, data: {confirm: '¿Estás seguro que quieres cerrar sesión?'}  %><br><br>
-        <%= link_to 'Editar Swiper logueado', edit_swiper_registration_path %><br><br>
-        <%= link_to "Borrar Swiper logueado", registration_path(resource_name), data: { confirm: "Estás seguro" }, method: :delete %><br><br>
-
-    <% end %>
 <% else %>
     <% controller.redirect_to new_admin_session_path, notice: 'No tienes permiso para ingresar a la página que intentaste acceder.' %>
 <% end %>
