@@ -3,15 +3,17 @@
    <th>Nombre</th>
    <th>Edad</th>
    <th></th>
+   <th></th>
    <th>Foto</th>
   </thead>
   <tbody>
     <% @swiper.matchs.each do |swiper| %>
       <tr>
-       <td><%= swiper.nombre %></td>
-       <td><%= swiper.edad %> años</td>
-       <td><%= link_to 'Ir al perfil', swiper_path(swiper.id)%></td>
-       <td><%= image_tag(swiper.imagenes[0], style:'width:200px; heigth: 100px') %></td>
+        <td><%= swiper.nombre %></td>
+        <td><%= swiper.edad %> años</td>
+        <td><%= link_to 'Ir al perfil', swiper_path(swiper.id)%></td>
+        <td><%= link_to 'Eliminar match', eliminar_match_path(@swiper.id, swiper.id) %></td>
+        <td><%= image_tag(swiper.imagenes[0], style:'width:200px; heigth: 100px') %></td>
       </tr>
     <% end %>
   </tbody>
