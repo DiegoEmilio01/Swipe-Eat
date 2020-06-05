@@ -2,15 +2,41 @@
 
 :root {
   --main-rojo: FireBrick ;
+  --main-darko-rojo: #000000;
 }
 header, footer {
-   background: var(--main-rojo) !important;
-   color: white;
+  background: var(--main-rojo) !important;
+  color: white;
 
- }
+}
 header {
   min-height: 15vh;
 }
 main {
+  height: 85vh;
   min-height: 85vh;
+}
+a.titulo {
+  color: white !important;
+}
+.linkable:hover{
+  background-color: var(--main-darko-rojo);
+}
+
+.btn-primary {
+  background-color: var(--main-rojo);
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  margin: 3px;
+}
+
+.tall-1{
+  height: 80vh;
+}
+.tall-title{
+  height: 10vh;
+}
+.tall-content{
+  height: 70vh;
 }
