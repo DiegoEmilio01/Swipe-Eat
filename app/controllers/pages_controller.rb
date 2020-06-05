@@ -39,4 +39,14 @@ class PagesController < ApplicationController
   def lista_matchs
     @swiper = Swiper.find params[:id]
   end
+
+  def eliminar_match
+    @swiper = Swiper.find params[:id]
+    eliminado = Swiper.find params[:mid]
+
+    @swiper.matchs.delete(eliminado)
+    eliminado.matchs.delete(@swiper)
+
+    redirect_to swiper_path(@swiper.id)
+  end
 end

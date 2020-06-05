@@ -2,8 +2,11 @@
     <div>
         <h2><%= swiper.nombre %></h2> <small> <%= swiper.edad %> </small>
         <div class="imagen">
-            <%= image_tag(swiper.imagenes[0], style:'width:200px; heigth: 100px') %>
+            <% if swiper.imagenes.any?%>
+                <%= image_tag(swiper.imagenes[0], style:'width:200px; heigth: 100px') %>
+            <% end %>
             <%= link_to 'Ir al perfil', swiper_path(swiper.id) %>
+            <%= link_to 'Eliminar match', eliminar_match_path(@swiper.id, swiper.id) %>
         </div>
     </div>
 <% end %>
