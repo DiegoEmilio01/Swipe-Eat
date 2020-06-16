@@ -37,7 +37,8 @@ class Swiper < ApplicationRecord
   # Cita Swiper-Swiper-Restaurante
   has_many :meets, foreign_key: :swiper_cita_id
   has_many :swipers, through: :meets, source: :swiper_citado
-  # Comenta Swiper-Restaurante-Comentario ###Por verse
+  # Comenta Swiper-Comentario
+  has_many :comentarios
   #------------------------------------------------------
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

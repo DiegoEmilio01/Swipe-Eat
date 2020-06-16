@@ -11,6 +11,8 @@ class Restaurante < ApplicationRecord
   has_and_belongs_to_many :swipers, join_table: 'favorecidos', class_name: 'Swiper'
   # Cita Swiper-Swiper-Restaurante
   has_many :meets
+  # Comenta Restaurante-Comentario
+  has_many :comentarios
   #------------------------------------------------------
   has_many_attached :imagenes
   validates :nombre, presence: { message: 'Ingresó un Nombre en blanco.' }

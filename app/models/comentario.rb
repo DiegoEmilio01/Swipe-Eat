@@ -3,8 +3,10 @@
 class Comentario < ApplicationRecord
   #------------------------------------------------------
   # Relaciones
-  # Reporta Owner-Comentario:1-n
-  belongs_to :owner
+  # Comenta Restaurante-Comentario:1-n
+  belongs_to :restaurante
+  # Comenta Swiper-Comentario:1-n
+  belongs_to :swiper
   #------------------------------------------------------
 
   validates :contenido, presence: { message: 'Ingresó un Contenido en blanco.' }
