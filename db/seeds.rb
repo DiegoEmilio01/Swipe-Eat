@@ -95,7 +95,11 @@
 @owner2.save
 @owner3 = Owner.create nombre: 'Ronald McDonald', email: 'mcdonald@uc.cl', password: '123456'
 @owner3.save
-@restaurante1 = Restaurante.create nombre: "Barba negra", descripcion: "Restaurante solo para los mejores piratas",
-                                   comuna_id: (Comuna.find_by_nombre('Las Condes')).id, aceptado: "Pendiente"
-puts Owner.find_by_nombre("Gordon Ramsay")
-@restaurante1.save!
+
+# RESTAURANTE PRECARGADO
+@restaurante1 = Restaurante.create nombre: 'Barba negra',
+                                   descripcion: 'Restaurante solo para los mejores piratas',
+                                   comuna_id: Comuna.find_by_nombre('Las Condes').id,
+                                   owner_id: Owner.find_by_nombre('Gordon Ramsay').id,
+                                   aceptado: 'Pendiente'
+@restaurante1.save

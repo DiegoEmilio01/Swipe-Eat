@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_16_230044) do
+ActiveRecord::Schema.define(version: 2020_06_18_203141) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -140,10 +140,8 @@ ActiveRecord::Schema.define(version: 2020_06_16_230044) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "nombre"
-    t.bigint "restaurante_id"
     t.index ["email"], name: "index_owners_on_email", unique: true
     t.index ["reset_password_token"], name: "index_owners_on_reset_password_token", unique: true
-    t.index ["restaurante_id"], name: "index_owners_on_restaurante_id"
   end
 
   create_table "reportes", force: :cascade do |t|
@@ -161,7 +159,9 @@ ActiveRecord::Schema.define(version: 2020_06_16_230044) do
     t.datetime "updated_at", null: false
     t.bigint "comuna_id"
     t.string "aceptado", default: "Pendiente"
+    t.bigint "owner_id"
     t.index ["comuna_id"], name: "index_restaurantes_on_comuna_id"
+    t.index ["owner_id"], name: "index_restaurantes_on_owner_id"
   end
 
   create_table "swipers", force: :cascade do |t|
@@ -193,7 +193,6 @@ ActiveRecord::Schema.define(version: 2020_06_16_230044) do
   add_foreign_key "gustos_swiper", "swipers"
   add_foreign_key "owner_reportes", "comentarios"
   add_foreign_key "owner_reportes", "owners"
-  add_foreign_key "owners", "restaurantes"
   add_foreign_key "restaurantes", "comunas"
   add_foreign_key "swipers", "comunas"
 end
