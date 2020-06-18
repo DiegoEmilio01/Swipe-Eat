@@ -89,10 +89,13 @@
 @cristobal.save
 
 # OWNER PRECARGADO
-
 @owner1 = Owner.create nombre: 'Gordon Ramsay', email: 'gordon@uc.cl', password: '123456'
 @owner1.save
 @owner2 = Owner.create nombre: 'Colonel Sanders', email: 'coronel@uc.cl', password: '123456'
 @owner2.save
 @owner3 = Owner.create nombre: 'Ronald McDonald', email: 'mcdonald@uc.cl', password: '123456'
 @owner3.save
+@restaurante1 = Restaurante.create nombre: "Barba negra", descripcion: "Restaurante solo para los mejores piratas",
+                                   comuna_id: (Comuna.find_by_nombre('Las Condes')).id, aceptado: "Pendiente"
+puts Owner.find_by_nombre("Gordon Ramsay")
+@restaurante1.save!

@@ -4,6 +4,7 @@
    <th>Edad</th>
    <th></th>
    <th></th>
+   <th></th>
    <th>Foto</th>
   </thead>
   <tbody>
@@ -13,6 +14,7 @@
         <td><%= swiper.edad %> años</td>
         <td><%= link_to 'Ir al perfil', swiper_path(swiper.id)%></td>
         <td><%= link_to 'Eliminar match', eliminar_match_path(@swiper.id, swiper.id) %></td>
+        <td><%= link_to 'Agendar cita', agendar_cita_path(@swiper.id, swiper.id) %></td>
         <% i = 0 %>
         <% swiper.imagenes.each do |imagen| %>
           <% if (i == 0) %>
