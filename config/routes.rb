@@ -51,6 +51,11 @@ Rails.application.routes.draw do
   root to: 'pages#home', as: 'home_root'
   get 'pages/swiper_mostrados/:id', to: 'pages#swipers_mostrados', as: 'aceptando'
   get 'pages/swiper_mostrados/:id/aceptar/:id_a', to: 'pages#aceptar', as: 'aceptado'
+
+  get 'cita/:id/:id_a', to: 'pages#agendar_cita', as: 'agendar_cita'
+  get 'cita/restaurante/:id/:id_a', to: 'restaurantes#index', as: 'restaurante_cita'
+  get 'cita/:id/:id_a/:id_r', to: 'pages#agendar_fecha', as: 'fecha_cita'
+
   get 'pages/gustos/:id', to: 'pages#gustos', as: 'add_gustos'
 
   ### RUTAS CRUD COMUNA ###
