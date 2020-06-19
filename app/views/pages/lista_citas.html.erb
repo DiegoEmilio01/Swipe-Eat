@@ -1,0 +1,33 @@
+<table class="table">
+    <thead>
+     <th>Nombre</th>
+     <th>Edad</th>
+     <th>Restaurante</th>
+     <th>Fecha</th>
+     <th></th>
+     <th></th>
+     <th></th>
+     <th>Foto</th>
+    </thead>
+    <tbody>
+      <% @swiper.meets.each do |meet| %>
+        <tr>
+          <td><%= meet.swiper_citado.nombre %></td>
+          <td><%= meet.swiper_citado.edad %> años</td>
+          <td><%= meet.restaurante.nombre %></td>
+          <td><%= meet.fecha %></td>
+          <td><%= link_to 'Ir al perfil', swiper_path(meet.swiper_citado.id)%></td>
+          <td><%= link_to 'Eliminar cita', eliminar_cita_path(@swiper.id, meet.id) %></td>
+
+          <% i = 0 %>
+          <% meet.swiper_citado.imagenes.each do |imagen| %>
+            <% if (i == 0) %>
+              <td><%= image_tag(imagen, style:'width:200px; heigth: 100px') %></td>
+            <% end %>
+            <% i += 1 %>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  

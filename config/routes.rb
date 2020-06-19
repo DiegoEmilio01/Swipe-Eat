@@ -23,8 +23,8 @@ Rails.application.routes.draw do
     get 'swiper_root' => 'swipers/registrations#index', as: 'swiper_root'
     get 'swipers' => 'swipers/registrations#index', as: 'lista_swipers'
     get 'swipers/:id' => 'swipers/registrations#show', as: 'swiper'
-    get 'swipers/:id/lista_matchs' => 'pages#lista_matchs', as: 'lista_matchs'
-    get 'swipers/:id/lista_matchs/:mid' => 'pages#eliminar_match', as: 'eliminar_match'
+    get 'swipers/lista_matchs/:id' => 'pages#lista_matchs', as: 'lista_matchs'
+    get 'swipers/:id/lista_matchs/:id_d' => 'pages#eliminar_match', as: 'eliminar_match'
     get 'swipers/:id/edit', to: 'swipers/registrations#edit_admin', as: 'admin_edit_swiper'
     patch 'swipers/:id', to: 'swipers/registrations#update_admin'
     delete 'swipers/:id', to: 'swipers/registrations#destroy_admin'
@@ -55,6 +55,8 @@ Rails.application.routes.draw do
   get 'cita/:id/:id_a', to: 'pages#agendar_cita', as: 'agendar_cita'
   get 'cita/restaurante/:id/:id_a', to: 'restaurantes#index', as: 'restaurante_cita'
   get 'cita/:id/:id_a/:id_r', to: 'pages#agendar_fecha', as: 'fecha_cita'
+  get 'citas/:id', to: 'pages#lista_citas', as: 'lista_citas'
+  get 'citas/:id/:mid', to: 'pages#eliminar_cita', as: 'eliminar_cita'
 
   get 'pages/gustos/:id', to: 'pages#gustos', as: 'add_gustos'
 

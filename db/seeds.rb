@@ -103,3 +103,7 @@
                                    owner_id: Owner.find_by_nombre('Gordon Ramsay').id,
                                    aceptado: 'Pendiente'
 @restaurante1.save
+
+@meet1 = Meet.create swiper_cita_id: Swiper.first.id, swiper_citado_id: Swiper.second.id,
+                     restaurante_id: Restaurante.first.id, estado: false
+@meet1.save!

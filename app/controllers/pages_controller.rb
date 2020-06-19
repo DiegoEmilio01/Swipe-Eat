@@ -42,7 +42,7 @@ class PagesController < ApplicationController
 
   def eliminar_match
     @swiper = Swiper.find params[:id]
-    eliminado = Swiper.find params[:mid]
+    eliminado = Swiper.find params[:id_d]
 
     @swiper.matchs.delete(eliminado)
     eliminado.matchs.delete(@swiper)
@@ -61,5 +61,17 @@ class PagesController < ApplicationController
     @swiper = Swiper.find params[:id]
     @citado = Swiper.find params[:id_a]
     @restaurante = Restaurante.find params[:id_r]
+  end
+
+  def lista_citas
+    @swiper = Swiper.find params[:id]
+  end
+
+  def eliminar_cita
+    meet = Meet.find params[:mid]
+    @swiper = Swiper.find params[:id]
+    Meet.all.delete(meet)
+
+    redirect_to lista_citas_path(@swiper.id)
   end
 end
