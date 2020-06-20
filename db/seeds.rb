@@ -107,3 +107,9 @@
 @meet1 = Meet.create swiper_cita_id: Swiper.first.id, swiper_citado_id: Swiper.second.id,
                      restaurante_id: Restaurante.first.id, estado: false
 @meet1.save!
+
+@meet2 = Meet.create swiper_cita_id: Swiper.find_by_nombre('Elías').id,
+                     swiper_citado_id: Swiper.find_by_nombre('Cristóbal').id,
+                     restaurante_id: Restaurante.first.id, estado: false
+@meet2.save!
+
