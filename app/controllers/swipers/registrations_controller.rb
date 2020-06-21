@@ -33,7 +33,7 @@ class Swipers::RegistrationsController < Devise::RegistrationsController
     preparams = params.require(:swiper)
     params = preparams.permit(:email, :nombre, :edad, :telefono, :cumpleanos,
                               :direccion, :comuna_id, :descripcion,
-                              imagenes: []).permit(gusto_ids: [])
+                              imagenes: [], gusto_ids: [])
 
     if @swiper.update_without_password(params)
       aviso = 'Swiper editado exitosamente.'

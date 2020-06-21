@@ -112,4 +112,3 @@
                      swiper_citado_id: Swiper.find_by_nombre('Cristóbal').id,
                      restaurante_id: Restaurante.first.id, estado: false
 @meet2.save!
-
