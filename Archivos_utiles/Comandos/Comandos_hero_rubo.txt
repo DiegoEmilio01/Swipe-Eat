@@ -1,0 +1,21 @@
+- HEROKU (ejecutar dentro del repositorio de github)
+
+Crear el Procfile (web:bundle exec puma -C config/puma.rb), loguearse a hero, crear app hero, setear lenguaje, pushear a hero, migrar la bbdd, abrir la app.
+
+heroku login					# Chequear instalación e iniciar sesión desde el browser.
+heroku create app-name				# Crear app en heroku.
+heroku logs --tail				# Ve los logs recibidos por la app.
+heroku buildpacks:set -a app-name heroku/ruby	# Set el lenguaje de la app.
+git push heroku master				# Pushear a heroku.
+heroku run rake db:migrate			# Migra la base de datos a heroku.
+heroku run rake db:seed 			# Migra la seed a heroku.
+heroku open					# Abre el link de la app en heroku.
+heroku local web				# Corre la app localmente (tambien se puede con el server de rails).
+heroku git:remote -a app-name			# Setear que la app no es un repo entero sino que esta dentro de otro repo.
+
+
+- RUBOCOP
+
+https://github.com/rubocop-hq/rubocop
+rubocop						# Ver ofensas a las restricciones.
+rubocop -a					# Intentar arreglar automáticamente las ofensas.
