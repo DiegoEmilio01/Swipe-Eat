@@ -1,4 +1,4 @@
-<% if current_admin %>
+<% if current_admin or current_swiper%>
   <p id="notice"><%= notice %></p>
 
   <h1>Restaurantes</h1>
@@ -34,7 +34,11 @@
         <tr>
           <td><%= restaurante.nombre %></td>
           <td><%= restaurante.comuna.nombre %></td>
-          <td><%= link_to 'Ver detalles', restaurante_path(restaurante.id) %></td>
+          <% if @swiper_cita_id && @swiper_citado_id %>
+            <td><%= link_to 'Ver detalles CITA', restaurante_cita_path(@swiper_cita_id, @swiper_citado_id, restaurante.id) %></td>
+          <% else %>
+            <td><%= link_to 'Ver detalles', restaurante_path(restaurante.id) %></td>
+          <% end %>
         </tr>
       <% end %>
     </tbody>
@@ -80,7 +84,7 @@
   </table>
 
   <br>
-  <% if not current_admin %>
+  <% if not current_admin and not current_swiper %>
     <%= link_to 'Crear Restaurante', restaurantes_new_path %><br><br>
   <% end %>
   <%= link_to 'Volver a la lista de acciones disponibles.', admin_root_path %><br>

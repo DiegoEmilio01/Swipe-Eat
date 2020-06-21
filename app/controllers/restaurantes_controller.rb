@@ -19,10 +19,23 @@ class RestaurantesController < ApplicationController
 
   def index
     @restaurantes = Restaurante.all
+    if params[:id] && params[:id_a]
+      @swiper_cita_id = params[:id]
+      @swiper_citado_id = params[:id_a]
+    end
   end
 
   def show
-    @restaurante = Restaurante.find params[:id]
+    if params[:id] && params[:id_a] && params[:id_r]
+      @swiper_cita_id = params[:id]
+      @swiper_citado_id = params[:id_a]
+      @restaurante = Restaurante.find params[:id_r]
+      if params[:bool]
+        @bool = params[:bool]
+      end
+    else
+      @restaurante = Restaurante.find params[:id]
+    end
   end
 
   def edit
