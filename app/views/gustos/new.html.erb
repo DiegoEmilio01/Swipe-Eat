@@ -14,7 +14,7 @@
 
 <h1>Crear gusto</h1>
 
-<%= form_with(model: @gustos, method: :post) do |form| %>
+<%= form_with(model: @gustos, local: true, method: :post) do |form| %>
 <div class="field">
   <%= form.label :nombre %>
   <%= form.text_field :nombre %>

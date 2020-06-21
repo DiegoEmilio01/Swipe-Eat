@@ -1,37 +1,45 @@
-<p id="notice">
-    <% if (notice != 'Guardado') and (notice)%>
-        <h2>ERROR:</h2>
-        <% if notice["nombre"] %>
-            <%= notice["nombre"][0] %><br>
+<% if current_owner %>
+    <p id="notice">
+        <% if (notice != 'Guardado') and (notice)%>
+            <h2>ERROR:</h2>
+            <% if notice["nombre"] %>
+                <%= notice["nombre"][0] %><br>
+            <% end %>
+            <% if notice["descripcion"] %>
+                <%= notice["descripcion"][0] %><br>
+            <% end %>
+        <% elsif notice == 'Guardado'%>
+            <%= 'Restaurante guardado exitosamente.' %><br>
         <% end %>
-        <% if notice["descripcion"] %>
-            <%= notice["descripcion"][0] %><br>
-        <% end %>
-    <% elsif notice == 'Guardado'%>
-        <%= 'Restaurante guardado exitosamente.' %><br>
+    </p>
+
+    <h1>Nuevo Restaurante</h1>
+
+    <%= form_with(model: @restaurante, local: true, method: :post) do |form| %>
+        <div class="field">
+            <%= form.label :nombre %>
+            <%= form.text_field :nombre %>
+        </div>
+        <div class="field">
+            <%= form.label :descripción %>
+            <%= form.text_field :descripcion %>
+        </div>
+        <div class="field">
+            <%= form.label :comuna %><br />
+            <%= form.select :comuna_id, options_from_collection_for_select(Comuna.all, :id, :nombre) %><br />
+        </div><br>
+        <div class="field">
+            <%= form.label :imágenes %>
+            <%= form.file_field :imagenes, multiple: true %>
+        </div>
+        <div class="actions">
+            <%= form.submit %>
+        </div>
     <% end %>
-  </p>
 
-<h1>Nuevo Restaurante</h1>
+    <br>
 
-<%= form_with(model: @restaurante, method: :post) do |form| %>
-    <div class="field">
-        <%= form.label :nombre %>
-        <%= form.text_field :nombre %>
-    </div>
-    <div class="field">
-        <%= form.label :descripción %>
-        <%= form.text_field :descripcion %>
-    </div>
-    <div class="field">
-        <%= form.label :imágenes %>
-        <%= form.file_field :imagenes, multiple: true %>
-    </div>
-    <div class="actions">
-        <%= form.submit %>
-    </div>
+    <%= link_to 'Lista Restaurantes', lista_restaurantes_path %>
+<% else %>
+    <% controller.redirect_to new_admin_session_path, notice: 'No tienes permiso para ingresar a la página que intentaste acceder.' %>
 <% end %>
-
-<br>
-
-<%= link_to 'Lista Restaurantes', lista_restaurantes_path %>

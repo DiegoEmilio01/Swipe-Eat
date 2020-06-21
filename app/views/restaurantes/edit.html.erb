@@ -1,7 +1,8 @@
-<% if current_admin %>
+<% if current_admin or current_owner %>
     <p id="notice">
         <% if notice %>
             <h2>ERROR:</h2>
+            <%= notice %><br>
             <% if notice["nombre"] %>
                 <%= notice["nombre"][0] %><br>
             <% end %>
@@ -13,7 +14,7 @@
 
     <h1>Editar Restaurante</h1>
 
-    <%= form_with(model: @restaurante, method: :patch) do |form| %>
+    <%= form_with(model: @restaurante, local: true, method: :patch) do |form| %>
         <div class="field">
             <%= form.label :nombre %>
             <%= form.text_field :nombre %>
@@ -22,6 +23,16 @@
             <%= form.label :descripción %>
             <%= form.text_field :descripcion %>
         </div>
+        <div class="field">
+            <%= form.label :comuna %>
+            <%= form.select :comuna_id, options_from_collection_for_select(Comuna.all, :id, :nombre, @restaurante.comuna.id) %><br />
+        </div>
+        <% if current_admin %>
+            <div class="field">
+                <%= form.label :estado %>
+                <%= form.select :aceptado, options_for_select(["Pendiente", "Aceptado", "Rechazado"], @restaurante.aceptado) %>
+            </div>
+        <% end %>
         <div class="field">
             <%= form.label :imágenes %>
             <%= form.file_field :imagenes, multiple: true %>

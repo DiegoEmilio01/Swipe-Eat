@@ -17,7 +17,7 @@
 
     <h1>Editar comentario</h1>
 
-    <%= form_with(model: @comentario, method: :patch) do |form| %>
+    <%= form_with(model: @comentario, local: true, method: :patch) do |form| %>
         <div class="field">
             <%= form.label :contenido %>
             <%= form.text_field :contenido %>

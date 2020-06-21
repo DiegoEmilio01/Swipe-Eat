@@ -13,7 +13,7 @@
 
   <h1>Editar gusto</h1>
 
-  <%= form_with(model: @gusto, method: :patch) do |form| %>
+  <%= form_with(model: @gusto, local: true, method: :patch) do |form| %>
     <div class="field">
       <%= form.label :nombre %>
       <%= form.text_field :nombre %>

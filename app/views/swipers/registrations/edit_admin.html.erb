@@ -46,7 +46,7 @@
       <tbody>
         <tr>
           <td>
-            <%= form_with(model: @swiper, method: :patch) do |f| %>
+            <%= form_with(model: @swiper, local: true, method: :patch) do |f| %>
               <div class="field">
                 <%= f.label :nombre %><br />
                 <%= f.text_field :nombre, autofocus: true, autocomplete: "nombre" %>
