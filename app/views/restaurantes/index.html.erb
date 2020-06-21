@@ -25,6 +25,7 @@
     <thead>
       <tr>
         <th>Nombre</th>
+        <th>Comuna</th>
       </tr>
     </thead>
 
@@ -32,6 +33,7 @@
       <% @restaurantes.each do |restaurante| %>
         <tr>
           <td><%= restaurante.nombre %></td>
+          <td><%= restaurante.comuna.nombre %></td>
           <td><%= link_to 'Ver detalles', restaurante_path(restaurante.id) %></td>
         </tr>
       <% end %>
@@ -61,6 +63,17 @@
                 <% end %>
             </td>
             <td>
+                <%= form_tag(controller: 'restaurantes', action: "filtro", method: "post") do %>
+                    <div class="field">
+                        <%= select_tag(:input, options_from_collection_for_select(Comuna.all, :id, :nombre))%>
+                    </div>
+                    <div class="field">
+                        <%= hidden_field_tag(:filtro, "comuna") %><br>
+                    </div>
+                    <div class="actions">
+                        <%= submit_tag("Filtrar") %><br><br>
+                    </div>
+                <% end %>
             </td>
         </tr>
     </tbody>

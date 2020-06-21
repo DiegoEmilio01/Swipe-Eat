@@ -6,10 +6,12 @@ class RestaurantesController < ApplicationController
   end
 
   def create
-    restaurante_params = params.require(:restaurante).permit(:nombre, :descripcion, imagenes: [])
+    restaurante_params = params.require(:restaurante).permit(:nombre, :owner_id, :comuna_id,
+                                                             :descripcion, imagenes: [])
+    restaurante_params["owner_id"] = current_owner.id
     @restaurante = Restaurante.create restaurante_params
     if @restaurante.save
-      redirect_to restaurantes_new_path, notice: 'Guardado'
+      redirect_to restaurantes_new_path, notice: 'Guardado' #ARREGlAR DESPUES
     else
       redirect_to restaurantes_new_path, notice: @restaurante.errors
     end
@@ -28,8 +30,11 @@ class RestaurantesController < ApplicationController
   end
 
   def update
-    restaurante_params = params.require(:restaurante).permit(:nombre, :descripcion, imagenes: [])
+    restaurante_params = params.require(:restaurante).permit(:nombre, :owner_id, :comuna_id,
+                                                             :aceptado,
+                                                             :descripcion, imagenes: [])
     @restaurante = Restaurante.find params[:id]
+    restaurante_params["owner_id"] = @restaurante.owner.id    
     if @restaurante.update restaurante_params
       aviso_exito = 'Restaurante editado exitosamente.'
       redirect_to restaurante_path(@restaurante.id), notice: aviso_exito
@@ -56,6 +61,8 @@ class RestaurantesController < ApplicationController
       @filtrados = Restaurante.where('nombre ~* ?', '.*' + params[:input] + '.*')
     elsif params[:filtro] == 'o_nombre'
       @filtrados = Restaurante.order(:nombre)
+    elsif params[:filtro] == 'comuna'
+      @filtrados = Restaurante.where('comuna_id = ?', params[:input])
     end
   end
 end
