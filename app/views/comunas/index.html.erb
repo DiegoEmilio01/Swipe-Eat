@@ -26,6 +26,8 @@
       <tr>
         <th>Nombre</th>
         <th>Cuarentena</th>
+        <th>Número de Restaurantes</th>
+        <th>Número de Swipers</th>
       </tr>
     </thead>
 
@@ -34,6 +36,8 @@
         <tr>
           <td><%= comuna.nombre %></td>
           <td><%= comuna.cuarentena %></td>
+          <td><%= comuna.restaurantes.length %></td>
+          <td><%= comuna.swipers.length %></td>
           <td><%= link_to 'Ver detalles', comuna_path(comuna.id) %></td>
         </tr>
       <% end %>

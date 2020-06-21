@@ -11,6 +11,16 @@
     <%= @comuna.cuarentena %>
   </p>
 
+  <p>
+    <strong>Número de Restaurantes:</strong>
+    <%= @comuna.restaurantes.length %>
+  </p>
+
+  <p>
+    <strong>Número de Swipers:</strong>
+    <%= @comuna.swipers.length %>
+  </p>
+
   <br>
 
   <%= link_to 'Lista Comunas', lista_comunas_path %><br>
