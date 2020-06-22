@@ -55,8 +55,11 @@ Rails.application.routes.draw do
   get 'pages/swiper_mostrados/:id/aceptar/:id_a', to: 'pages#aceptar', as: 'aceptado'
 
   get 'cita/:id/:id_a', to: 'pages#agendar_cita', as: 'agendar_cita'
-  get 'cita/restaurante/:id/:id_a', to: 'restaurantes#index', as: 'restaurante_cita'
-  get 'cita/:id/:id_a/:id_r', to: 'pages#agendar_fecha', as: 'fecha_cita'
+  get 'cita/restaurante/:id/:id_a', to: 'restaurantes#index', as: 'restaurantes_cita'
+  get 'cita/restaurante/:id/:id_a/:id_r', to: 'restaurantes#show', as: 'restaurante_cita'
+  get 'cita/:id/:id_a/:id_r/:bool', to: 'restaurantes#show', as: 'fecha_cita'
+  post 'cita', to: 'meet#create', as: 'generar_cita'
+  get 'aceptar_cita/:mid', to: 'meet#accept', as: 'aceptar_cita'
   get 'citas/:id', to: 'pages#lista_citas', as: 'lista_citas'
   get 'citas/:id/:mid', to: 'pages#eliminar_cita', as: 'eliminar_cita'
 
@@ -79,7 +82,7 @@ Rails.application.routes.draw do
 
   ### RUTAS CRUD COMENTARIO ###
   # CREATE
-  get 'comentarios/new', to: 'comentarios#new'
+  get 'comentarios/new/:ids/:idr', to: 'comentarios#new', as: 'comentar_restaurante'
   post 'comentarios', to: 'comentarios#create'
   # READ
   get 'comentarios', to: 'comentarios#index', as: 'lista_comentarios'
@@ -121,4 +124,8 @@ Rails.application.routes.draw do
                                                                               'imagen_restaurante'
   # FILTRO
   post 'restaurantes-filtrados' => 'restaurantes#filtro'
+
+  # RUTAS EXTRA
+  get 'pages/choose_login', to:'pages#choose_login', as: 'choose_login'
+  get 'pages/choose_registration', to:'pages#choose_registration', as: 'choose_registration'
 end

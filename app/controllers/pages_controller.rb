@@ -54,7 +54,7 @@ class PagesController < ApplicationController
     @swiper = Swiper.find params[:id]
     @citado = Swiper.find params[:id_a]
 
-    redirect_to restaurante_cita_path(@swiper.id, @citado.id)
+    redirect_to restaurantes_cita_path(@swiper.id, @citado.id)
   end
 
   def agendar_fecha

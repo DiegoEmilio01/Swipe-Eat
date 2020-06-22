@@ -1,54 +1,96 @@
-<% if current_admin or current_owner %>
-    <p id="notice"><%= notice %></p>
+<p id="notice"><%= notice %></p>
 
-    <p>
-    <strong>Nombre:</strong>
-    <%= @restaurante.nombre %>
-    </p>
+<p>
+<strong>Nombre:</strong>
+<%= @restaurante.nombre %>
+</p>
 
-    <p>
-        <strong>Descripción:</strong>
-        <%= @restaurante.descripcion %>
-    </p>
+<p>
+    <strong>Descripción:</strong>
+    <%= @restaurante.descripcion %>
+</p>
 
-    <p>
-        <strong>Comuna:</strong>
-        <%= @restaurante.comuna.nombre %>
-    </p>
+<p>
+    <strong>Comuna:</strong>
+    <%= @restaurante.comuna.nombre %>
+</p>
 
-    <p>
-        <strong>Estado:</strong>
-        <%= @restaurante.aceptado %>
-    </p>
+<p>
+    <strong>Estado:</strong>
+    <%= @restaurante.aceptado %>
+</p>
 
-    <br>
+<br>
 
-    <table>
-        <thead>
-            <tr>
-                <% (0...@restaurante.imagenes.count).each do |numero| %>
-                    <th>Imagen <%= numero + 1 %> </th>
-                <% end %>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <% @restaurante.imagenes.each do |imagen| %>
-                <td>
-                    <div style="width:200px; height:300px;">
-                        <%= image_tag(imagen, style:'width:150px; heigth: 100px') %>
-                    </div>
-                </td>
-                <% end %>
-            </tr>
-        </tbody>
-    </table>
+<table>
+    <thead>
+        <tr>
+            <% (0...@restaurante.imagenes.count).each do |numero| %>
+                <th>Imagen <%= numero + 1 %> </th>
+            <% end %>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <% @restaurante.imagenes.each do |imagen| %>
+            <td>
+                <div style="width:200px; height:300px;">
+                    <%= image_tag(imagen, style:'width:150px; heigth: 100px') %>
+                </div>
+            </td>
+            <% end %>
+        </tr>
+    </tbody>
+</table>
+<% if @bool %>
+    <%= form_with(local: true, method: :post, url: generar_cita_path) do |form| %>
+        <div class="field">
+            <%= form.hidden_field :swiper_cita_id, :value => @swiper_cita_id %>
+        </div>
+        <div class="field">
+            <%= form.hidden_field :swiper_citado_id, :value => @swiper_citado_id %>
+        </div>
+        <div class="field">
+            <%= form.hidden_field :restaurante_id, :value => @restaurante.id %>
+        </div>
+        <div class="field">
+            <%= form.label :fecha %><br />
+            <%= form.datetime_field :fecha, autofocus: true %>
+          </div><br>
+        <div class="actions">
+            <%= form.submit "Agendar cita" %>
+        </div>
+    <% end %>
+<% end %>
 
-    <br>
-
+<h2>Comentarios</h2>
+<% @restaurante.comentarios.each do |comentario| %>
+        <div>
+            <% swiper = Swiper.find(comentario.swiper_id) %>
+            <%= swiper.nombre %>
+            <%= comentario.valoracion %><br>
+            <%= comentario.contenido %> <br>
+            <% if current_admin %>
+                <%= link_to 'Ver detalles', comentario_path(comentario.id) %>
+            <% end %>
+            <br>
+        </div>
+<% end %>
+<br>
+<% if current_admin %>
     <%= link_to 'Lista Restaurantes', lista_restaurantes_path %><br>
     <%= link_to 'Editar Restaurante', edit_restaurante_path(@restaurante.id) %><br>
     <%= link_to 'Eliminar Restaurante', restaurante_path(@restaurante.id), method: :delete, data: {confirm: '¿Estás seguro?'} %><br>
-<% else %>
-    <% controller.redirect_to new_admin_session_path, notice: 'No tienes permiso para ingresar a la página que intentaste acceder.' %>
+<% end %>
+<% if @swiper_cita_id && @swiper_citado_id %>
+    <%= link_to 'Lista Restaurantes', restaurantes_cita_path(@swiper_cita_id, @swiper_citado_id) %><br>
+    <%= link_to 'Agendar cita en el local', fecha_cita_path(@swiper_cita_id, @swiper_citado_id, @restaurante.id, 1) %><br>
+<% elsif current_swiper %>
+    <%= link_to 'Lista Restaurantes', lista_restaurantes_path %><br>
+<% end %>
+<% if current_owner %>
+    <% if current_owner.restaurante.id == @restaurante.id %>
+        <%= link_to 'Editar Restaurante', edit_restaurante_path(@restaurante.id) %><br>
+        <%= link_to 'Eliminar Restaurante', restaurante_path(@restaurante.id), method: :delete, data: {confirm: '¿Estás seguro?'} %><br>
+    <% end %>
 <% end %>

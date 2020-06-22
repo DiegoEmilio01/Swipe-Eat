@@ -1,140 +1,182 @@
-<p id="notice">
-  <% if resource.errors.any? %>
+
+<div class="row text-center tall-tittle">
+  <h2 class="big">Registrarse como Owner</h2>
+  <p id="notice">
+    <% if resource.errors.any? %>
       <h2>ERROR:</h2>
-  
+
       <% resource.errors.full_messages.each do |message| %>
-          <% if message == "Email can't be blank" %>
-              <%= "Ingresó un Correo en blanco." %><br>
-          <% elsif message == "Password can't be blank" %>
-              <%= "Ingresó una Contraseña en blanco." %><br>
-          <% elsif message == "Password confirmation doesn't match Password" %>
-              <%= "Ingresó una Confirmación que no corresponde con Contraseña." %><br>
-          <% elsif message == "Password is too short (minimum is 6 characters)" %>
-              <%= "Ingresó una Contraseña demasiado corta (mínimo 6 carácteres)." %><br>
-          <% elsif message == "Nombre vacio" %>
-              <%= "Ingresó un Nombre en blanco." %><br>
-          <% elsif message == "Nombre existe" %>
-              <%= "Ya existe un Swiper con ese Nombre." %><br>
-          <% elsif message == "Email has already been taken" %>
-              <%= "Ya existe un Swiper con ese Correo." %><br>
-          <% elsif message == "Descripcion vacio" %>
-              <%= "Ingresó una Descripción en blanco." %><br>
-          <% elsif message == "Descripcion largo" %>
-              <%= "La Descripción debe tener un largo entre 10 a 100 carácteres inclusive." %><br>
-          <% elsif message == "Edad vacio" %>
-              <%= "Ingresó una Edad en blanco." %><br>
-          <% elsif message == "Edad formato" %>
-              <%= "La Edad debe ser un entero mayor o igual a 18." %><br>
-          <% elsif message == "Telefono vacio" %>
-              <%= "Ingresó un Teléfono en blanco." %><br>
-          <% elsif message == "Telefono formato" %>
-              <%= "El Teléfono debe ingresarse en formato: +56912345678" %><br>
-          <% elsif message == "Direccion vacio" %>
-              <%= "Ingresó una Dirección en blanco." %><br>
-          <% elsif message == "Direccion formato" %>
-              <%= "La Dirección debe ingresarse en formato: Callejón Vicuña Mackenna 4860" %><br>
-          <% elsif message == "Comuna must exist" %>
-            <%= "No se seleccionó una comuna" %><br>
-          <% elsif message == "Gustos vacio" %>
-            <%= "No se escogieron gustos" %><br>
-          <% end %>
+        <% if message == "Email can't be blank" %>
+          <%= "Ingresó un Correo en blanco." %><br>
+        <% elsif message == "Password can't be blank" %>
+          <%= "Ingresó una Contraseña en blanco." %><br>
+        <% elsif message == "Password confirmation doesn't match Password" %>
+          <%= "Ingresó una Confirmación que no corresponde con Contraseña." %><br>
+        <% elsif message == "Password is too short (minimum is 6 characters)" %>
+          <%= "Ingresó una Contraseña demasiado corta (mínimo 6 carácteres)." %><br>
+        <% elsif message == "Nombre vacio" %>
+          <%= "Ingresó un Nombre en blanco." %><br>
+        <% elsif message == "Nombre existe" %>
+          <%= "Ya existe un Swiper con ese Nombre." %><br>
+        <% elsif message == "Email has already been taken" %>
+          <%= "Ya existe un Swiper con ese Correo." %><br>
+        <% elsif message == "Descripcion vacio" %>
+          <%= "Ingresó una Descripción en blanco." %><br>
+        <% elsif message == "Descripcion largo" %>
+          <%= "La Descripción debe tener un largo entre 10 a 100 carácteres inclusive." %><br>
+        <% elsif message == "Edad vacio" %>
+          <%= "Ingresó una Edad en blanco." %><br>
+        <% elsif message == "Edad formato" %>
+          <%= "La Edad debe ser un entero mayor o igual a 18." %><br>
+        <% elsif message == "Telefono vacio" %>
+          <%= "Ingresó un Teléfono en blanco." %><br>
+        <% elsif message == "Telefono formato" %>
+          <%= "El Teléfono debe ingresarse en formato: +56912345678" %><br>
+        <% elsif message == "Direccion vacio" %>
+          <%= "Ingresó una Dirección en blanco." %><br>
+        <% elsif message == "Direccion formato" %>
+          <%= "La Dirección debe ingresarse en formato: Callejón Vicuña Mackenna 4860" %><br>
+        <% elsif message == "Comuna must exist" %>
+          <%= "No se seleccionó una comuna" %><br>
+        <% elsif message == "Gustos vacio" %>
+          <%= "No se escogieron gustos" %><br>
+        <% end %>
       <% end %>
-  <% end %>
-</p>
+    <% end %>
+  </p>
+</div>
 
-<h2>Sign up Swipers</h2>
+<div class="row text-left">
+  <div class="col-md-4 tall-content align-middle"></div>
+  <div class="col-md-4 tall-content align-middle" >
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :nombre %><br />
-    <%= f.text_field :nombre, autofocus: true, autocomplete: "nombre" %>
-  </div>
+      <div class="row">
+        <div class="field big">
+          <%= f.label :nombre %><br />
+          <%= f.text_field :nombre, autofocus: true, autocomplete: "nombre" %>
+        </div>
+        <br>
+      </div>
 
-  <div class="field">
-    <%= f.label :correo %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+      <div class="row">
+        <div class="field big">
+          <%= f.label :correo %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        </div>
+        <br>
+      </div>
 
-  <div class="field">
-    <%= f.label :edad %><br />
-    <%= f.text_field :edad, autofocus: true, autocomplete: "edad" %>
-  </div>
+      <div class="row">
+        <div class="field big">
+          <%= f.label :edad %><br />
+          <%= f.text_field :edad, autofocus: true, autocomplete: "edad" %>
+        </div>
+        <br>
+      </div>
 
-  <div class="field">
-    <%= f.label :teléfono %><br />
-    <%= f.text_field :telefono, autofocus: true, autocomplete: "telefono" %>
-  </div>
+      <div class="row">
+        <div class="field big">
+          <%= f.label :teléfono %><br />
+          <%= f.text_field :telefono, autofocus: true, autocomplete: "telefono" %>
+        </div>
+        <br>
+      </div>
 
-  <div class="field">
-    <%= f.label :cumpleaños %><br />
-    <%= f.date_select :cumpleanos, autofocus: true, autocomplete: "cumpleanos", discard_year:true %>
-  </div>
+      <div class="row">
+        <div class="field big">
+          <%= f.label :cumpleaños %><br />
+          <%= f.date_select :cumpleanos, autofocus: true, autocomplete: "cumpleanos", discard_year:true %>
+        </div>
+        <br>
+      </div>
 
-  <div class="field">
-    <%= f.label :dirección %><br />
-    <%= f.text_field :direccion, autofocus: true, autocomplete: "direccion" %>
-  </div>
+      <div class="row">
+        <div class="field big">
+          <%= f.label :dirección %><br />
+          <%= f.text_field :direccion, autofocus: true, autocomplete: "direccion" %>
+        </div>
+        <br>
+      </div>
 
-  <div class="field">
-    <%= f.label :comuna_id %><br />
-    <%= f.select :comuna_id, options_from_collection_for_select(Comuna.all, :id, :nombre) %><br />
-  </div> <br><br>
+      <div class="row">
+        <div class="field big">
+          <%= f.label :comuna_id %><br />
+          <%= f.select :comuna_id, options_from_collection_for_select(Comuna.all, :id, :nombre) %><br />
+        </div>
+        <br>
+      </div>
 
-  <div class="field">
-    <%= f.label :gustos %><br />
-    <div style="height:150px;overflow:auto;">
-    <% @gustos = Gusto.all %>
-    <% @gustos.each do |gusto| %>
-      <div class="box">
-          <article class="media">
-          <div class="media-content">
-              <div class="content">
-              <p>
-                  <strong><%= gusto.nombre %></strong>
-                  <br>
-                  <%= gusto.descripcion%>
-                  <%= f.check_box :gusto_ids, { multiple: true}, gusto.id, nil %>
-              </p>
+      <div class="row">
+        <div class="field big">
+          <%= f.label :gustos %><br />
+          <div style="height:150px;overflow:auto;">
+            <% @gustos = Gusto.all %>
+            <% @gustos.each do |gusto| %>
+              <div class="box">
+                  <article class="media">
+                  <div class="media-content">
+                      <div class="content">
+                      <p>
+                          <strong><%= gusto.nombre %></strong>
+                          <br>
+                          <%= gusto.descripcion%>
+                          <%= f.check_box :gusto_ids, { multiple: true}, gusto.id, nil %>
+                      </p>
+                      </div>
+                  </div>
+                  </article>
               </div>
-          </div>
-          </article>
+            <% end %>
+           </div>
+        </div>
+        <br>
+      </div>
+
+      <div class="row">
+        <div class="field big">
+          <%= f.label :descripción %><br />
+          <%= f.text_field :descripcion, autofocus: true, autocomplete: "descripcion" %>
+        </div>
+        <br>
+      </div>
+
+      <div class="row">
+        <div class="field big">
+          <%= f.label :imágenes %>
+          <%= f.file_field :imagenes, multiple: true %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field big">
+          <%= f.label :contraseña %>
+          <% if @minimum_password_length %>
+            <em>(<%= @minimum_password_length %> carácteres mínimo) </em>
+          <% end %><br />
+          <%= f.password_field :password, autocomplete: "new-password" %>
+        </div>
+        <br>
+      </div>
+
+      <div class="row">
+        <div class="field big">
+          <%= f.label :confirmación_contraseña %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+        </div>
+        <br>
+      </div>
+
+
+            <div class="row">
+        <div class="actions">
+          <%= f.submit "Registrarse", :class => 'btn btn-primary' %>
+        </div>
+        <br>
       </div>
     <% end %>
-    </div>   
-  </div><br>
 
-  <div class="field">
-    <%= f.label :descripción %><br />
-    <%= f.text_field :descripcion, autofocus: true, autocomplete: "descripcion" %>
   </div>
-
-  <br>
-
-  <div class="field">
-    <%= f.label :imágenes %>
-    <%= f.file_field :imagenes, multiple: true %>
+  <div class="col-md-4 tall-content align-middle">
   </div>
-
-  <br>
-
-  <div class="field">
-    <%= f.label :contraseña %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> carácteres mínimo) </em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :confirmación_contraseña %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <br>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-<br><br>
-<%= render "swipers/shared/links" %>
+</div>
