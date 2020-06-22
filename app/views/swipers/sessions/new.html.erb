@@ -12,6 +12,7 @@
         <%= f.label :email %><br />
         <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
       </div>
+      <br>
     </div>
 
     <div class="row">
@@ -19,24 +20,17 @@
         <%= f.label :password %><br />
         <%= f.password_field :password, autocomplete: "current-password" %>
       </div>
+      <br>
     </div>
 
-    <div class="row">
-      <% if devise_mapping.rememberable? %>
-        <div class="field small">
-          <%= f.check_box :remember_me, :class => 'checkbox'%>
-          <%= f.label :remember_me %>
-        </div>
-      <% end %>
-    </div>
 
     <div class="row">
       <div class="actions">
         <%= f.submit "Log in", :class => 'btn btn-primary' %>
       </div>
+      <br>
     </div>
     <% end %>
-    <div class="row small"><%= render "swipers/shared/links" %></div>
 
   </div>
   <div class="col-md-4 tall-content align-middle">
