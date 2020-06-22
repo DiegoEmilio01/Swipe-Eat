@@ -126,6 +126,6 @@ Rails.application.routes.draw do
   post 'restaurantes-filtrados' => 'restaurantes#filtro'
 
   # RUTAS EXTRA
-  get 'pages/choose_login', to:'pages#choose_login', as: 'choose_login'
-  get 'pages/choose_registration', to:'pages#choose_registration', as: 'choose_registration'
+  get 'pages/choose_login', to: 'pages#choose_login', as: 'choose_login'
+  get 'pages/choose_registration', to: 'pages#choose_registration', as: 'choose_registration'
 end
