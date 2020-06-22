@@ -69,7 +69,11 @@
             <% swiper = Swiper.find(comentario.swiper_id) %>
             <%= swiper.nombre %>
             <%= comentario.valoracion %><br>
-            <%= comentario.contenido %> <br><br>
+            <%= comentario.contenido %> <br>
+            <% if current_admin %>
+                <%= link_to 'Ver detalles', comentario_path(comentario.id) %>
+            <% end %>
+            <br>
         </div>
 <% end %>
 <br>
