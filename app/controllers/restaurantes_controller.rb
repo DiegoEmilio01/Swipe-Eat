@@ -18,7 +18,11 @@ class RestaurantesController < ApplicationController
   end
 
   def index
-    @restaurantes = Restaurante.all
+    if current_swiper
+      @restaurantes = Restaurante.where("aceptado = 'Aceptado'")
+    else
+      @restaurantes = Restaurante.all
+    end
     return unless params[:id] && params[:id_a]
 
     @swiper_cita_id = params[:id]
@@ -68,12 +72,25 @@ class RestaurantesController < ApplicationController
   end
 
   def filtro
-    if params[:filtro] == 'nombre'
-      @filtrados = Restaurante.where('nombre ~* ?', '.*' + params[:input] + '.*')
-    elsif params[:filtro] == 'o_nombre'
-      @filtrados = Restaurante.order(:nombre)
-    elsif params[:filtro] == 'comuna'
-      @filtrados = Restaurante.where('comuna_id = ?', params[:input])
+    if current_swiper
+      if params[:filtro] == 'nombre'
+        @filtrados = Restaurante.where("nombre ~* ? AND aceptado = 'Aceptado'", '.*' + params[:input] + '.*')
+      elsif params[:filtro] == 'o_nombre'
+        @filtrados = Restaurante.where("aceptado = 'Aceptado'").order(:nombre)
+      elsif params[:filtro] == 'comuna'
+        @filtrados = Restaurante.where("comuna_id = ? AND aceptado = 'Aceptado'", params[:input])
+      end
+    else
+      if params[:filtro] == 'nombre'
+        @filtrados = Restaurante.where('nombre ~* ?', '.*' + params[:input] + '.*')
+      elsif params[:filtro] == 'o_nombre'
+        @filtrados = Restaurante.order(:nombre)
+      elsif params[:filtro] == 'comuna'
+        @filtrados = Restaurante.where('comuna_id = ?', params[:input])
+      end
     end
+    return unless params[:id] && params[:id_a]
+    @swiper_cita_id = params[:id]
+    @swiper_citado_id = params[:id_a]
   end
 end

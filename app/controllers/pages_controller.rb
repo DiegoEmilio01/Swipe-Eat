@@ -76,10 +76,10 @@ class PagesController < ApplicationController
   end
 
   def mensajes
-    @mensajes = Mensaje.where('swiper_origen_id = ? AND'\
+    @mensajes = Mensaje.where('swiper_origen_id = ? AND '\
                               'swiper_destino_id = ?',
                               params[:id], current_swiper.id).or(Mensaje.where(
-                                                                   'swiper_destino_id = ? AND'\
+                                                                   'swiper_destino_id = ? AND '\
                                                                    'swiper_origen_id = ?',
                                                                    params[:id], current_swiper.id
                                                                  ))
