@@ -3,7 +3,7 @@
 
     <h1>Chat con <%= @destinatario.nombre %></h1>
 
-    <div style="height:200px;overflow:auto;">
+    <div style="height:350px;overflow:auto;display:flex;flex-direction:column-reverse;">
         <table class="table">
             <tbody>
                 <% @mensajes.each do |mensaje| %>
@@ -19,7 +19,7 @@
                             <%= mensaje.contenido %>
                         </td>
                         <td>
-                            <%= mensaje.created_at %>
+                            <%= mensaje.created_at.to_formatted_s(:short) %>
                         </td>
                     </tr>
                 <% end %>
