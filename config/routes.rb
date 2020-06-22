@@ -31,6 +31,8 @@ Rails.application.routes.draw do
     delete 'swipers/imagen/:id_i/:id_s' => 'swipers/registrations#delete_imagen', as: 'delete_'\
                                                                                   'imagen_swiper'
     post 'swipers-filtrados' => 'swipers/registrations#filtro'
+    get 'swipers/mensajes/:id' => 'pages#mensajes', as: 'mensajes'
+    post 'mensaje-nuevo' => 'pages#crear_mensaje'
   end
 
   ### RUTAS CRUD ADMIN ###

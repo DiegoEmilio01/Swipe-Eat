@@ -74,4 +74,15 @@ class PagesController < ApplicationController
 
     redirect_to lista_citas_path(@swiper.id)
   end
+
+  def mensajes
+    @mensajes = Mensaje.where('swiper_origen_id = ? AND swiper_destino_id = ?',
+                              params[:id], current_swiper.id).order(:created_at)
+    @destinatario = Swiper.find(params[:id])
+  end
+
+  def crear_mensaje
+    Mensaje.new()
+    redirect_to mensajes_path(params[:id])
+  end
 end
