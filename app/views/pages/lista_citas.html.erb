@@ -19,7 +19,7 @@
               <td><%= meet.swiper_citado.nombre %></td>
               <td><%= meet.swiper_citado.edad %> años</td>
               <td><%= meet.restaurante.nombre %></td>
-              <td><%= meet.fecha %></td>
+              <td><%= meet.fecha.to_formatted_s(:short) %></td>
               <td><%= link_to 'Ir al perfil', swiper_path(meet.swiper_citado.id)%></td>
               <td><%= link_to 'Eliminar cita', eliminar_cita_path(@swiper.id, meet.id) %></td>
               <% i = 0 %>
@@ -33,7 +33,7 @@
               <td><%= meet.swiper_cita.nombre %></td>
               <td><%= meet.swiper_cita.edad %> años</td>
               <td><%= meet.restaurante.nombre %></td>
-              <td><%= meet.fecha %></td>
+              <td><%= meet.fecha.to_formatted_s(:short) %></td>
               <td><%= link_to 'Ir al perfil', swiper_path(meet.swiper_cita.id)%></td>
               <td><%= link_to 'Eliminar cita', eliminar_cita_path(@swiper.id, meet.id) %></td>
               <% i = 0 %>
@@ -72,7 +72,7 @@
             <td><%= meet.swiper_citado.nombre %></td>
             <td><%= meet.swiper_citado.edad %> años</td>
             <td><%= meet.restaurante.nombre %></td>
-            <td><%= meet.fecha %></td>
+            <td><%= meet.fecha.to_formatted_s(:short) %></td>
             <td><%= link_to 'Ir al perfil', swiper_path(meet.swiper_citado.id)%></td>
             <td><%= link_to 'Eliminar cita', eliminar_cita_path(@swiper.id, meet.id) %></td>
 
@@ -110,7 +110,7 @@
             <td><%= meet.swiper_cita.nombre %></td>
             <td><%= meet.swiper_cita.edad %> años</td>
             <td><%= meet.restaurante.nombre %></td>
-            <td><%= meet.fecha %></td>
+            <td><%= meet.fecha.to_formatted_s(:short) %></td>
             <td><%= link_to 'Ir al perfil', swiper_path(meet.swiper_citado.id)%></td>
             <td><%= link_to 'Eliminar cita', eliminar_cita_path(@swiper.id, meet.id) %></td>
             <td><%= link_to 'Aceptar cita', aceptar_cita_path(meet.id) %></td>

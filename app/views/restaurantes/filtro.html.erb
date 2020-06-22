@@ -1,4 +1,4 @@
-<% if current_admin %>
+<% if current_admin or current_swiper%>
   <p id="notice"><%= notice %></p>
 
   <h1>Restaurantes</h1>
@@ -9,6 +9,14 @@
           <tr>
               <td>
                   <%= form_tag(controller: 'restaurantes', action: "filtro", method: "post") do %>
+                      <% if @swiper_cita_id && @swiper_citado_id %>
+                        <div class="field">
+                          <%= hidden_field_tag(:id, @swiper_cita_id) %>
+                        </div>
+                        <div class="field">
+                          <%= hidden_field_tag(:id_a, @swiper_citado_id) %>
+                        </div>
+                      <% end %>
                       <div class="field">
                           <%= hidden_field_tag(:filtro, "o_nombre") %><br>
                       </div>
@@ -31,11 +39,15 @@
 
     <tbody>
       <% @filtrados.each do |restaurante| %>
-        <tr>
-          <td><%= restaurante.nombre %></td>
-          <td><%= restaurante.comuna.nombre %></td>
+      <tr>
+        <td><%= restaurante.nombre %></td>
+        <td><%= restaurante.comuna.nombre %></td>
+        <% if @swiper_cita_id && @swiper_citado_id %>
+          <td><%= link_to 'Ver detalles para agendar una cita', restaurante_cita_path(@swiper_cita_id, @swiper_citado_id, restaurante.id) %></td>
+        <% else %>
           <td><%= link_to 'Ver detalles', restaurante_path(restaurante.id) %></td>
-        </tr>
+        <% end %>
+      </tr>
       <% end %>
     </tbody>
   </table>
@@ -51,6 +63,14 @@
         <tr>
             <td>
                 <%= form_tag(controller: 'restaurantes', action: "filtro", method: "post") do %>
+                    <% if @swiper_cita_id && @swiper_citado_id %>
+                      <div class="field">
+                        <%= hidden_field_tag(:id, @swiper_cita_id) %>
+                      </div>
+                      <div class="field">
+                        <%= hidden_field_tag(:id_a, @swiper_citado_id) %>
+                      </div>
+                    <% end %>
                     <div class="field">
                         <%= text_field_tag(:input) %>
                     </div>
@@ -64,6 +84,14 @@
             </td>
             <td>
               <%= form_tag(controller: 'restaurantes', action: "filtro", method: "post") do %>
+                  <% if @swiper_cita_id && @swiper_citado_id %>
+                      <div class="field">
+                        <%= hidden_field_tag(:id, @swiper_cita_id) %>
+                      </div>
+                      <div class="field">
+                        <%= hidden_field_tag(:id_a, @swiper_citado_id) %>
+                      </div>
+                  <% end %>
                   <div class="field">
                       <%= select_tag(:input, options_from_collection_for_select(Comuna.all, :id, :nombre))%>
                   </div>
@@ -80,10 +108,12 @@
   </table>
 
   <br>
-  <% if not current_admin %>
+  <% if current_owner #esto debe sacarse después a owner %>
     <%= link_to 'Crear Restaurante', restaurantes_new_path %><br><br>
   <% end %>
-  <%= link_to 'Volver a la lista de acciones disponibles.', admin_root_path %><br>
+  <% if current_admin %>
+    <%= link_to 'Volver a la lista de acciones disponibles.', admin_root_path %><br>
+  <% end %>
 <% else %>
   <% controller.redirect_to new_admin_session_path, notice: 'No tienes permiso para ingresar a la página que intentaste acceder.' %>
 <% end %>
