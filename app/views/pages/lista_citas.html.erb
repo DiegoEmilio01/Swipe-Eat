@@ -67,7 +67,7 @@
     </thead>
     <tbody>
       <% @swiper.meets.each do |meet| %>
-          <% if !meet.estado && (@swiper.id == meet.swiper_cita_id)%>
+          <% if !(meet.estado) && (current_swiper.id == meet.swiper_cita_id)%>
           <tr>
             <td><%= meet.swiper_citado.nombre %></td>
             <td><%= meet.swiper_citado.edad %> años</td>
