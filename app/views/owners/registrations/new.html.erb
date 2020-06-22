@@ -1,55 +1,90 @@
-<p id="notice">
-  <% if resource.errors.any? %>
-      <h2>ERROR:</h2>
-      <% resource.errors.full_messages.each do |message| %>
-          <% if message == "Email can't be blank" %>
-              <%= "Ingresó un Correo en blanco." %><br>
-          <% elsif message == "Password can't be blank" %>
-              <%= "Ingresó una Contraseña en blanco." %><br>
-          <% elsif message == "Password confirmation doesn't match Password" %>
-              <%= "Ingresó una Confirmación que no corresponde con Contraseña." %><br>
-          <% elsif message == "Password is too short (minimum is 6 characters)" %>
-              <%= "Ingresó una Contraseña demasiado corta (mínimo 6 carácteres)." %><br>
-          <% elsif message == "Nombre vacio" %>
-              <%= "Ingresó un Nombre en blanco." %><br>
-          <% elsif message == "Nombre existe" %>
-              <%= "Ya existe un Owner con ese Nombre." %><br>
-          <% elsif message == "Email has already been taken" %>
-              <%= "Ya existe un Owner con ese Correo." %><br>
-          <% end %>
+
+<div class="row text-center tall-tittle">
+  <h2 class="big">Registrarse como Owner</h2>
+  <p id="notice">
+    <% if resource.errors.any? %>
+    <h2>ERROR:</h2>
+    <% resource.errors.full_messages.each do |message| %>
+      <% if message == "Email can't be blank" %>
+        <%= "Ingresó un Correo en blanco." %><br>
+      <% elsif message == "Password can't be blank" %>
+        <%= "Ingresó una Contraseña en blanco." %><br>
+      <% elsif message == "Password confirmation doesn't match Password" %>
+        <%= "Ingresó una Confirmación que no corresponde con Contraseña." %><br>
+      <% elsif message == "Password is too short (minimum is 6 characters)" %>
+        <%= "Ingresó una Contraseña demasiado corta (mínimo 6 carácteres)." %><br>
+      <% elsif message == "Nombre vacio" %>
+        <%= "Ingresó un Nombre en blanco." %><br>
+      <% elsif message == "Nombre existe" %>
+        <%= "Ya existe un Owner con ese Nombre." %><br>
+      <% elsif message == "Email has already been taken" %>
+        <%= "Ya existe un Owner con ese Correo." %><br>
       <% end %>
+    <% end %>
   <% end %>
-</p>
+  </p>
+</div>
+<div class="row text-left">
+  <div class="col-md-4 tall-content align-middle"></div>
+  <div class="col-md-4 tall-content align-middle" >
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
 
-<h2>Sign up Owner</h2>
+      <div class="row">
+        <div class="field big">
+          <%= f.label :nombre %><br />
+          <%= f.text_field :nombre, autofocus: true, autocomplete: "nombre" %>
+        </div>
+        <br>
+      </div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :nombre %><br />
-    <%= f.text_field :nombre, autofocus: true, autocomplete: "nombre" %>
-  </div>
+      <div class="row">
+        <div class="field big">
+          <%= f.label :correo %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        </div>
+        <br>
+      </div>
 
-  <div class="field">
-    <%= f.label :correo %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+      <div class="row">
+        <div class="field big">
+          <%= f.label :contraseña %>
+          <% if @minimum_password_length %>
+            <em>(<%= @minimum_password_length %> carácteres mínimo) </em>
+          <% end %><br />
+          <%= f.password_field :password, autocomplete: "new-password" %>
+        </div>
+        <br>
+      </div>
 
-  <div class="field">
-    <%= f.label :contraseña %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> carácteres mínimo) </em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+      <div class="row">
+        <div class="field big">
+          <%= f.label :confirmación_contraseña %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+        </div>
+        <br>
+      </div>
 
-  <div class="field">
-    <%= f.label :confirmación_contraseña %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+      <div class="row">
+        <div class="actions">
+          <%= f.submit "Registrarse", :class => 'btn btn-primary' %>
+        </div>
+        <br>
+      </div>
+    <% end %>
+
   </div>
-  <br>
-  <div class="actions">
-    <%= f.submit "Sign up" %>
+  <div class="col-md-4 tall-content align-middle">
   </div>
-<% end %>
-<br>
-<%= render "owners/shared/links" %>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
