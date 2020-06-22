@@ -80,7 +80,7 @@ Rails.application.routes.draw do
 
   ### RUTAS CRUD COMENTARIO ###
   # CREATE
-  get 'comentarios/new', to: 'comentarios#new'
+  get 'comentarios/new/:ids/:idr', to: 'comentarios#new', as: 'comentar_restaurante'
   post 'comentarios', to: 'comentarios#create'
   # READ
   get 'comentarios', to: 'comentarios#index', as: 'lista_comentarios'
