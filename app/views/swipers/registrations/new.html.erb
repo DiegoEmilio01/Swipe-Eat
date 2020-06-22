@@ -110,23 +110,25 @@
       <div class="row">
         <div class="field big">
           <%= f.label :gustos %><br />
-          <% @gustos = Gusto.all %>
-          <% @gustos.each do |gusto| %>
-            <div class="box">
-              <article class="media">
-                <div class="media-content">
-                  <div class="content">
-                    <p>
-                      <strong><%= gusto.nombre %></strong>
-                      <br>
-                      <%= gusto.descripcion%>
-                      <%= f.check_box :gusto_ids, { multiple: true}, gusto.id, nil %>
-                    </p>
+          <div style="height:150px;overflow:auto;">
+            <% @gustos = Gusto.all %>
+            <% @gustos.each do |gusto| %>
+              <div class="box">
+                  <article class="media">
+                  <div class="media-content">
+                      <div class="content">
+                      <p>
+                          <strong><%= gusto.nombre %></strong>
+                          <br>
+                          <%= gusto.descripcion%>
+                          <%= f.check_box :gusto_ids, { multiple: true}, gusto.id, nil %>
+                      </p>
+                      </div>
                   </div>
-                </div>
-              </article>
-            </div>
-            <%end %>
+                  </article>
+              </div>
+            <% end %>
+           </div>
         </div>
         <br>
       </div>

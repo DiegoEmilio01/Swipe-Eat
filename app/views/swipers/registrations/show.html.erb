@@ -37,13 +37,14 @@
       <div class="row">
         <div class="row">
           <div class="col-md-6">
-            <strong>Descripción</strong><br>
-            <div class="align-z">
-              <div>
-                <% @swiper.gustos.each do |gusto| %>
-
-                  <p> <%= gusto.nombre %> | <%= gusto.descripcion%> </p>
-                <% end %>
+            <strong>Gustos</strong><br>
+            <div style="height:120px;overflow:auto;">
+              <div class="align-z">
+                <div>
+                  <% @swiper.gustos.each do |gusto| %>
+                    <p> <%= gusto.nombre %> | <%= gusto.descripcion%> </p>
+                  <% end %>
+                </div>
               </div>
             </div>
           </div>

@@ -5,6 +5,7 @@
    <th></th>
    <th></th>
    <th></th>
+   <th></th>
    <th>Foto</th>
   </thead>
   <tbody>
@@ -13,6 +14,7 @@
         <td><%= swiper.nombre %></td>
         <td><%= swiper.edad %> años</td>
         <td><%= link_to 'Ir al perfil', swiper_path(swiper.id)%></td>
+        <td><%= link_to 'Ir al chat', mensajes_path(swiper.id)%></td>
         <td><%= link_to 'Eliminar match', eliminar_match_path(@swiper.id, swiper.id) %></td>
         <td><%= link_to 'Agendar cita', agendar_cita_path(@swiper.id, swiper.id) %></td>
         <% i = 0 %>
