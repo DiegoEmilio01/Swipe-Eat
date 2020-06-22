@@ -63,6 +63,15 @@
     <% end %>
 <% end %>
 
+<h2>Comentarios</h2>
+<% @restaurante.comentarios.each do |comentario| %>
+        <div>
+            <% swiper = Swiper.find(comentario.swiper_id) %>
+            <%= swiper.nombre %>
+            <%= comentario.valoracion %><br>
+            <%= comentario.contenido %> <br><br>
+        </div>
+<% end %>
 <br>
 <% if current_admin %>
     <%= link_to 'Lista Restaurantes', lista_restaurantes_path %><br>

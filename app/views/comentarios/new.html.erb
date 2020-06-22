@@ -1,6 +1,5 @@
 <p id="notice">
     <% if (notice != 'Guardado') and (notice)%>
-        <h2>ERROR:</h2>
         <% if notice["contenido"] %>
             <%= notice["contenido"][0] %><br>
         <% end %>
@@ -24,13 +23,20 @@
     </div>
 
     <div class='field'>
-        <%= form.label :fecha %>
-        <%= form.datetime_field :fecha %>
+        <%= form.label :valoracion %>
+        <%= form.text_field :valoracion %>
     </div>
 
     <div class='field'>
-        <%= form.label :valoracion %>
-        <%= form.text_field :valoracion %>
+        <%= form.hidden_field :fecha, :value => DateTime.now %>
+    </div>
+    
+    <div class='field'>
+        <%= form.hidden_field :restaurante_id, :value => @restaurante_id %>
+    </div>
+
+    <div class='field'>
+        <%= form.hidden_field :swiper_id, :value => @swiper_id %>
     </div>
 
     <div class="actions">

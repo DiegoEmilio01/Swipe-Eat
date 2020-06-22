@@ -3,16 +3,21 @@
 class ComentariosController < ApplicationController
   def new
     @comentario = Comentario.new
+    @swiper_id = params[:ids]
+    @restaurante_id = params[:idr]
   end
 
   def create
-    comentario_params = params.require(:comentario).permit(:contenido, :fecha, :valoracion)
+    comentario_params = params.require(:comentario).permit(:contenido, :fecha, :valoracion,
+                                                           :restaurante_id, :swiper_id)
     @comentario = Comentario.create(comentario_params)
 
+    swiper_id = comentario_params['swiper_id']
+    restaurante_id = comentario_params['restaurante_id']
     if @comentario.save
-      redirect_to comentarios_new_path, notice: 'Guardado'
+      redirect_to lista_citas_path(swiper_id), notice: 'Comentario guardado'
     else
-      redirect_to comentarios_new_path, notice: @comentario.errors
+      redirect_to comentar_restaurante_path(swiper_id, restaurante_id), notice: @comentario.errors
     end
   end
 
