@@ -6,7 +6,7 @@ Rails.application.routes.draw do
                                      registrations: 'owners/registrations' }
   # Rutas adicionales de owner
   devise_scope :owner do
-    get 'owners_root' => 'owners/registrations#index', as: 'owner_root'
+    get 'owners_root' => 'owners/registrations#index', as: 'owner_root' #cambiar
     get 'owners' => 'owners/registrations#index', as: 'lista_owners'
     get 'owners/:id' => 'owners/registrations#show', as: 'owner'
     get 'owners/:id/edit', to: 'owners/registrations#edit_admin', as: 'admin_edit_owner'
@@ -20,7 +20,7 @@ Rails.application.routes.draw do
                                       registrations: 'swipers/registrations' }
   # Rutas adicionales de swipers
   devise_scope :swiper do
-    get 'swiper_root' => 'swipers/registrations#index', as: 'swiper_root'
+    get 'swiper_root' => 'swipers/registrations#index', as: 'swiper_root' #cambiar
     get 'swipers' => 'swipers/registrations#index', as: 'lista_swipers'
     get 'swipers/:id' => 'swipers/registrations#show', as: 'swiper'
     get 'swipers/lista_matchs/:id' => 'pages#lista_matchs', as: 'lista_matchs'
