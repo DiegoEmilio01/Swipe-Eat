@@ -7,8 +7,8 @@
      <th>Fecha</th>
      <th></th>
      <th></th>
-     <th>Foto</th>
      <th></th>
+     <th>Foto</th>
     </thead>
     <tbody>
       <% meets = Meet.where(swiper_citado_id: @swiper.id).or(Meet.where(swiper_cita_id: @swiper.id)) %>

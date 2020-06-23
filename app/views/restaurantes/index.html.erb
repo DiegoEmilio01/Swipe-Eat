@@ -1,7 +1,11 @@
-<% if current_admin or current_swiper%>
+<% if current_admin or current_swiper %>
   <p id="notice"><%= notice %></p>
 
   <h1>Restaurantes</h1>
+
+  <% if current_swiper %>
+    <h4> En comunas sin cuarentena </h4>
+  <% end %>
 
   <h3 style="margin: 0px; margin-bottom: -17px;"> Ordenar por: </h3>
   <table>
