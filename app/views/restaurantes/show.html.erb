@@ -72,6 +72,24 @@
     <% end %>
 <% end %>
 
+<% if current_admin %>
+    <%= link_to 'Lista Restaurantes', lista_restaurantes_path %><br>
+    <%= link_to 'Editar Restaurante', edit_restaurante_path(@restaurante.id) %><br>
+    <%= link_to 'Eliminar Restaurante', restaurante_path(@restaurante.id), method: :delete, data: {confirm: '¿Estás seguro?'} %><br>
+<% end %>
+<% if @swiper_cita_id && @swiper_citado_id %>
+    <%= link_to 'Lista Restaurantes', restaurantes_cita_path(@swiper_cita_id, @swiper_citado_id) %><br>
+    <%= link_to 'Agendar cita en el local', fecha_cita_path(@swiper_cita_id, @swiper_citado_id, @restaurante.id, 1) %><br>
+<% elsif current_swiper %>
+    <%= link_to 'Lista Restaurantes', lista_restaurantes_path %><br>
+<% end %>
+<% if current_owner %>
+    <% if current_owner.restaurante.id == @restaurante.id %>
+        <%= link_to 'Editar Restaurante', edit_restaurante_path(@restaurante.id) %><br>
+        <%= link_to 'Eliminar Restaurante', restaurante_path(@restaurante.id), method: :delete, data: {confirm: '¿Estás seguro?'} %><br>
+    <% end %>
+<% end %>
+
 <% if @restaurante.comentarios.length > 0 %>
     <h2>Comentarios</h2>
     <div style="height:350px;overflow:auto;display:flex;flex-direction:column-reverse;">
@@ -101,21 +119,4 @@
         </table>
     </div>
     <br>
-<% end %>
-<% if current_admin %>
-    <%= link_to 'Lista Restaurantes', lista_restaurantes_path %><br>
-    <%= link_to 'Editar Restaurante', edit_restaurante_path(@restaurante.id) %><br>
-    <%= link_to 'Eliminar Restaurante', restaurante_path(@restaurante.id), method: :delete, data: {confirm: '¿Estás seguro?'} %><br>
-<% end %>
-<% if @swiper_cita_id && @swiper_citado_id %>
-    <%= link_to 'Lista Restaurantes', restaurantes_cita_path(@swiper_cita_id, @swiper_citado_id) %><br>
-    <%= link_to 'Agendar cita en el local', fecha_cita_path(@swiper_cita_id, @swiper_citado_id, @restaurante.id, 1) %><br>
-<% elsif current_swiper %>
-    <%= link_to 'Lista Restaurantes', lista_restaurantes_path %><br>
-<% end %>
-<% if current_owner %>
-    <% if current_owner.restaurante.id == @restaurante.id %>
-        <%= link_to 'Editar Restaurante', edit_restaurante_path(@restaurante.id) %><br>
-        <%= link_to 'Eliminar Restaurante', restaurante_path(@restaurante.id), method: :delete, data: {confirm: '¿Estás seguro?'} %><br>
-    <% end %>
 <% end %>
