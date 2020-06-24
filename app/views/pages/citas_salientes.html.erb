@@ -1,0 +1,43 @@
+<h2 style="text-align: center;">Citas esperando respuesta</h2><br><br>
+<table class="table">
+    <thead>
+     <th>Nombre</th>
+     <th>Edad</th>
+     <th>Restaurante</th>
+     <th>Fecha</th>
+     <th></th>
+     <th></th>
+     <th></th>
+     <th>Foto</th>
+    </thead>
+    <tbody>
+      <% current_swiper.meets.each do |meet| %>
+          <% if !(meet.estado) && (current_swiper.id == meet.swiper_cita_id)%>
+          <tr>
+            <td><%= meet.swiper_citado.nombre %></td>
+            <td><%= meet.swiper_citado.edad %> años</td>
+            <td><%= meet.restaurante.nombre %></td>
+            <td><%= meet.fecha.to_formatted_s(:short) %></td>
+            <td><%= link_to 'Ir al perfil', swiper_path(meet.swiper_citado.id)%></td>
+            <td><%= link_to 'Eliminar cita', eliminar_cita_path(current_swiper.id, meet.id, 3) %></td>
+
+            <% i = 0 %>
+            <% meet.swiper_citado.imagenes.each do |imagen| %>
+              <% if (i == 0) %>
+                <td><%= image_tag(imagen, style:'width:200px; heigth: 100px') %></td>
+              <% end %>
+              <% i += 1 %>
+            <% end %>
+          </tr>
+          <% end %>
+      <% end %>
+    </tbody>
+  </table>
+
+<div class="row text-center">
+    <div class="col-md-4 tall-content align-middle" ></div>
+    <div class="col-md-4 tall-content align-middle" >
+        <div class="row"><%= link_to "Back", menu_citas_path, :class => "btn btn-primary btn-menu" %></div>
+    </div>
+    <div class="col-md-4 tall-content align-middle" ></div>
+</div>

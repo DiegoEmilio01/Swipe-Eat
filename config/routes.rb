@@ -6,7 +6,7 @@ Rails.application.routes.draw do
                                      registrations: 'owners/registrations' }
   # Rutas adicionales de owner
   devise_scope :owner do
-    get 'owners_root' => 'owners/registrations#index', as: 'owner_root' #cambiar
+    get 'owners_root' => 'owners/registrations#index', as: 'owner_root' # cambiar
     get 'owners' => 'owners/registrations#index', as: 'lista_owners'
     get 'owners/:id' => 'owners/registrations#show', as: 'owner'
     get 'owners/:id/edit', to: 'owners/registrations#edit_admin', as: 'admin_edit_owner'
@@ -20,7 +20,7 @@ Rails.application.routes.draw do
                                       registrations: 'swipers/registrations' }
   # Rutas adicionales de swipers
   devise_scope :swiper do
-    get 'swiper_root' => 'swipers/registrations#index', as: 'swiper_root' #cambiar
+    get 'swiper_root' => 'swipers/registrations#index', as: 'swiper_root' # cambiar
     get 'swipers' => 'swipers/registrations#index', as: 'lista_swipers'
     get 'swipers/:id' => 'swipers/registrations#show', as: 'swiper'
     get 'swipers/lista_matchs/:id' => 'pages#lista_matchs', as: 'lista_matchs'
@@ -54,14 +54,22 @@ Rails.application.routes.draw do
   get 'pages/swiper_mostrados/:id', to: 'pages#swipers_mostrados', as: 'aceptando'
   get 'pages/swiper_mostrados/:id/aceptar/:id_a', to: 'pages#aceptar', as: 'aceptado'
 
+  get 'cita/:id_a', to: 'pages#choose_restaurante', as: 'menu_cita_restaurante'
   get 'cita/:id/:id_a', to: 'pages#agendar_cita', as: 'agendar_cita'
+
+  get 'cita/restaurante/favoritos/:id/:id_a/:fav', to: 'restaurantes#index', as: 'rest_cita_fav'
   get 'cita/restaurante/:id/:id_a', to: 'restaurantes#index', as: 'restaurantes_cita'
+
   get 'cita/restaurante/:id/:id_a/:id_r', to: 'restaurantes#show', as: 'restaurante_cita'
   get 'cita/:id/:id_a/:id_r/:bool', to: 'restaurantes#show', as: 'fecha_cita'
   post 'cita', to: 'meet#create', as: 'generar_cita'
+
   get 'aceptar_cita/:mid', to: 'meet#accept', as: 'aceptar_cita'
-  get 'citas/:id', to: 'pages#lista_citas', as: 'lista_citas'
-  get 'citas/:id/:mid', to: 'pages#eliminar_cita', as: 'eliminar_cita'
+  get 'citas', to: 'pages#menu_citas', as: 'menu_citas'
+  get 'citas/1', to: 'pages#lista_citas', as: 'lista_citas'
+  get 'citas/2', to: 'pages#citas_entrantes', as: 'citas_entrantes'
+  get 'citas/3', to: 'pages#citas_salientes', as: 'citas_salientes'
+  get 'citas/:id/:mid/:a', to: 'pages#eliminar_cita', as: 'eliminar_cita'
 
   get 'pages/gustos/:id', to: 'pages#gustos', as: 'add_gustos'
 

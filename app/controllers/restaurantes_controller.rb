@@ -28,6 +28,10 @@ class RestaurantesController < ApplicationController
 
     @swiper_cita_id = params[:id]
     @swiper_citado_id = params[:id_a]
+
+    return unless params[:fav]
+
+    @fav = params[:fav]
   end
 
   def show

@@ -10,10 +10,10 @@ class MeetController < ApplicationController
       @meet = Meet.create meet_params
       if @meet.save
         @swiper_citado = Swiper.find params[:swiper_citado_id]
-        return redirect_to lista_citas_path(@swiper_id), notice: 'Cita agendada'
+        return redirect_to citas_salientes_path(@swiper_id), notice: 'Cita agendada'
       end
     end
-    redirect_to fecha_cita_path(params[:swiper_cita_id], params[:swiper_cita_id],
+    redirect_to fecha_cita_path(params[:swiper_cita_id], params[:swiper_citado_id],
                                 params[:restaurante_id], 1), notice: 'Fecha no válida'
   end
 
