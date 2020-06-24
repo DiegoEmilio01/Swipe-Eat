@@ -123,7 +123,7 @@
               <br>
             
               <div class="field">
-                <%= f.label :imágenes %>
+                <%= f.label :agregar_imágenes %>
                 <%= f.file_field :imagenes, multiple: true %>
               </div>
             
@@ -140,9 +140,9 @@
               </div>
             <% end %>
           </td>
+
           <td>
             <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-              
 
               <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
                 <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
@@ -167,7 +167,7 @@
                 <%= f.password_field :current_password, autocomplete: "current-password" %>
               </div>
 
-              <br><br><br><br><br><br><br><br><br><br><br>
+              <br>
 
               <div class="actions" style="margin-top:13px;">
                 <%= f.submit "Enviar nueva contraseña" %>
@@ -184,8 +184,13 @@
       <thead>
           <tr>
             <th>
-              Editar Imágenes
+              Eliminar Imágenes
             </th>
+          </tr>
+          <tr>
+            <td>
+              <em>(Click para borrar)</em>
+            </td>
           </tr>
           <tr>
               <% (0...current_swiper.imagenes.count).each do |numero| %>
@@ -196,20 +201,12 @@
       <tbody>
           <tr>
               <% current_swiper.imagenes.each do |imagen| %>
-              <td>
+              <td>            
                   <div style="width:200px; height:250px;">
-                    <%= image_tag(imagen, style:'width:180px; heigth: 170px') %>
+                    <%= link_to image_tag(imagen, style:'width:180px; heigth: 170px'), delete_imagen_swiper_path(imagen.id, current_swiper.id), method: :delete, data: {confirm: "¿Estás seguro de querer eliminar esta imagen?"} %>
                   </div>
-              </td>
               <% end %>
           </tr>
-          <tr>
-              <% current_swiper.imagenes.each do |imagen| %>
-              <td>
-                <%= link_to "Remover imagen", delete_imagen_swiper_path(imagen.id, current_swiper.id), method: :delete, data: {confirm: "Are you sure?"} %>
-              </td>
-              <% end %>
-        </tr>
       </tbody>
   </table>
 

@@ -34,11 +34,11 @@
             </div>
         <% end %>
         <div class="field">
-            <%= form.label :imágenes %>
+            <%= form.label :agregar_imágenes %>
             <%= form.file_field :imagenes, multiple: true %>
-        </div>
+        </div><br>
         <div class="actions">
-            <%= form.submit %>
+            <%= form.submit "Enviar datos" %>
         </div>
     <% end %>
 
@@ -46,6 +46,16 @@
 
     <table>
         <thead>
+            <tr>
+                <th>
+                  Eliminar Imágenes
+                </th>
+            </tr>
+            <tr>
+                <td>
+                  <em>(Click para borrar)</em>
+                </td>
+            </tr>
             <tr>
                 <% (0...@restaurante.imagenes.count).each do |numero| %>
                     <th>Imagen <%= numero + 1 %> </th>
@@ -57,15 +67,8 @@
                 <% @restaurante.imagenes.each do |imagen| %>
                 <td>
                     <div style="width:200px; height:300px;">
-                        <%= image_tag(imagen, style:'width:150px; heigth: 100px') %>
+                        <%= link_to image_tag(imagen, style:'width:150px; heigth: 100px'), delete_imagen_restaurante_path(imagen.id, @restaurante.id), method: :delete, data: {confirm: "¿Estás seguro de querer eliminar esta imagen?"} %>
                     </div>
-                </td>
-                <% end %>
-            </tr>
-            <tr>
-                <% @restaurante.imagenes.each do |imagen| %>
-                <td>
-                    <%= link_to "Remover imagen", delete_imagen_restaurante_path(imagen.id, @restaurante.id), method: :delete, data: {confirm: "Are you sure?"} %>
                 </td>
                 <% end %>
             </tr>

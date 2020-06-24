@@ -134,8 +134,13 @@
       <thead>
           <tr>
             <th>
-              Editar Imágenes
+              Eliminar Imágenes
             </th>
+          </tr>
+          <tr>
+            <td>
+              <em>(Click para borrar)</em>
+            </td>
           </tr>
           <tr>
               <% (0...@swiper.imagenes.count).each do |numero| %>
@@ -148,18 +153,11 @@
               <% @swiper.imagenes.each do |imagen| %>
               <td>
                   <div style="width:200px; height:250px;">
-                    <%= image_tag(imagen, style:'width:180px; heigth: 170px') %>
+                    <%= link_to image_tag(imagen, style:'width:180px; heigth: 170px'), delete_imagen_swiper_path(imagen.id, @swiper.id), method: :delete, data: {confirm: "¿Estás seguro de querer eliminar esta imagen?"} %>
                   </div>
               </td>
               <% end %>
           </tr>
-          <tr>
-              <% @swiper.imagenes.each do |imagen| %>
-              <td>
-                <%= link_to "Remover imagen", delete_imagen_swiper_path(imagen.id, @swiper.id), method: :delete, data: {confirm: "Are you sure?"} %>
-              </td>
-              <% end %>
-        </tr>
       </tbody>
   </table>
   
