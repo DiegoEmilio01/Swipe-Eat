@@ -54,6 +54,9 @@ Rails.application.routes.draw do
   get 'pages/swiper_mostrados/:id', to: 'pages#swipers_mostrados', as: 'aceptando'
   get 'pages/swiper_mostrados/:id/aceptar/:id_a', to: 'pages#aceptar', as: 'aceptado'
 
+  get 'add_favorito/:id/:idr', to: 'pages#add_favorito', as: 'add_favorito'
+  get 'delete_favorito/:id/:id_a/:idr', to: 'pages#delete_favorito', as: 'delete_favorito'
+
   get 'cita/:id_a', to: 'pages#choose_restaurante', as: 'menu_cita_restaurante'
   get 'cita/:id/:id_a', to: 'pages#agendar_cita', as: 'agendar_cita'
 
@@ -66,9 +69,11 @@ Rails.application.routes.draw do
 
   get 'aceptar_cita/:mid', to: 'meet#accept', as: 'aceptar_cita'
   get 'citas', to: 'pages#menu_citas', as: 'menu_citas'
+
   get 'citas/1', to: 'pages#lista_citas', as: 'lista_citas'
   get 'citas/2', to: 'pages#citas_entrantes', as: 'citas_entrantes'
   get 'citas/3', to: 'pages#citas_salientes', as: 'citas_salientes'
+
   get 'citas/:id/:mid/:a', to: 'pages#eliminar_cita', as: 'eliminar_cita'
 
   get 'pages/gustos/:id', to: 'pages#gustos', as: 'add_gustos'

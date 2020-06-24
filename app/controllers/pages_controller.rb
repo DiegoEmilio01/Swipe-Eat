@@ -71,9 +71,9 @@ class PagesController < ApplicationController
     meet = Meet.find params[:mid]
     @swiper = Swiper.find params[:id]
     Meet.all.delete(meet)
-    if params[:a] == 1
+    if params[:a] == '1'
       redirect_to lista_citas_path
-    elsif params[:a] == 2
+    elsif params[:a] == '2'
       redirect_to citas_entrantes_path
     else
       redirect_to citas_salientes_path
@@ -98,5 +98,23 @@ class PagesController < ApplicationController
                               contenido: params[:contenido]
     @mensaje.save
     redirect_to mensajes_path(params[:id])
+  end
+
+  def add_favorito
+    @swiper = Swiper.find params[:id]
+    @restaurante = Restaurante.find params[:idr]
+
+    @swiper.favoritos << @restaurante unless @swiper.favoritos.include?(@restaurante)
+
+    redirect_to lista_citas_path
+  end
+
+  def delete_favorito
+    @swiper = Swiper.find params[:id]
+    @restaurante = Restaurante.find params[:idr]
+
+    @swiper.favoritos.delete(@restaurante)
+
+    redirect_to rest_cita_fav_path(params[:id], params[:id_a], params[:idr])
   end
 end

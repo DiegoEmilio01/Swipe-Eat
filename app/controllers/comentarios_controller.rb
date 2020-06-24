@@ -11,16 +11,12 @@ class ComentariosController < ApplicationController
     comentario_params = params.require(:comentario).permit(:contenido, :fecha, :valoracion,
                                                            :restaurante_id, :swiper_id)
     swiper_id = comentario_params['swiper_id']
-    restaurante_id = comentario_params['restaurante_id']                                                       
+    restaurante_id = comentario_params['restaurante_id']
 
-    @comentarios_anteriores = Comentario.where("swiper_id = ? AND restaurante_id = ?",
-                                            comentario_params['swiper_id'],
-                                            comentario_params['restaurante_id'])
-    if @comentarios_anteriores
-      @comentarios_anteriores.each do |comentario|
-        comentario.destroy
-      end
-    end
+    @comentarios_anteriores = Comentario.where('swiper_id = ? AND restaurante_id = ?',
+                                               comentario_params['swiper_id'],
+                                               comentario_params['restaurante_id'])
+    @comentarios_anteriores&.each(&:destroy)
 
     @comentario = Comentario.create(comentario_params)
     if @comentario.save
