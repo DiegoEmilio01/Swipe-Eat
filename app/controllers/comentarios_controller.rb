@@ -10,10 +10,19 @@ class ComentariosController < ApplicationController
   def create
     comentario_params = params.require(:comentario).permit(:contenido, :fecha, :valoracion,
                                                            :restaurante_id, :swiper_id)
-    @comentario = Comentario.create(comentario_params)
-
     swiper_id = comentario_params['swiper_id']
-    restaurante_id = comentario_params['restaurante_id']
+    restaurante_id = comentario_params['restaurante_id']                                                       
+
+    @comentarios_anteriores = Comentario.where("swiper_id = ? AND restaurante_id = ?",
+                                            comentario_params['swiper_id'],
+                                            comentario_params['restaurante_id'])
+    if @comentarios_anteriores
+      @comentarios_anteriores.each do |comentario|
+        comentario.destroy
+      end
+    end
+
+    @comentario = Comentario.create(comentario_params)
     if @comentario.save
       redirect_to lista_citas_path(swiper_id), notice: 'Comentario guardado'
     else
