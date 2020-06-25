@@ -1,0 +1,13 @@
+<% if current_admin %>
+    <div>
+    <p>
+        <strong>Nombre reportado:</strong>
+        <%=  @swiper.nombre %>
+    </p>
+
+    <p>
+        <strong>Contenido:</strong>
+        <%= @reporte.contenido %>
+    </p>
+    </div>
+<% end %>

@@ -27,4 +27,16 @@ class ReportesController < ApplicationController
   def index
     @reportes = Reporte.all
   end
+
+  def show
+    @reporte = Reporte.find params[:id]
+    @swiper = Swiper.find(@reporte.swiper_reportado_id)
+  end
+
+  def destroy
+    @reporte = Reporte.find params[:id]
+    Reporte.all.delete(@reporte)
+
+    redirect_to reportes_path, notice: 'reporte eliminado exitosamente.'
+  end
 end

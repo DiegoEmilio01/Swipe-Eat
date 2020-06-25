@@ -4,7 +4,8 @@
             <thead>
                 <tr>
                     <th>Reportado</th>
-                    <th>Contenido</th>
+                    <th></th>
+                    <th></th>
                     <th></th>
                 </tr>
             </thead>
@@ -14,8 +15,9 @@
                     <% swiper = Swiper.find(reporte.swiper_reportado_id) %>
                     <tr>
                         <td><%= swiper.nombre %></td>
-                        <td><%= reporte.contenido %></td>
+                        <td><%= link_to 'Ver detalles', reporte_path(reporte.id) %></td>
                         <td><%= link_to 'Ver perfil', swiper_path(swiper.id) %></td>
+                        <td><%= link_to 'Eliminar reporte', destroy_reporte_path(reporte.id), method: :delete %></td>
                     </tr>
                 <%end%>
             </tbody>

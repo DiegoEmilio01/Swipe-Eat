@@ -54,6 +54,8 @@ Rails.application.routes.draw do
     post 'admins-filtrados' => 'admins/registrations#filtro'
 
     get 'reportes', to: 'reportes#index', as: 'reportes'
+    get 'reporte/:id', to: 'reportes#show', as: 'reporte'
+    delete 'reporte/:id', to: 'reportes#destroy', as: 'destroy_reporte'
   end
 
   ### RUTAS NAVEGACION SWIPER(HOME)###
