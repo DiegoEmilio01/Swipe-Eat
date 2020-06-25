@@ -23,9 +23,14 @@ Rails.application.routes.draw do
   devise_scope :swiper do
     get 'swiper_root' => 'swipers/registrations#index', as: 'swiper_root' # cambiar
     get 'swipers' => 'swipers/registrations#index', as: 'lista_swipers'
+
     get 'swipers/:id' => 'swipers/registrations#show', as: 'swiper'
     get 'swipers/lista_matchs/:id' => 'pages#lista_matchs', as: 'lista_matchs'
     get 'swipers/:id/lista_matchs/:id_d' => 'pages#eliminar_match', as: 'eliminar_match'
+
+    get 'swipers/reportar/:id_a' => 'reportes#new', as: 'reportar_swiper'
+    post 'swipers/reportar' => 'reportes#create', as: 'create_reporte_swiper'
+
     get 'swipers/:id/edit', to: 'swipers/registrations#edit_admin', as: 'admin_edit_swiper'
     patch 'swipers/:id', to: 'swipers/registrations#update_admin'
     delete 'swipers/:id', to: 'swipers/registrations#destroy_admin'

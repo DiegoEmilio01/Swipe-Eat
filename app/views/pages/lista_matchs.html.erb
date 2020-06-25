@@ -6,6 +6,7 @@
    <th></th>
    <th></th>
    <th></th>
+   <th></th>
    <th>Foto</th>
   </thead>
   <tbody>
@@ -15,8 +16,13 @@
         <td><%= swiper.edad %> años</td>
         <td><%= link_to 'Ir al perfil', swiper_path(swiper.id)%></td>
         <td><%= link_to 'Ir al chat', mensajes_path(swiper.id)%></td>
-        <td><%= link_to 'Eliminar match', eliminar_match_path(@swiper.id, swiper.id) %></td>
         <td><%= link_to 'Agendar cita', menu_cita_restaurante_path(swiper.id) %></td>
+        <td><%= link_to 'Eliminar match', eliminar_match_path(@swiper.id, swiper.id) %></td>
+        <% if @swiper.reportes.where(swiper_reportado_id: swiper.id).empty? %>
+          <td><%= link_to 'Reportar swiper', reportar_swiper_path(swiper.id) %></td>
+        <% else %>
+          <td></td>
+        <% end %>
         <% i = 0 %>
         <% swiper.imagenes.each do |imagen| %>
           <% if (i == 0) %>
