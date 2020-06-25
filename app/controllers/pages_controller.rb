@@ -10,10 +10,12 @@ class PagesController < ApplicationController
     @swipers_all.each do |swiper_all|
       added = false
       swiper_all.gustos.each do |gusto|
-        if @swiper.gustos.include?(gusto) && !added && !@swiper.aceptados.include?(swiper_all)
-          @swipers_recomendados << swiper_all unless @swiper == swiper_all
-          added = true
-        end
+        next unless @swiper.gustos.include?(gusto) && !added && \
+                    !@swiper.aceptados.include?(swiper_all) && \
+                    !@swiper.bloqueados.include?(swiper_all)
+
+        @swipers_recomendados << swiper_all unless @swiper == swiper_all
+        added = true
       end
 
       # if !added && (@swiper.comuna == swiper_all.comuna) &&

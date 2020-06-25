@@ -6,7 +6,6 @@ Rails.application.routes.draw do
                                      registrations: 'owners/registrations' }
   # Rutas adicionales de owner
   devise_scope :owner do
-
     get 'owners_root' => 'owners/sessions#menu', as: 'owner_root'
     get 'owners' => 'owners/registrations#index', as: 'lista_owners'
     get 'owners/:id' => 'owners/registrations#show', as: 'owner'
