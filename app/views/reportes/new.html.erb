@@ -1,0 +1,21 @@
+<h1>Generando reporte</h1>
+    <%= form_with(model: @reporte, local: true, method: :post, url: create_reporte_swiper_path) do |form| %>
+        <div class="field">
+            <%= form.label :contenido %>
+            <%= form.text_field :contenido %>
+        </div>
+        
+        <div class='field'>
+            <%= form.hidden_field :swiper_reporta_id, :value => current_swiper.id %>
+        </div>
+
+        <div class='field'>
+            <%= form.hidden_field :swiper_reportado_id, :value => @swiper_reportado_id %>
+        </div>
+
+        <div class="actions">
+            <%= form.submit "Reportar" %>
+        </div>
+
+        <% end %>
+    <br>

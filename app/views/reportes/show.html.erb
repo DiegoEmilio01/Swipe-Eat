@@ -1,0 +1,16 @@
+<% if current_admin %>
+    <div>
+    <p>
+        <strong>Nombre reportado:</strong>
+        <%=  @swiper.nombre %>
+    </p>
+
+    <p>
+        <strong>Contenido:</strong>
+        <%= @reporte.contenido %>
+    </p><br><br>
+
+    <%= link_to 'Ver perfil swiper', swiper_path(@swiper.id) %><br><br>
+    <%= link_to 'Eliminar reporte', destroy_reporte_path(@reporte.id), method: :delete %>
+    </div>
+<% end %>

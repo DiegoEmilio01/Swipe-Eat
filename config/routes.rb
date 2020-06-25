@@ -6,7 +6,6 @@ Rails.application.routes.draw do
                                      registrations: 'owners/registrations' }
   # Rutas adicionales de owner
   devise_scope :owner do
-
     get 'owners_root' => 'owners/sessions#menu', as: 'owner_root'
     get 'owners' => 'owners/registrations#index', as: 'lista_owners'
     get 'owners/:id' => 'owners/registrations#show', as: 'owner'
@@ -23,9 +22,14 @@ Rails.application.routes.draw do
   devise_scope :swiper do
     get 'swiper_root' => 'pages#home', as: 'swiper_root'
     get 'swipers' => 'swipers/registrations#index', as: 'lista_swipers'
+
     get 'swipers/:id' => 'swipers/registrations#show', as: 'swiper'
     get 'swipers/lista_matchs/:id' => 'pages#lista_matchs', as: 'lista_matchs'
     get 'swipers/:id/lista_matchs/:id_d' => 'pages#eliminar_match', as: 'eliminar_match'
+
+    get 'swipers/reportar/:id_a' => 'reportes#new', as: 'reportar_swiper'
+    post 'swipers/reportar' => 'reportes#create', as: 'create_reporte_swiper'
+
     get 'swipers/:id/edit', to: 'swipers/registrations#edit_admin', as: 'admin_edit_swiper'
     patch 'swipers/:id', to: 'swipers/registrations#update_admin'
     delete 'swipers/:id', to: 'swipers/registrations#destroy_admin'
@@ -48,6 +52,10 @@ Rails.application.routes.draw do
     patch 'admins/:id', to: 'admins/registrations#update_admin'
     delete 'admins/:id', to: 'admins/registrations#destroy_admin'
     post 'admins-filtrados' => 'admins/registrations#filtro'
+
+    get 'reportes', to: 'reportes#index', as: 'reportes'
+    get 'reporte/:id', to: 'reportes#show', as: 'reporte'
+    delete 'reporte/:id', to: 'reportes#destroy', as: 'destroy_reporte'
   end
 
   ### RUTAS NAVEGACION SWIPER(HOME)###

@@ -2,88 +2,120 @@
   <p id="notice"><%= notice %></p>
 
   <h1>Restaurantes</h1>
+  <% if current_swiper %>
+    <h4> En comunas sin cuarentena </h4>
+  <% end %>
 
   <h3 style="margin: 0px; margin-bottom: -17px;"> Ordenar por: </h3>
-  <table>
-      <tbody>
-          <tr>
-              <td>
-                  <%= form_tag(controller: 'restaurantes', action: "filtro", method: "post") do %>
-                      <% if @swiper_cita_id && @swiper_citado_id %>
-                        <div class="field">
-                          <%= hidden_field_tag(:id, @swiper_cita_id) %>
-                        </div>
-                        <div class="field">
-                          <%= hidden_field_tag(:id_a, @swiper_citado_id) %>
-                        </div>
-                      <% end %>
-                      <div class="field">
-                          <%= hidden_field_tag(:filtro, "o_nombre") %><br>
-                      </div>
-                      <div class="actions">
-                          <%= submit_tag("Nombre") %><br><br>
-                      </div>
-                  <% end %>
-              </td>
-          </tr>
-      </tbody>
-  </table>
-
-  <table>
-    <thead>
-    <tr>
-      <th>Filtrar por nombre</th>
-      <th></th>
-      <th>Filtrar por comuna</th>
-      <th></th>
-    </tr>
-    </thead>
-    <tbody>
-
-    <tr>
-      <td>
-        <%= form_tag(controller: 'restaurantes', action: "filtro", method: "post") do %>
-          <div class="field">
-            <%= text_field_tag(:input) %>
-          </div>
-          <div class="field">
-            <%= hidden_field_tag(:filtro, "nombre") %><br>
-          </div>
-          </td>
-          <td style="width: 10vw">
-            <div class="actions">
-              <%= submit_tag("Filtrar") %><br><br>
-            </div>
-          </td>
-        <% end %>
+  <div class="row">
+    <div class="col-md-4 align-middle" >
+      <table>
+        <tbody>
         <td>
           <%= form_tag(controller: 'restaurantes', action: "filtro", method: "post") do %>
-            <div class="field">
-              <%= select_tag(:input, options_from_collection_for_select(Comuna.all, :id, :nombre))%>
-            </div>
-            <div class="field">
-              <%= hidden_field_tag(:filtro, "comuna") %><br>
-            </div>
-
-            </td>
-            <td>
-              <div class="actions">
-                <%= submit_tag("Filtrar") %><br><br>
+            <% if @swiper_cita_id && @swiper_citado_id %>
+              <div class="field">
+                <%= hidden_field_tag(:id, @swiper_cita_id) %>
               </div>
-            </td>
+              <div class="field">
+                <%= hidden_field_tag(:id_a, @swiper_citado_id) %>
+              </div>
+            <% end %>
+            <div class="field">
+              <%= hidden_field_tag(:filtro, "o_nombre") %><br>
+            </div>
+            <div class="actions">
+              <%= submit_tag("Nombre") %><br><br>
+            </div>
           <% end %>
-          </tr>
+        </td>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-4 align-middle">
+      <table>
+        <thead>
+        <tr>
+          <th>Filtrar por nombre</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>
+            <%= form_tag(controller: 'restaurantes', action: "filtro", method: "post") do %>
+              <% if @swiper_cita_id && @swiper_citado_id %>
+                <div class="field">
+                  <%= hidden_field_tag(:id, @swiper_cita_id) %>
+                </div>
+                <div class="field">
+                  <%= hidden_field_tag(:id_a, @swiper_citado_id) %>
+                </div>
+              <% end %>
+              <div class="field">
+                <%= text_field_tag(:input) %>
+              </div>
+              <div class="field">
+                <%= hidden_field_tag(:filtro, "nombre") %>
+              </div><br>
 
-    </tbody>
-  </table>
-
+              </td>
+              <td>
+                <div class="actions">
+                  <%= submit_tag("Filtrar") %><br><br>
+                </div>
+            <% end %>
+            </td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-4 align-middle" >
+      <table>
+        <thead>
+        <tr>
+          <th>Filtrar por comuna</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>
+            <%= form_tag(controller: 'restaurantes', action: "filtro", method: "post") do %>
+              <% if @swiper_cita_id && @swiper_citado_id %>
+                <div class="field">
+                  <%= hidden_field_tag(:id, @swiper_cita_id) %>
+                </div>
+                <div class="field">
+                  <%= hidden_field_tag(:id_a, @swiper_citado_id) %>
+                </div>
+              <% end %>
+              <div class="field">
+                <%= select_tag(:input, options_from_collection_for_select(Comuna.all, :id, :nombre))%>
+              </div>
+              <div class="field">
+                <%= hidden_field_tag(:filtro, "comuna") %><br>
+              </div>
+              </td>
+              <td>
+                <div class="actions">
+                  <%= submit_tag("Filtrar") %><br><br>
+                </div>
+            <% end %>
+            </td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
   <table class="table">
     <thead>
-    <th>Nombre</th>
-    <th>Comuna</th>
+    <tr>
+      <th>Nombre</th>
+      <th>Comuna</th>
+    </tr>
     </thead>
-    <tbody>
 
+    <tbody>
     <% @filtrados.each do |restaurante| %>
       <tr>
         <td><%= restaurante.nombre %></td>
@@ -93,23 +125,14 @@
         <% else %>
           <td><%= link_to 'Ver detalles', restaurante_path(restaurante.id) %></td>
         <% end %>
-        <% i = 0 %>
-        <% restaurante.imagenes.each do |imagen| %>
-          <% if (i == 0) %>
-            <td><%= image_tag(imagen, style:'width:200px; heigth: 100px') %></td>
-          <% end %>
-          <% i += 1 %>
-        <% end %>
       </tr>
     <% end %>
-
     </tbody>
   </table>
-
   <br>
-
-<% if current_admin %>
-  <%= link_to 'Volver a la lista de acciones disponibles.', admin_root_path %>
-<% end %>
-
-
+  <% if current_owner #esto debe sacarse después a owner %>
+    <%= link_to 'Crear Restaurante', restaurantes_new_path %><br><br>
+  <% end %>
+  <% if current_admin %>
+    <%= link_to 'Volver a la lista de acciones disponibles.', admin_root_path %><br>
+  <% end %>
