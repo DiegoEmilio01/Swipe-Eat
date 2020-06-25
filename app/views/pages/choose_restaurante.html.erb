@@ -1,8 +1,12 @@
-<br><br><br><br><br><br><br><br>
-<div class="row text-center">
+<% if current_swiper %>
+  <br><br><br><br><br><br><br><br>
+  <div class="row text-center">
     <div class="col-md-4 tall-content align-middle" ></div>
     <div class="col-md-4 tall-content align-middle">
       <div class="row"><%= link_to "Restaurantes favoritos", rest_cita_fav_path(current_swiper.id, @citado_id, 1), :class => "btn btn-primary btn-menu" %></div><br><br>
       <div class="row"><%= link_to "Navegar restaurantes", agendar_cita_path(current_swiper.id, @citado_id) , :class => "btn btn-primary btn-menu"%></div>
     <div class="col-md-4 tall-content align-middle" ></div>
   </div>
+<% else %>
+  <% controller.redirect_to new_swiper_session_path %>
+<% end %>

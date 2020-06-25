@@ -91,5 +91,5 @@
 
   <%= link_to 'Volver a la lista de acciones disponibles', admin_root_path %>
 <% else %>
-  <% controller.redirect_to new_admin_session_path, notice: 'No tienes permiso para ingresar a la página que intentaste acceder.' %>
+  <% controller.redirect_to new_admin_session_path %>
 <% end%>

@@ -29,5 +29,5 @@
   <br>
   <%= link_to 'Atrás', gusto_path(@gusto.id) %>
 <% else %>
-  <% controller.redirect_to new_admin_session_path, notice: 'No tienes permiso para ingresar a la página que intentaste acceder.' %>
+  <% controller.redirect_to new_admin_session_path %>
 <% end %>

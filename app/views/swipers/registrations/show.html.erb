@@ -1,7 +1,5 @@
 <% if current_admin or current_swiper %>
-
   <div class="row" >
-
     <div class="col-md-7">
       <div class="row text-left tall-tittle">
         <h1>Perfil</h1>
@@ -84,7 +82,6 @@
     </div>
   </div>
 
-
 <% else %>
-    <% controller.redirect_to new_admin_session_path, notice: 'No tienes permiso para ingresar a la página que intentaste acceder.' %>
+    <% controller.redirect_to new_swiper_session_path %>
 <% end %>

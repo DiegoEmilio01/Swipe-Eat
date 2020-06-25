@@ -14,9 +14,24 @@
       <div class="container nopadding">
         <div class="row">
           <div class="col-md-4 col-10 linkable text-center">
-            <%= link_to(home_root_path, :class => "titulo") do %>
-              <h1 class="bigbig">Swipe-eat</h1>
-            <%end %>
+            <% if current_admin %>
+              <%= link_to(admin_root_path, :class => "titulo") do %>
+                <h1 class="bigbig">Swipe-eat</h1>
+              <%end %>
+            <% elsif current_swiper %>
+              <%= link_to(swiper_root_path, :class => "titulo") do %>
+                <h1 class="bigbig">Swipe-eat</h1>
+              <%end %>
+            <% elsif current_owner %>
+              <%= link_to(owner_root_path, :class => "titulo") do %>
+                <h1 class="bigbig">Swipe-eat</h1>
+              <%end %>
+            <% else %>
+              <%= link_to(home_root_path, :class => "titulo") do %>
+                <h1 class="bigbig">Swipe-eat</h1>
+              <%end %>
+            <% end %>
+            
           </div>
           <div class="col-md-4"></div>
           <div class="col-md-4 text-right">

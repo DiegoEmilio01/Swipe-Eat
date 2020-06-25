@@ -1,4 +1,5 @@
-<div class="row text-center">
+<% if current_swiper %>
+  <div class="row text-center">
     <div class="col-md-4 tall-content align-middle" ></div>
     <div class="col-md-4 tall-content align-middle">
       <div class="row"><%= link_to "Citas agendadas", lista_citas_path, :class => "btn btn-primary btn-menu" %></div>
@@ -13,3 +14,6 @@
   </div>
   <div class="row">
   </div>
+<% else %>
+  <% controller.redirect_to new_swiper_session_path %>
+<% end %>
