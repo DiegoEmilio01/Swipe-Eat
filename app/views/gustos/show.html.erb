@@ -13,5 +13,5 @@
   <%= link_to "Editar gusto", edit_gusto_path %><br><br>
   <%= link_to "Eliminar gusto", gusto_path(@gusto.id), method: :delete, data: {confirm: '¿Estás seguro?'}%>
 <% else %>
-  <% controller.redirect_to new_admin_session_path, notice: 'No tienes permiso para ingresar a la página que intentaste acceder.' %>
+  <% controller.redirect_to new_admin_session_path %>
 <% end %>

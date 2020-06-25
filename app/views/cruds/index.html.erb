@@ -21,5 +21,5 @@
     <div class="col-md-3 tall-content align-middle" ></div>
   </div>
 <% else %>
-    <% controller.redirect_to new_admin_session_path, notice: 'No tienes permiso para ingresar a la página que intentaste acceder.' %>
+    <% controller.redirect_to new_admin_session_path %>
 <% end %>

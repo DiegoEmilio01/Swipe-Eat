@@ -1,43 +1,47 @@
-<table class="table">
-  <thead>
-   <th>Nombre</th>
-   <th>Edad</th>
-   <th></th>
-   <th></th>
-   <th></th>
-   <th></th>
-   <th></th>
-   <th>Foto</th>
-  </thead>
-  <tbody>
-    <% @swiper.matchs.each do |swiper| %>
-      <tr>
-        <td><%= swiper.nombre %></td>
-        <td><%= swiper.edad %> años</td>
-        <td><%= link_to 'Ir al perfil', swiper_path(swiper.id)%></td>
-        <td><%= link_to 'Ir al chat', mensajes_path(swiper.id)%></td>
-        <td><%= link_to 'Agendar cita', menu_cita_restaurante_path(swiper.id) %></td>
-        <td><%= link_to 'Eliminar match', eliminar_match_path(@swiper.id, swiper.id) %></td>
-        <% if @swiper.reportes.where(swiper_reportado_id: swiper.id).empty? %>
-          <td><%= link_to 'Reportar swiper', reportar_swiper_path(swiper.id) %></td>
-        <% else %>
-          <td></td>
-        <% end %>
-        <% i = 0 %>
-        <% swiper.imagenes.each do |imagen| %>
-          <% if (i == 0) %>
-            <td><%= image_tag(imagen, style:'width:200px; heigth: 100px') %></td>
+<% if current_swiper %>
+  <table class="table">
+    <thead>
+     <th>Nombre</th>
+     <th>Edad</th>
+     <th></th>
+     <th></th>
+     <th></th>
+     <th></th>
+     <th></th>
+     <th>Foto</th>
+    </thead>
+    <tbody>
+      <% @swiper.matchs.each do |swiper| %>
+        <tr>
+          <td><%= swiper.nombre %></td>
+          <td><%= swiper.edad %> años</td>
+          <td><%= link_to 'Ir al perfil', swiper_path(swiper.id)%></td>
+          <td><%= link_to 'Ir al chat', mensajes_path(swiper.id)%></td>
+          <td><%= link_to 'Agendar cita', menu_cita_restaurante_path(swiper.id) %></td>
+          <td><%= link_to 'Eliminar match', eliminar_match_path(@swiper.id, swiper.id) %></td>
+          <% if @swiper.reportes.where(swiper_reportado_id: swiper.id).empty? %>
+            <td><%= link_to 'Reportar swiper', reportar_swiper_path(swiper.id) %></td>
+          <% else %>
+            <td></td>
           <% end %>
-          <% i += 1 %>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<br><br>
-<div class="row text-center">
-  <div class="col-md-4 tall-content align-middle" ></div>
-  <div class="col-md-4 tall-content align-middle">
-    <div class="row"><%= link_to "Home", home_root_path(current_swiper.id), :class => "btn btn-primary btn-menu" %></div>
-  <div class="col-md-4 tall-content align-middle" ></div>
-</div>
+          <% i = 0 %>
+          <% swiper.imagenes.each do |imagen| %>
+            <% if (i == 0) %>
+              <td><%= image_tag(imagen, style:'width:200px; heigth: 100px') %></td>
+            <% end %>
+            <% i += 1 %>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <br><br>
+  <div class="row text-center">
+    <div class="col-md-4 tall-content align-middle" ></div>
+    <div class="col-md-4 tall-content align-middle">
+      <div class="row"><%= link_to "Home", home_root_path(current_swiper.id), :class => "btn btn-primary btn-menu" %></div>
+    <div class="col-md-4 tall-content align-middle" ></div>
+  </div>
+<% else %>
+  <% controller.redirect_to new_swiper_session_path %>
+<% end %>

@@ -20,7 +20,7 @@ Rails.application.routes.draw do
                                       registrations: 'swipers/registrations' }
   # Rutas adicionales de swipers
   devise_scope :swiper do
-    get 'swiper_root' => 'swipers/registrations#index', as: 'swiper_root' # cambiar
+    get 'swiper_root' => 'pages#home', as: 'swiper_root'
     get 'swipers' => 'swipers/registrations#index', as: 'lista_swipers'
 
     get 'swipers/:id' => 'swipers/registrations#show', as: 'swiper'

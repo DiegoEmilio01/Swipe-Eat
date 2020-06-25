@@ -49,5 +49,5 @@
 
     <%= link_to "Volver a Matches", lista_matchs_path(current_swiper.id) %>
 <% else %>
-  <% controller.redirect_to new_swiper_session_path, notice: 'No tienes permiso para ingresar a la página que intentaste acceder.' %>
+  <% controller.redirect_to new_swiper_session_path %>
 <% end %>

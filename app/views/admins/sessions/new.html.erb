@@ -1,47 +1,56 @@
-<div class="row text-center tall-tittle">
-  <h2 class="big">Log in</h2> <!--chequear tamaño-->
-  <p id="notice"><%= notice %></p>
-</div>
-<div class="row text-left">
-  <div class="col-md-4 tall-content align-middle"></div>
-  <div class="col-md-4 tall-content align-middle" >
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <div class="row">
-        <div class="field big">
-          <%= f.label :email %><br />
-          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-        </div>
-      </div>
-
-
-      <div class="row">
-        <div class="field big">
-          <%= f.label :password %><br />
-          <%= f.password_field :password, autocomplete: "current-password" %>
-        </div>
-      </div>
-
-
-      <div class="row">
-        <% if devise_mapping.rememberable? %>
-          <div class="field small">
-            <%= f.check_box :remember_me, :class => 'checkbox'%>
-            <%= f.label :remember_me %>
+<% if (not current_admin) && (not current_owner) && (not current_swiper) %>
+  <div class="row text-center tall-tittle">
+    <h2 class="big">Log in</h2> <!--chequear tamaño-->
+    <p id="notice"><%= notice %></p>
+  </div>
+  <div class="row text-left">
+    <div class="col-md-4 tall-content align-middle"></div>
+    <div class="col-md-4 tall-content align-middle" >
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="row">
+          <div class="field big">
+            <%= f.label :email %><br />
+            <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
           </div>
-        <% end %>
-      </div>
-
-
-      <div class="row">
-        <div class="actions">
-          <%= f.submit "Log in", :class => 'btn btn-primary' %>
         </div>
-      </div>
 
-    <% end %>
-    <div class="row small"><%= render "admins/shared/links" %></div>
 
+        <div class="row">
+          <div class="field big">
+            <%= f.label :password %><br />
+            <%= f.password_field :password, autocomplete: "current-password" %>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <% if devise_mapping.rememberable? %>
+            <div class="field small">
+              <%= f.check_box :remember_me, :class => 'checkbox'%>
+              <%= f.label :remember_me %>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="row">
+          <div class="actions">
+            <%= f.submit "Log in", :class => 'btn btn-primary' %>
+          </div>
+        </div>
+
+      <% end %>
+      <div class="row small"><%= render "admins/shared/links" %></div>
+
+    </div>
+    <div class="col-md-4 tall-content align-middle">
+    </div>
   </div>
-  <div class="col-md-4 tall-content align-middle">
-  </div>
-</div>
+<% else %>
+  <% if current_admin %>
+    <% controller.redirect_to admin_root_path %>
+  <% elsif current_swiper %>
+    <% controller.redirect_to swiper_root_path %>
+  <% elsif current_owner %>
+    <% controller.redirect_to owner_root_path %>
+  <% end %>
+<% end %>
