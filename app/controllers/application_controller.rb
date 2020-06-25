@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
       home_root_path
     elsif resource.class == Admin
       admin_root_path
+    elsif resource.class == Owner
+      owner_root_path
     end
   end
 end

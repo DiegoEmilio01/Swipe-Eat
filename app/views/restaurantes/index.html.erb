@@ -1,10 +1,12 @@
-<% if current_admin or current_swiper %>
+
   <p id="notice"><%= notice %></p>
 
 <% if @fav %>
   <h1>Restaurantes favoritos</h1>
 <% else %>
   <h1>Restaurantes</h1>
+
+
 <% end %>
 <% if (@fav) %>
   <table>
@@ -15,9 +17,12 @@
         <th></th>
         <th></th>
       </tr>
-    </thead>
 
+    </thead>
     <tbody>
+
+
+
       <% current_swiper.favoritos.each do |restaurante| %>
         <tr>
           <td><%= restaurante.nombre %></td>
@@ -30,9 +35,13 @@
           <% end %>
           <td><%= link_to 'Quitar de favoritos', delete_favorito_path(current_swiper.id, @swiper_citado_id, restaurante.id) %></td>
         </tr>
+
       <% end %>
+    </tr>
     </tbody>
   </table>
+
+
 
 <% else %>
 <% if current_swiper %>
@@ -148,6 +157,7 @@
         <td><%= restaurante.nombre %></td>
         <td><%= restaurante.comuna.nombre %></td>
         <% if @swiper_cita_id && @swiper_citado_id %>
+
           <td><%= link_to 'Ver detalles para agendar una cita', restaurante_cita_path(@swiper_cita_id, @swiper_citado_id, restaurante.id) %></td>
         <% else %>
           <td><%= link_to 'Ver detalles', restaurante_path(restaurante.id) %></td>
@@ -159,13 +169,10 @@
 <% end %>
   <br><br>
 
+
+
+
   <br>
-  <% if current_owner #esto debe sacarse después a owner %>
-    <%= link_to 'Crear Restaurante', restaurantes_new_path %><br><br>
-  <% end %>
-  <% if current_admin %>
-    <%= link_to 'Volver a la lista de acciones disponibles.', admin_root_path %><br>
-  <% end %>
-<% else %>
-  <% controller.redirect_to new_admin_session_path, notice: 'No tienes permiso para ingresar a la página que intentaste acceder.' %>
+<% if current_admin %>
+  <%= link_to 'Volver a la lista de acciones disponibles.', admin_root_path %>
 <% end %>

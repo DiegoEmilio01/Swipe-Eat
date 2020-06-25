@@ -11,9 +11,9 @@ class RestaurantesController < ApplicationController
     restaurante_params['owner_id'] = current_owner.id
     @restaurante = Restaurante.create restaurante_params
     if @restaurante.save
-      redirect_to restaurantes_new_path, notice: 'Guardado' # ARREGlAR DESPUES
+      redirect_to owner_root_path, notice: 'Guardado' # ARREGlAR DESPUES
     else
-      redirect_to restaurantes_new_path, notice: @restaurante.errors
+      redirect_to restaurante_new_path, notice: @restaurante.errors
     end
   end
 
@@ -66,7 +66,11 @@ class RestaurantesController < ApplicationController
   def destroy
     @restaurante = Restaurante.find params[:id]
     @restaurante.destroy
-    redirect_to lista_restaurantes_path, notice: 'Restaurante eliminado exitosamente.'
+    if current_admin
+      redirect_to lista_restaurantes_path, notice: 'Restaurante eliminado exitosamente.'
+    else
+      redirect_to owner_root_path, notice: 'Restaurante eliminado exitosamente.'
+    end
   end
 
   def delete_imagen
