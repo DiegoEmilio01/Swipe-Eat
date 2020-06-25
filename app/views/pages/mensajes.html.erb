@@ -1,0 +1,53 @@
+<% if current_swiper %>
+    <p id="notice"><%= notice %></p> 
+
+    <h1>Chat con <%= @destinatario.nombre %></h1>
+
+    <div style="height:150px;overflow:auto;display:flex;flex-direction:column-reverse;">
+        <table class="table">
+            <tbody>
+                <% @mensajes.each do |mensaje| %>
+                    <tr>
+                        <td>
+                            <% if mensaje.swiper_origen_id == current_swiper.id %>
+                                <%= current_swiper.nombre %>
+                            <% else %>
+                                <%= @destinatario.nombre %>
+                            <% end %>
+                        </td>
+                        <td>
+                            <%= mensaje.contenido %>
+                        </td>
+                        <td>
+                            <%= mensaje.created_at.to_formatted_s(:short) %>
+                        </td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+    <table>
+        <tr>
+            <%= form_tag(controller: 'pages', action: "crear_mensaje", method: "post") do %>
+                <div class="field">
+                    <td>
+                        <%= text_field_tag(:contenido) %>
+                    </td>
+                </div>
+                <div class="field">
+                    <%= hidden_field_tag(:id, @destinatario.id) %>
+                </div>
+                <div class="actions">
+                    <td>
+                        <%= submit_tag("Enviar") %>
+                    </td>
+                </div>
+            <% end %>
+        </tr>
+    </table>
+    
+
+    <%= link_to "Volver a Matches", lista_matchs_path(current_swiper.id) %>
+<% else %>
+  <% controller.redirect_to new_swiper_session_path, notice: 'No tienes permiso para ingresar a la página que intentaste acceder.' %>
+<% end %>

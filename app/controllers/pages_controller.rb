@@ -50,11 +50,15 @@ class PagesController < ApplicationController
     redirect_to lista_matchs_path(@swiper.id)
   end
 
+  def choose_restaurante
+    @citado_id = params[:id_a]
+  end
+
   def agendar_cita
     @swiper = Swiper.find params[:id]
     @citado = Swiper.find params[:id_a]
 
-    redirect_to restaurantes_cita_path(@swiper.id, @citado.id)
+    redirect_to restaurantes_cita_path(@swiper.id, @citado.id, 0)
   end
 
   def agendar_fecha
@@ -63,15 +67,54 @@ class PagesController < ApplicationController
     @restaurante = Restaurante.find params[:id_r]
   end
 
-  def lista_citas
-    @swiper = Swiper.find params[:id]
-  end
-
   def eliminar_cita
     meet = Meet.find params[:mid]
     @swiper = Swiper.find params[:id]
     Meet.all.delete(meet)
+    if params[:a] == '1'
+      redirect_to lista_citas_path
+    elsif params[:a] == '2'
+      redirect_to citas_entrantes_path
+    else
+      redirect_to citas_salientes_path
+    end
+  end
 
-    redirect_to lista_citas_path(@swiper.id)
+  def mensajes
+    @mensajes = Mensaje.where('swiper_origen_id = ? AND '\
+                              'swiper_destino_id = ?',
+                              params[:id], current_swiper.id).or(Mensaje.where(
+                                                                   'swiper_destino_id = ? AND '\
+                                                                   'swiper_origen_id = ?',
+                                                                   params[:id], current_swiper.id
+                                                                 ))
+    @mensajes = @mensajes.order(:created_at)
+    @destinatario = Swiper.find(params[:id])
+  end
+
+  def crear_mensaje
+    @mensaje = Mensaje.create swiper_origen_id: current_swiper.id,
+                              swiper_destino_id: params[:id],
+                              contenido: params[:contenido]
+    @mensaje.save
+    redirect_to mensajes_path(params[:id])
+  end
+
+  def add_favorito
+    @swiper = Swiper.find params[:id]
+    @restaurante = Restaurante.find params[:idr]
+
+    @swiper.favoritos << @restaurante unless @swiper.favoritos.include?(@restaurante)
+
+    redirect_to lista_citas_path
+  end
+
+  def delete_favorito
+    @swiper = Swiper.find params[:id]
+    @restaurante = Restaurante.find params[:idr]
+
+    @swiper.favoritos.delete(@restaurante)
+
+    redirect_to rest_cita_fav_path(params[:id], params[:id_a], params[:idr])
   end
 end

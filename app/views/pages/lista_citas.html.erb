@@ -1,4 +1,4 @@
-<h2>Citas agendadas</h2>
+<h2 style="text-align: center;">Citas agendadas</h2><br><br>
 <table class="table">
     <thead>
      <th>Nombre</th>
@@ -7,21 +7,22 @@
      <th>Fecha</th>
      <th></th>
      <th></th>
-     <th>Foto</th>
      <th></th>
+     <th></th>
+     <th>Foto</th>
     </thead>
     <tbody>
-      <% meets = Meet.where(swiper_citado_id: @swiper.id).or(Meet.where(swiper_cita_id: @swiper.id)) %>
+      <% meets = Meet.where(swiper_citado_id: current_swiper.id).or(Meet.where(swiper_cita_id: current_swiper.id)) %>
       <% meets.each do |meet| %>
         <% if meet.estado %>
           <tr>
-            <% if meet.swiper_cita_id == @swiper.id %>
+            <% if meet.swiper_cita_id == current_swiper.id %>
               <td><%= meet.swiper_citado.nombre %></td>
               <td><%= meet.swiper_citado.edad %> años</td>
               <td><%= meet.restaurante.nombre %></td>
-              <td><%= meet.fecha %></td>
+              <td><%= meet.fecha.to_formatted_s(:short) %></td>
               <td><%= link_to 'Ir al perfil', swiper_path(meet.swiper_citado.id)%></td>
-              <td><%= link_to 'Eliminar cita', eliminar_cita_path(@swiper.id, meet.id) %></td>
+              <td><%= link_to 'Eliminar cita', eliminar_cita_path(current_swiper.id, meet.id, 1) %></td>
               <% i = 0 %>
               <% meet.swiper_citado.imagenes.each do |imagen| %>
                 <% if (i == 0) %>
@@ -33,9 +34,21 @@
               <td><%= meet.swiper_cita.nombre %></td>
               <td><%= meet.swiper_cita.edad %> años</td>
               <td><%= meet.restaurante.nombre %></td>
-              <td><%= meet.fecha %></td>
+              <td><%= meet.fecha.to_formatted_s(:short) %></td>
               <td><%= link_to 'Ir al perfil', swiper_path(meet.swiper_cita.id)%></td>
-              <td><%= link_to 'Eliminar cita', eliminar_cita_path(@swiper.id, meet.id) %></td>
+              <td><%= link_to 'Eliminar cita', eliminar_cita_path(current_swiper.id, meet.id, 1) %></td>
+              <% if meet.fecha < DateTime.now %>
+                <td><%= link_to 'Comentar local de cita', comentar_restaurante_path(current_swiper.id, meet.restaurante.id) %></td>
+                <td>
+                  <% if current_swiper.favoritos.include?(Restaurante.find(meet.restaurante.id)) %>
+                    <%= "En favoritos" %>
+                  <% elsif  %>
+                    <%= link_to 'Añadir a favoritos', add_favorito_path(current_swiper.id, meet.restaurante.id) %>
+                  <% end %>
+                </td>
+              <% else %>
+                <td> </td>
+              <% end %>
               <% i = 0 %>
               <% meet.swiper_cita.imagenes.each do |imagen| %>
                 <% if (i == 0) %>
@@ -44,85 +57,16 @@
               <% i += 1 %>
               <% end %>
             <% end %>
-            <% if meet.fecha < DateTime.now %>
-              <td><%= link_to 'Comentar local de cita', comentar_restaurante_path(@swiper.id, meet.restaurante.id) %></td>
-            <% end %>
           </tr>
         <% end %>
       <% end %>
     </tbody>
   </table>
   
-<h2>Citas esperando respuesta</h2>
-<table class="table">
-    <thead>
-     <th>Nombre</th>
-     <th>Edad</th>
-     <th>Restaurante</th>
-     <th>Fecha</th>
-     <th></th>
-     <th></th>
-     <th></th>
-     <th>Foto</th>
-    </thead>
-    <tbody>
-      <% @swiper.meets.each do |meet| %>
-          <% if !meet.estado && (@swiper.id == meet.swiper_cita_id)%>
-          <tr>
-            <td><%= meet.swiper_citado.nombre %></td>
-            <td><%= meet.swiper_citado.edad %> años</td>
-            <td><%= meet.restaurante.nombre %></td>
-            <td><%= meet.fecha %></td>
-            <td><%= link_to 'Ir al perfil', swiper_path(meet.swiper_citado.id)%></td>
-            <td><%= link_to 'Eliminar cita', eliminar_cita_path(@swiper.id, meet.id) %></td>
-
-            <% i = 0 %>
-            <% meet.swiper_citado.imagenes.each do |imagen| %>
-              <% if (i == 0) %>
-                <td><%= image_tag(imagen, style:'width:200px; heigth: 100px') %></td>
-              <% end %>
-              <% i += 1 %>
-            <% end %>
-          </tr>
-          <% end %>
-      <% end %>
-    </tbody>
-  </table>
-
-  <h2>Solicitudes entrantes de cita</h2>
-<table class="table">
-    <thead>
-     <th>Nombre</th>
-     <th>Edad</th>
-     <th>Restaurante</th>
-     <th>Fecha</th>
-     <th></th>
-     <th></th>
-     <th></th>
-     <th>Foto</th>
-     <th></th>
-    </thead>
-    <tbody>
-      <% meets = Meet.where(swiper_citado_id: @swiper.id) %>
-      <% meets.each do |meet| %>
-          <% if !meet.estado && (@swiper.id == meet.swiper_citado_id)%>
-          <tr>
-            <td><%= meet.swiper_cita.nombre %></td>
-            <td><%= meet.swiper_cita.edad %> años</td>
-            <td><%= meet.restaurante.nombre %></td>
-            <td><%= meet.fecha %></td>
-            <td><%= link_to 'Ir al perfil', swiper_path(meet.swiper_citado.id)%></td>
-            <td><%= link_to 'Eliminar cita', eliminar_cita_path(@swiper.id, meet.id) %></td>
-            <td><%= link_to 'Aceptar cita', aceptar_cita_path(meet.id) %></td>
-            <% i = 0 %>
-            <% meet.swiper_citado.imagenes.each do |imagen| %>
-              <% if (i == 0) %>
-                <td><%= image_tag(imagen, style:'width:200px; heigth: 100px') %></td>
-              <% end %>
-              <% i += 1 %>
-            <% end %>
-          </tr>
-          <% end %>
-      <% end %>
-    </tbody>
-  </table>
+<div class="row text-center">
+  <div class="col-md-4 tall-content align-middle" ></div>
+  <div class="col-md-4 tall-content align-middle" >
+      <div class="row"><%= link_to "Back", menu_citas_path, :class => "btn btn-primary btn-menu" %></div>
+  </div>
+  <div class="col-md-4 tall-content align-middle" ></div>
+</div>

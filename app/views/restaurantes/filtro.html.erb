@@ -9,6 +9,14 @@
           <tr>
               <td>
                   <%= form_tag(controller: 'restaurantes', action: "filtro", method: "post") do %>
+                      <% if @swiper_cita_id && @swiper_citado_id %>
+                        <div class="field">
+                          <%= hidden_field_tag(:id, @swiper_cita_id) %>
+                        </div>
+                        <div class="field">
+                          <%= hidden_field_tag(:id_a, @swiper_citado_id) %>
+                        </div>
+                      <% end %>
                       <div class="field">
                           <%= hidden_field_tag(:filtro, "o_nombre") %><br>
                       </div>
@@ -31,6 +39,7 @@
     </tr>
     </thead>
     <tbody>
+
     <tr>
       <td>
         <%= form_tag(controller: 'restaurantes', action: "filtro", method: "post") do %>
@@ -64,6 +73,7 @@
             </td>
           <% end %>
           </tr>
+
     </tbody>
   </table>
 
@@ -73,12 +83,13 @@
     <th>Comuna</th>
     </thead>
     <tbody>
+
     <% @filtrados.each do |restaurante| %>
       <tr>
         <td><%= restaurante.nombre %></td>
         <td><%= restaurante.comuna.nombre %></td>
         <% if @swiper_cita_id && @swiper_citado_id %>
-          <td><%= link_to 'Ver detalles CITA', restaurante_cita_path(@swiper_cita_id, @swiper_citado_id, restaurante.id) %></td>
+          <td><%= link_to 'Ver detalles para agendar una cita', restaurante_cita_path(@swiper_cita_id, @swiper_citado_id, restaurante.id) %></td>
         <% else %>
           <td><%= link_to 'Ver detalles', restaurante_path(restaurante.id) %></td>
         <% end %>
@@ -91,10 +102,14 @@
         <% end %>
       </tr>
     <% end %>
+
     </tbody>
   </table>
 
   <br>
+
 <% if current_admin %>
   <%= link_to 'Volver a la lista de acciones disponibles.', admin_root_path %>
 <% end %>
+
+

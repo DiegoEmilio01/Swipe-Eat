@@ -11,7 +11,7 @@ heroku run rake db:migrate			# Migra la base de datos a heroku.
 heroku run rake db:seed 			# Migra la seed a heroku.
 heroku open					# Abre el link de la app en heroku.
 heroku local web				# Corre la app localmente (tambien se puede con el server de rails).
-heroku git:remote -a app-name			# Setear que la app no es un repo entero sino que esta dentro de otro repo.
+heroku git:remote -a app-name			# Inicializar repo heroku. O setear que la app no es un repo entero sino que esta dentro de otro repo.
 
 
 - RUBOCOP

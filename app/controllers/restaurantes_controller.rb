@@ -18,11 +18,20 @@ class RestaurantesController < ApplicationController
   end
 
   def index
-    @restaurantes = Restaurante.all
+    @restaurantes = if current_swiper
+                      Restaurante.joins(:comuna).where('comunas.cuarentena = false AND '\
+                                                                       "aceptado = 'Aceptado'")
+                    else
+                      Restaurante.all
+                    end
     return unless params[:id] && params[:id_a]
 
     @swiper_cita_id = params[:id]
     @swiper_citado_id = params[:id_a]
+
+    return unless params[:fav]
+
+    @fav = params[:fav]
   end
 
   def show
@@ -72,12 +81,29 @@ class RestaurantesController < ApplicationController
   end
 
   def filtro
-    if params[:filtro] == 'nombre'
+    if (params[:filtro] == 'nombre') && current_swiper
+      @filtrados = Restaurante.joins(:comuna).where('comunas.cuarentena = false '\
+                                                    "AND aceptado = 'Aceptado' AND "\
+                                                    'Restaurantes.nombre ~* ?',
+                                                    '.*' + params[:input] + '.*')
+    elsif (params[:filtro] == 'o_nombre') && current_swiper
+      @filtrados = Restaurante.joins(:comuna).where('comunas.cuarentena = false '\
+                                                    "AND aceptado = 'Aceptado'").order(:nombre)
+    elsif (params[:filtro] == 'comuna') && current_swiper
+      @filtrados = Restaurante.joins(:comuna).where('comunas.cuarentena = false AND '\
+                                                    "comuna_id = ? AND aceptado = 'Aceptado'",
+                                                    params[:input])
+    elsif params[:filtro] == 'nombre'
       @filtrados = Restaurante.where('nombre ~* ?', '.*' + params[:input] + '.*')
     elsif params[:filtro] == 'o_nombre'
       @filtrados = Restaurante.order(:nombre)
     elsif params[:filtro] == 'comuna'
       @filtrados = Restaurante.where('comuna_id = ?', params[:input])
     end
+
+    return unless params[:id] && params[:id_a]
+
+    @swiper_cita_id = params[:id]
+    @swiper_citado_id = params[:id_a]
   end
 end

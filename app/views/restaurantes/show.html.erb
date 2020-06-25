@@ -15,10 +15,19 @@
     <%= @restaurante.comuna.nombre %>
 </p>
 
-<p>
-    <strong>Estado:</strong>
-    <%= @restaurante.aceptado %>
-</p>
+<% if @restaurante.comentarios.length > 0 %>
+    <p>
+        <strong>Valoración promedio:</strong>
+        <%= @restaurante.comentarios.sum(:valoracion).to_f / @restaurante.comentarios.length %>
+    </p>
+<% end %>
+
+<% if current_admin %>
+    <p>
+        <strong>Estado:</strong>
+        <%= @restaurante.aceptado %>
+    </p>
+<% end %>
 
 <br>
 
@@ -63,20 +72,6 @@
     <% end %>
 <% end %>
 
-<h2>Comentarios</h2>
-<% @restaurante.comentarios.each do |comentario| %>
-        <div>
-            <% swiper = Swiper.find(comentario.swiper_id) %>
-            <%= swiper.nombre %>
-            <%= comentario.valoracion %><br>
-            <%= comentario.contenido %> <br>
-            <% if current_admin %>
-                <%= link_to 'Ver detalles', comentario_path(comentario.id) %>
-            <% end %>
-            <br>
-        </div>
-<% end %>
-<br>
 <% if current_admin %>
     <%= link_to 'Lista Restaurantes', lista_restaurantes_path %><br>
     <%= link_to 'Editar Restaurante', edit_restaurante_path(@restaurante.id) %><br>
@@ -93,4 +88,35 @@
         <%= link_to 'Editar Restaurante', edit_restaurante_path(@restaurante.id) %><br>
         <%= link_to 'Eliminar Restaurante', restaurante_path(@restaurante.id), method: :delete, data: {confirm: '¿Estás seguro?'} %><br>
     <% end %>
+<% end %>
+
+<% if @restaurante.comentarios.length > 0 %>
+    <h2>Comentarios</h2>
+    <div style="height:350px;overflow:auto;display:flex;flex-direction:column-reverse;">
+        <table class="table">
+            <tbody>
+                <% @restaurante.comentarios.each do |comentario| %>
+                        <tr>
+                            <% swiper = Swiper.find(comentario.swiper_id) %>
+                            <td>
+                                <%= swiper.nombre %>
+                            </td>
+                            <td>
+                                <%= comentario.valoracion %>
+                            </td>
+                            <td>
+                                <%= comentario.contenido %>
+                            </td>
+                            <% if current_admin %>
+                                <td>
+                                    <%= link_to 'Ver detalles', comentario_path(comentario.id) %>
+                                </td>
+                            <% end %>
+                            <br>
+                        </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+    <br>
 <% end %>
