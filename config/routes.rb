@@ -53,6 +53,8 @@ Rails.application.routes.draw do
     patch 'admins/:id', to: 'admins/registrations#update_admin'
     delete 'admins/:id', to: 'admins/registrations#destroy_admin'
     post 'admins-filtrados' => 'admins/registrations#filtro'
+
+    get 'reportes', to: 'reportes#index', as: 'reportes'
   end
 
   ### RUTAS NAVEGACION SWIPER(HOME)###

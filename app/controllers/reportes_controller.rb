@@ -21,4 +21,8 @@ class ReportesController < ApplicationController
             redirect_to reportar_swiper_path(@swiper_reportado_id), notice: @reporte.errors
         end
     end
+
+    def index
+        @reportes = Reporte.all
+    end
 end
