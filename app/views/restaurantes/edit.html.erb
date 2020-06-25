@@ -73,8 +73,10 @@
     </table>
 
     <br>
-
+    <% if current_admin %>
     <%= link_to 'Lista Restaurantes', lista_restaurantes_path %>
+    <% end %>
+
 <% else %>
     <% controller.redirect_to new_admin_session_path, notice: 'No tienes permiso para ingresar a la página que intentaste acceder.' %>
 <% end %>

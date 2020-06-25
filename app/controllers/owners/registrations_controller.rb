@@ -17,7 +17,9 @@ class Owners::RegistrationsController < Devise::RegistrationsController
     @owner = Owner.find params[:id]
   end
 
-  def sign_up(resource_name, resource); end
+  def sign_up(resource_name, resource)
+    sign_in(resource_name, resource)
+  end
 
   def update_admin
     @owner = Owner.find params[:id]
@@ -124,7 +126,7 @@ class Owners::RegistrationsController < Devise::RegistrationsController
 
   # The path used after sign up.
   # def after_sign_up_path_for(resource)
-  #   super(resource)
+  #  super(resource)
   # end
 
   # The path used after sign up for inactive accounts.

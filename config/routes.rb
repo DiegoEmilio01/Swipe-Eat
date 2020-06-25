@@ -6,7 +6,7 @@ Rails.application.routes.draw do
                                      registrations: 'owners/registrations' }
   # Rutas adicionales de owner
   devise_scope :owner do
-    get 'owners_root' => 'owners/registrations#index', as: 'owner_root'
+    get 'owners_root' => 'owners/sessions#menu', as: 'owner_root'
     get 'owners' => 'owners/registrations#index', as: 'lista_owners'
     get 'owners/:id' => 'owners/registrations#show', as: 'owner'
     get 'owners/:id/edit', to: 'owners/registrations#edit_admin', as: 'admin_edit_owner'
@@ -108,7 +108,7 @@ Rails.application.routes.draw do
 
   ### RUTAS CRUD RESTAURANTE ###
   # CREATE
-  get 'restaurantes/new', to: 'restaurantes#new'
+  get 'restaurantes/new', to: 'restaurantes#new', as: 'restaurante_new'
   post 'restaurantes', to: 'restaurantes#create'
   # READ
   get 'restaurantes', to: 'restaurantes#index', as: 'lista_restaurantes'
