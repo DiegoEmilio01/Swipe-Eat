@@ -69,19 +69,6 @@ class PagesController < ApplicationController
     @restaurante = Restaurante.find params[:id_r]
   end
 
-  def eliminar_cita
-    meet = Meet.find params[:mid]
-    @swiper = Swiper.find params[:id]
-    Meet.all.delete(meet)
-    if params[:a] == '1'
-      redirect_to lista_citas_path
-    elsif params[:a] == '2'
-      redirect_to citas_entrantes_path
-    else
-      redirect_to citas_salientes_path
-    end
-  end
-
   def mensajes
     @mensajes = Mensaje.where('swiper_origen_id = ? AND '\
                               'swiper_destino_id = ?',
