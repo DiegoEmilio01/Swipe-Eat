@@ -1,54 +1,106 @@
+<p id="notice"><%= notice %></p>
 
-  <p id="notice"><%= notice %></p>
+<% if @fav %>
+  <h1>Restaurantes favoritos</h1>
+<% else %>
+  <h1>Restaurantes</h1>
+<% end %>
 
-  <% if @fav %>
-    <h1>Restaurantes favoritos</h1>
-  <% else %>
-    <h1>Restaurantes</h1>
-  <% end %>
-
-  <% if (@fav) %>
-    <hr style="border: 1px solid;color: #566787;">
-    <% current_swiper.favoritos.each do |restaurante| %>
-    <div class="row text-center">
-      <div class="col-md-2 align-middle">
-        <% if !restaurante.imagenes.empty? %>
-          <%= image_tag(restaurante.imagenes[0], style:"max-width: 200px;max-height: 200px;") %>
+<% if (@fav) %>
+<hr style="border: 1px solid;color: #566787;">
+  <% current_swiper.favoritos.each do |restaurante| %>
+  <div class="row text-center">
+    <div class="col-md-2 align-middle" >
+      <% if !restaurante.imagenes.empty? %>
+        <%= image_tag(restaurante.imagenes[0], style:"max-width: 200px; max-height: 200px;") %>
+      <% end %>
+    </div>
+    <div class="col-md-10 align-middle" >
+      <div class="row text-left" style="margin-top: -25px;margin-left: 15px;">
+        <h2><%= restaurante.nombre %></h2>
+      </div>
+      <div class="row" style="margin-top: 15px;">
+        <div class="col-md-2 text-left"><b>Comuna</b></div>
+        <div class="col-md-2 text-left"><b>Dueño</b></div>
+      </div>
+      <div class="row">
+        <div class="col-md-2 text-left"><%= restaurante.comuna.nombre %></div>
+        <div class="col-md-2 text-left"><%= restaurante.owner.nombre %></div>
+        <% if @swiper_cita_id && @swiper_citado_id %>
+          <div class="col-md-6 text-left"><%= link_to 'Ver', restaurante_cita_path(@swiper_cita_id, @swiper_citado_id, restaurante.id), :class => "btn btn-primary" %></div>
+        <% else %>
+          <div class="col-md-6 text-right"><%= link_to 'Ver', restaurante_path(restaurante.id), :class => "btn btn-primary" %></div>
         <% end %>
       </div>
-      <div class="col-md-10 align-middle" style="min-height:200px;">
-        <div class="row text-left"><h2><%= restaurante.nombre %></h2></div>
-        <div class="row">
-          <div class="col-md-2 text-left"><b>Comuna</b></div>
-          <div class="col-md-2 text-left"><b>Dueño</b></div>
+      <div class="row" style="margin-top: -20px;">
+        <div class="col-md-2 text-left">
+          <b>Valoración</b>
         </div>
-        <div class="row">
-          <div class="col-md-2 text-left"><%= restaurante.comuna.nombre %></div>
-          <div class="col-md-2 text-left"><%= restaurante.owner.nombre %></div>
-          <% if @swiper_cita_id && @swiper_citado_id %>
-            <div class="col-md-6 text-left"><%= link_to 'Ver para agendar cita', restaurante_cita_path(@swiper_cita_id, @swiper_citado_id, restaurante.id) %></div>
-          <% else %>
-            <div class="col-md-6 text-right"><%= link_to 'Ver', restaurante_path(restaurante.id), :class => "btn btn-primary" %></div>
-          <% end %>
-        </div><br>
-        <div class="row">
-          <div class="col-md-4 text-left"><%= restaurante.descripcion %></div>
+        <div class="col-md-2 text-left">
+          <b>Descripción</b>
         </div>
       </div>
-    </div><hr style="border: 1px solid;color: #566787;"><br>
-    <% end %>
+      <div class="row">
+        <div class="col-md-2 text-left">
+          <% if restaurante.comentarios.length > 0 %>
+                  <div class="row" style="margin-left: -15px;">
+                      <% (0...(restaurante.comentarios.sum(:valoracion).to_f / restaurante.comentarios.length).round).each do |i| %>
+                          <div class="col-md-1 text-left" style="margin-left: -10px; margin-right: right -10px;">
+                              <%= image_tag("logo.png", :alt => "Logo", style: "height: 20px; width: 40px;") %>
+                          </div>
+                      <% end %>
+                  </div>
+          <% else %>
+              <p>No disp</p>
+          <% end %>
+        </div>
+        <div class="col-md-2 text-left"><%= restaurante.descripcion %></div>
+      </div>
+    </div>
+  </div><hr style="border: 1px solid;color: #566787;">
+  <% end %>
+<% else %>
 
-  <% else %>
+  <% if current_swiper %>
+    <h4> En comunas sin cuarentena </h4>
+  <% end %>
 
-    <% if current_swiper %>
-      <h4> En comunas sin cuarentena </h4>
-    <% end %>
-
-    <h3 style="margin: 0px; margin-bottom: -17px;"> Ordenar por: </h3>
-    <div class="row">
-      <div class="col-md-4 align-middle" >
-        <table>
-          <tbody>
+  <h3 style="margin: 0px; margin-bottom: -17px;"> Ordenar por: </h3>
+  <div class="row">
+    <div class="col-md-4 align-middle" >
+      <table>
+        <tbody>
+        <td>
+          <%= form_tag(controller: 'restaurantes', action: "filtro", method: "post") do %>
+            <% if @swiper_cita_id && @swiper_citado_id %>
+              <div class="field">
+                <%= hidden_field_tag(:id, @swiper_cita_id) %>
+              </div>
+              <div class="field">
+                <%= hidden_field_tag(:id_a, @swiper_citado_id) %>
+              </div>
+            <% end %>
+            <div class="field">
+              <%= hidden_field_tag(:filtro, "o_nombre") %><br>
+            </div>
+            <div class="actions">
+              <%= submit_tag("Nombre") %><br><br>
+            </div>
+          <% end %>
+        </td>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-4 align-middle">
+      <table>
+        <thead>
+        <tr>
+          <th>Filtrar por nombre</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
           <td>
             <%= form_tag(controller: 'restaurantes', action: "filtro", method: "post") do %>
               <% if @swiper_cita_id && @swiper_citado_id %>
@@ -60,126 +112,116 @@
                 </div>
               <% end %>
               <div class="field">
-                <%= hidden_field_tag(:filtro, "o_nombre") %><br>
+                <%= text_field_tag(:input) %>
               </div>
-              <div class="actions">
-                <%= submit_tag("Nombre") %><br><br>
-              </div>
+              <div class="field">
+                <%= hidden_field_tag(:filtro, "nombre") %>
+              </div><br>
+
+          </td>
+          <td>
+            <div class="actions">
+              <%= submit_tag("Filtrar") %><br><br>
+            </div>
             <% end %>
           </td>
-          </tbody>
-        </table>
-      </div>
-      <div class="col-md-4 align-middle">
-        <table>
-          <thead>
-          <tr>
-            <th>Filtrar por nombre</th>
-            <th></th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td>
-              <%= form_tag(controller: 'restaurantes', action: "filtro", method: "post") do %>
-                <% if @swiper_cita_id && @swiper_citado_id %>
-                  <div class="field">
-                    <%= hidden_field_tag(:id, @swiper_cita_id) %>
-                  </div>
-                  <div class="field">
-                    <%= hidden_field_tag(:id_a, @swiper_citado_id) %>
-                  </div>
-                <% end %>
-                <div class="field">
-                  <%= text_field_tag(:input) %>
-                </div>
-                <div class="field">
-                  <%= hidden_field_tag(:filtro, "nombre") %>
-                </div><br>
-
-            </td>
-            <td>
-              <div class="actions">
-                <%= submit_tag("Filtrar") %><br><br>
-              </div>
-              <% end %>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="col-md-4 align-middle" >
-        <table>
-          <thead>
-          <tr>
-            <th>Filtrar por comuna</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td>
-              <%= form_tag(controller: 'restaurantes', action: "filtro", method: "post") do %>
-                <% if @swiper_cita_id && @swiper_citado_id %>
-                  <div class="field">
-                    <%= hidden_field_tag(:id, @swiper_cita_id) %>
-                  </div>
-                  <div class="field">
-                    <%= hidden_field_tag(:id_a, @swiper_citado_id) %>
-                  </div>
-                <% end %>
-                <div class="field">
-                  <%= select_tag(:input, options_from_collection_for_select(Comuna.all, :id, :nombre))%>
-                </div>
-                <div class="field">
-                  <%= hidden_field_tag(:filtro, "comuna") %><br>
-                </div>
-            </td>
-            <td>
-              <div class="actions">
-                <%= submit_tag("Filtrar") %><br><br>
-              </div>
-              <% end %>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
+        </tr>
+        </tbody>
+      </table>
     </div>
+    <div class="col-md-4 align-middle" >
+      <table>
+        <thead>
+        <tr>
+          <th>Filtrar por comuna</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>
+            <%= form_tag(controller: 'restaurantes', action: "filtro", method: "post") do %>
+              <% if @swiper_cita_id && @swiper_citado_id %>
+                <div class="field">
+                  <%= hidden_field_tag(:id, @swiper_cita_id) %>
+                </div>
+                <div class="field">
+                  <%= hidden_field_tag(:id_a, @swiper_citado_id) %>
+                </div>
+              <% end %>
+              <div class="field">
+                <%= select_tag(:input, options_from_collection_for_select(Comuna.all, :id, :nombre))%>
+              </div>
+              <div class="field">
+                <%= hidden_field_tag(:filtro, "comuna") %><br>
+              </div>
+          </td>
+          <td>
+            <div class="actions">
+              <%= submit_tag("Filtrar") %><br><br>
+            </div>
+            <% end %>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
-    <hr style="border: 1px solid;color: #566787;">
-    <% @restaurantes.each do |restaurante| %>
-    <div class="row text-center">
-      <div class="col-md-2 align-middle">
-        <% if !restaurante.imagenes.empty? %>
-          <%= image_tag(restaurante.imagenes[0], style:"max-width: 200px;max-height: 200px;") %>
+  <hr style="border: 1px solid;color: #566787;">
+  <% @restaurantes.each do |restaurante| %>
+  <div class="row text-center">
+    <div class="col-md-2 align-middle" >
+      <% if !restaurante.imagenes.empty? %>
+        <%= image_tag(restaurante.imagenes[0], style:"max-width: 200px; max-height: 200px;") %>
+      <% end %>
+    </div>
+    <div class="col-md-10 align-middle" >
+      <div class="row text-left" style="margin-top: -25px;margin-left: 15px;">
+        <h2><%= restaurante.nombre %></h2>
+      </div>
+      <div class="row" style="margin-top: 15px;">
+        <div class="col-md-2 text-left"><b>Comuna</b></div>
+        <div class="col-md-2 text-left"><b>Dueño</b></div>
+      </div>
+      <div class="row">
+        <div class="col-md-2 text-left"><%= restaurante.comuna.nombre %></div>
+        <div class="col-md-2 text-left"><%= restaurante.owner.nombre %></div>
+        <% if @swiper_cita_id && @swiper_citado_id %>
+          <div class="col-md-6 text-left"><%= link_to 'Ver', restaurante_cita_path(@swiper_cita_id, @swiper_citado_id, restaurante.id), :class => "btn btn-primary" %></div>
+        <% else %>
+          <div class="col-md-6 text-right"><%= link_to 'Ver', restaurante_path(restaurante.id), :class => "btn btn-primary" %></div>
         <% end %>
       </div>
-      <div class="col-md-10 align-middle" style="min-height:200px;">
-        <div class="row text-left"><h2><%= restaurante.nombre %></h2></div>
-        <div class="row">
-          <div class="col-md-2 text-left"><b>Comuna</b></div>
-          <div class="col-md-2 text-left"><b>Dueño</b></div>
+      <div class="row" style="margin-top: -20px;">
+        <div class="col-md-2 text-left">
+          <b>Valoración</b>
         </div>
-        <div class="row">
-          <div class="col-md-2 text-left"><%= restaurante.comuna.nombre %></div>
-          <div class="col-md-2 text-left"><%= restaurante.owner.nombre %></div>
-          <% if @swiper_cita_id && @swiper_citado_id %>
-            <div class="col-md-6 text-left"><%= link_to 'Ver para agendar cita', restaurante_cita_path(@swiper_cita_id, @swiper_citado_id, restaurante.id) %></div>
-          <% else %>
-            <div class="col-md-6 text-right"><%= link_to 'Ver', restaurante_path(restaurante.id), :class => "btn btn-primary" %></div>
-          <% end %>
-        </div><br>
-        <div class="row">
-          <div class="col-md-4 text-left"><%= restaurante.descripcion %></div>
+        <div class="col-md-2 text-left">
+          <b>Descripción</b>
         </div>
       </div>
-    </div><hr style="border: 1px solid;color: #566787;"><br>
-    <% end %>
-     
+      <div class="row">
+        <div class="col-md-2 text-left">
+          <% if restaurante.comentarios.length > 0 %>
+                  <div class="row" style="margin-left: -15px;">
+                      <% (0...(restaurante.comentarios.sum(:valoracion).to_f / restaurante.comentarios.length).round).each do |i| %>
+                          <div class="col-md-1 text-left" style="margin-left: -10px; margin-right: right -10px;">
+                              <%= image_tag("logo.png", :alt => "Logo", style: "height: 20px; width: 40px;") %>
+                          </div>
+                      <% end %>
+                  </div>
+          <% else %>
+              <p>No disp</p>
+          <% end %>
+        </div>
+        <div class="col-md-2 text-left"><%= restaurante.descripcion %></div>
+      </div>
+    </div>
+  </div><hr style="border: 1px solid;color: #566787;">
   <% end %>
-  <br><br>
+<% end %>
+<br><br><br>
 
-  <br>
-  <% if current_admin %>
-    <%= link_to 'Volver a la lista de acciones disponibles.', admin_root_path %><br>
-  <% end %>
+<% if current_admin %>
+  <%= link_to 'Volver a la lista de acciones disponibles.', admin_root_path %><br>
+<% end %>

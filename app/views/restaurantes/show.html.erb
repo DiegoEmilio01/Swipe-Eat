@@ -22,8 +22,21 @@
 
 <% if @restaurante.comentarios.length > 0 %>
     <p>
-        <strong>Valoración promedio:</strong>
-        <%= @restaurante.comentarios.sum(:valoracion).to_f / @restaurante.comentarios.length %>
+        <div class="row">
+            <div class="col-md-2">
+                <strong>Valoración promedio:</strong>
+            </div>
+            <div class="col-md-2">
+                <div class="row" style="margin-left: -50px;">
+                    <% (0...(@restaurante.comentarios.sum(:valoracion).to_f / @restaurante.comentarios.length).round).each do |i| %>
+                        <div class="col-md-1 text-left" style="margin-left: -10px; margin-right: right -10px;">
+                            <%= image_tag("logo.png", :alt => "Logo", style: "height: 20px; width: 40px;") %>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+
     </p>
 <% end %>
 
