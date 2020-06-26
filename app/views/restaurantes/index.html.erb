@@ -8,32 +8,35 @@
   <% end %>
 
   <% if (@fav) %>
-    <table class="table">
-      <thead>
-      <tr>
-        <th>Nombre</th>
-        <th>Comuna</th>
-        <th></th>
-        <th></th>
-      </tr>
-      </thead>
-
-      <tbody>
-      <% current_swiper.favoritos.each do |restaurante| %>
-        <tr>
-          <td><%= restaurante.nombre %></td>
-          <td><%= restaurante.comuna.nombre %></td>
+    <hr style="border: 1px solid;color: #566787;">
+    <% current_swiper.favoritos.each do |restaurante| %>
+    <div class="row text-center">
+      <div class="col-md-2 align-middle">
+        <% if !restaurante.imagenes.empty? %>
+          <%= image_tag(restaurante.imagenes[0], style:"max-width: 200px;max-height: 200px;") %>
+        <% end %>
+      </div>
+      <div class="col-md-10 align-middle" style="min-height:200px;">
+        <div class="row text-left"><h2><%= restaurante.nombre %></h2></div>
+        <div class="row">
+          <div class="col-md-2 text-left"><b>Comuna</b></div>
+          <div class="col-md-2 text-left"><b>Dueño</b></div>
+        </div>
+        <div class="row">
+          <div class="col-md-2 text-left"><%= restaurante.comuna.nombre %></div>
+          <div class="col-md-2 text-left"><%= restaurante.owner.nombre %></div>
           <% if @swiper_cita_id && @swiper_citado_id %>
-            <td><%= link_to 'Ver detalles para agendar una cita',
-                            restaurante_cita_path(@swiper_cita_id, @swiper_citado_id, restaurante.id) %></td>
+            <div class="col-md-6 text-left"><%= link_to 'Ver para agendar cita', restaurante_cita_path(@swiper_cita_id, @swiper_citado_id, restaurante.id) %></div>
           <% else %>
-            <td><%= link_to 'Ver detalles', restaurante_path(restaurante.id) %></td>
+            <div class="col-md-6 text-right"><%= link_to 'Ver', restaurante_path(restaurante.id), :class => "btn btn-primary" %></div>
           <% end %>
-          <td><%= link_to 'Quitar de favoritos', delete_favorito_path(current_swiper.id, @swiper_citado_id, restaurante.id) %></td>
-        </tr>
-      <% end %>
-      </tbody>
-    </table>
+        </div><br>
+        <div class="row">
+          <div class="col-md-4 text-left"><%= restaurante.descripcion %></div>
+        </div>
+      </div>
+    </div><hr style="border: 1px solid;color: #566787;"><br>
+    <% end %>
 
   <% else %>
 
