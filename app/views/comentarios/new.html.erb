@@ -24,9 +24,9 @@
 
         <div class='field'>
             <%= form.label :valoracion %>
-            <%= form.text_field :valoracion %>
+            <%= form.select :valoracion, options_for_select([1,2,3,4,5]) %>
         </div>
-
+        
         <div class='field'>
             <%= form.hidden_field :fecha, :value => DateTime.now %>
         </div>
