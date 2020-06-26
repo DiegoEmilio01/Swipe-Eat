@@ -15,7 +15,7 @@
       <tbody>
         <% meets = Meet.where(swiper_citado_id: current_swiper.id).or(Meet.where(swiper_cita_id: current_swiper.id)) %>
         <% meets.each do |meet| %>
-          <% if meet.estado %>
+          <% if meet.estado && !meet.hidden %>
             <tr>
               <% if meet.swiper_cita_id == current_swiper.id %>
                 <td><%= meet.swiper_citado.nombre %></td>
@@ -38,18 +38,19 @@
                 <td><%= meet.fecha.to_formatted_s(:short) %></td>
                 <td><%= link_to 'Ir al perfil', swiper_path(meet.swiper_cita.id)%></td>
                 <td><%= link_to 'Eliminar cita', eliminar_cita_path(current_swiper.id, meet.id, 1) %></td>
-                <% if meet.fecha < DateTime.now %>
-                  <td><%= link_to 'Comentar local de cita', comentar_restaurante_path(current_swiper.id, meet.restaurante.id) %></td>
-                  <td>
-                    <% if current_swiper.favoritos.include?(Restaurante.find(meet.restaurante.id)) %>
-                      <%= "En favoritos" %>
-                    <% elsif  %>
-                      <%= link_to 'Añadir a favoritos', add_favorito_path(current_swiper.id, meet.restaurante.id) %>
-                    <% end %>
-                  </td>
-                <% else %>
-                  <td> </td>
-                <% end %>
+              <% end %>
+              <% if meet.fecha < DateTime.now %>
+                <td><%= link_to 'Comentar local de cita', comentar_restaurante_path(current_swiper.id, meet.restaurante.id) %></td>
+                <td>
+                  <% if current_swiper.favoritos.include?(Restaurante.find(meet.restaurante.id)) %>
+                    <%= "En favoritos" %>
+                  <% elsif  %>
+                    <%= link_to 'Añadir a favoritos', add_favorito_path(current_swiper.id, meet.restaurante.id) %>
+                  <% end %>
+                </td>
+              <% else %>
+                <td> </td>
+              <% end %>
                 <% i = 0 %>
                 <% meet.swiper_cita.imagenes.each do |imagen| %>
                   <% if (i == 0) %>
@@ -57,7 +58,6 @@
                   <% end %>
                 <% i += 1 %>
                 <% end %>
-              <% end %>
             </tr>
           <% end %>
         <% end %>

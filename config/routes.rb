@@ -83,7 +83,7 @@ Rails.application.routes.draw do
   get 'citas/2', to: 'pages#citas_entrantes', as: 'citas_entrantes'
   get 'citas/3', to: 'pages#citas_salientes', as: 'citas_salientes'
 
-  get 'citas/:id/:mid/:a', to: 'pages#eliminar_cita', as: 'eliminar_cita'
+  get 'citas/:id/:mid/:a', to: 'meet#eliminar_cita', as: 'eliminar_cita'
 
   get 'pages/gustos/:id', to: 'pages#gustos', as: 'add_gustos'
 
