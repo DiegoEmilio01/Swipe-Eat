@@ -149,13 +149,14 @@ class Swipers::RegistrationsController < Devise::RegistrationsController
 
     @swiper = Swiper.find(current_swiper.id)
 
-    @swiper.gustos.each do |gusto|
-      @swiper.gustos.delete(gusto)
-    end
+    
 
     is_valid = if change_password
                  @swiper.update_with_password(new_params)
                else
+                 @swiper.gustos.each do |gusto|
+                   @swiper.gustos.delete(gusto)
+                 end
                  @swiper.update_without_password(new_params)
                end
 
