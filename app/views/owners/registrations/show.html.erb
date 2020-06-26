@@ -1,5 +1,8 @@
 <% if current_admin or current_owner%>
-  <p id="notice"><%= notice %></p>
+  <div class="row text-center tall-tittle">
+    <h4><%= notice %></h4>
+  </div>
+  
 
   <p>
     <strong>Owner:</strong>
@@ -19,7 +22,7 @@
   <% if current_owner %>
     <%= link_to "Cerrar sesión", destroy_owner_session_path, method: :delete, data: {confirm: '¿Estás seguro que quieres cerrar sesión?'}  %><br><br>
     <%= link_to 'Editar Owner logueado', edit_owner_registration_path %><br><br>
-    <%= link_to "Borrar Owner logueado", registration_path(resource_name), data: { confirm: "Estás seguro" }, method: :delete %><br><br>
+    <%= link_to "Borrar Owner logueado", registration_path(resource_name), data: { confirm: "¿Estás seguro de querer borrar tu cuenta?" }, method: :delete %><br><br>
   <% end %>
 <% else %>
   <% controller.redirect_to new_owner_session_path %>

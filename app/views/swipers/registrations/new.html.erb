@@ -110,6 +110,7 @@
         <div class="row">
           <div class="field big">
             <%= f.label :gustos %><br />
+            <em>(Debe escoger al menos un gusto.) </em><br>
             <div style="height:150px;overflow:auto;">
               <% @gustos = Gusto.all %>
               <% @gustos.each do |gusto| %>
@@ -150,7 +151,7 @@
 
         <div class="row">
           <div class="field big">
-            <%= f.label :contraseña %>
+            <%= f.label :contraseña %><br>
             <% if @minimum_password_length %>
               <em>(<%= @minimum_password_length %> carácteres mínimo) </em>
             <% end %><br />
@@ -168,7 +169,7 @@
         </div>
 
 
-              <div class="row">
+        <div class="row">
           <div class="actions">
             <%= f.submit "Registrarse", :class => 'btn btn-primary' %>
           </div>

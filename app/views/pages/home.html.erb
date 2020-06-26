@@ -1,5 +1,8 @@
 <% if current_swiper %>
   <div class="row text-center tall-tittle">
+    <h4><%= notice %></h4>
+  </div>
+  <div class="row text-center tall-tittle">
     <h1>Home</h1>
   </div>
   <div class="row text-center">
@@ -22,6 +25,9 @@
 
 <% else %>
   <div class="row text-center tall-tittle">
+    <h4><%= notice %></h4>
+  </div>
+  <div class="row text-center tall-tittle">
     <h1>Descubre un mundo de sabores</h1>
   </div>
   <div class="row text-center">
@@ -34,5 +40,4 @@
     </div>
   </div>
     <div class="row text-center" style="margin-top: 10vh;"><%= link_to "Ver Restaurantes", lista_restaurantes_path, :class => "btn btn-primary" %></div>
-
 <% end %>
