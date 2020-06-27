@@ -32,13 +32,13 @@ class Swiper < ApplicationRecord
   # Favorece Swiper-Restaurante:n-n
   has_and_belongs_to_many :favoritos, join_table: 'favorecidos', class_name: 'Restaurante'
   # Mensajea Swiper-Swiper:n-n
-  has_many :mensajes, foreign_key: :swiper_origen_id
-  has_many :swipers, through: :mensajes, source: :swiper_destino
+  has_many :mensajes, foreign_key: :swiper_origen_id, dependent: :destroy
+  has_many :swipers, through: :mensajes, source: :swiper_destino, dependent: :destroy
   # Cita Swiper-Swiper-Restaurante
-  has_many :meets, foreign_key: :swiper_cita_id
-  has_many :swipers, through: :meets, source: :swiper_citado
+  has_many :meets, foreign_key: :swiper_cita_id, dependent: :destroy
+  has_many :swipers, through: :meets, source: :swiper_citado, dependent: :destroy
   # Comenta Swiper-Comentario
-  has_many :comentarios
+  has_many :comentarios, dependent: :destroy
   #------------------------------------------------------
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

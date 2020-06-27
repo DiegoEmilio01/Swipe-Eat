@@ -8,11 +8,12 @@ class Restaurante < ApplicationRecord
   # Owns Owner-Restaurante:1-1
   belongs_to :owner
   # Favorece Swiper-Restaurante:n-n
-  has_and_belongs_to_many :swipers, join_table: 'favorecidos', class_name: 'Swiper'
+  has_and_belongs_to_many :swipers, join_table: 'favorecidos', class_name: 'Swiper',
+                                    dependent: :destroy
   # Cita Swiper-Swiper-Restaurante
-  has_many :meets
+  has_many :meets, dependent: :destroy
   # Comenta Restaurante-Comentario
-  has_many :comentarios
+  has_many :comentarios, dependent: :destroy
   #------------------------------------------------------
   has_many_attached :imagenes
   validates :nombre, presence: { message: 'Ingresó un Nombre en blanco.' }

@@ -142,6 +142,10 @@
                                 <td>
                                     <%= link_to 'Ver detalles', comentario_path(comentario.id) %>
                                 </td>
+                            <% elsif current_owner %>
+                                <td>
+                                    <%= link_to 'Reportar comentario', owner_reportando_path(comentario.id) %>
+                                </td>
                             <% end %>
                             <br>
                         </tr>

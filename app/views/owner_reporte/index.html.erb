@@ -1,0 +1,37 @@
+<% if current_admin %>
+    <div class="row text-center tall-tittle">
+        <h4><%= notice %></h4>
+    </div>
+    <h1>Lista de Reportes Owner</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Comentario de</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <% @reportes.each do |reporte| %>
+                    <% comentario = Comentario.find(reporte.comentario_id) %>
+                    <tr>
+                        <td><%= Swiper.find(comentario.swiper.id).nombre %></td>
+                        <td><%= link_to 'Ver detalles', owner_reporte_path(reporte.id) %></td>
+                    </tr>
+                <%end%>
+            </tbody>
+        </table>
+        <br><br>
+        <div class="row text-center">
+            <div class="col-md-4 tall-content align-middle" ></div>
+            <div class="col-md-4 tall-content align-middle">   
+              <div class="row"><%= link_to "Home", admin_root_path, :class => "btn btn-primary btn-menu" %></div>
+            </div>
+            <div class="col-md-4 tall-content align-middle" ></div>
+          </div>
+          <div class="row">
+          </div>
+<% else %>
+    <% controller.redirect_to new_admin_session_path %>
+<% end %>

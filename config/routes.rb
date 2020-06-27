@@ -13,6 +13,12 @@ Rails.application.routes.draw do
     patch 'owners/:id', to: 'owners/registrations#update_admin'
     delete 'owners/:id', to: 'owners/registrations#destroy_admin'
     post 'owners-filtrados' => 'owners/registrations#filtro'
+
+    get 'reportar_comentario/:cid' => 'owner_reporte#new', as: 'owner_reportando'
+    post 'reportar_comentario' => 'owner_reporte#create', as: 'owner_reporta'
+    get 'reportes_comentarios' => 'owner_reporte#index', as: 'owner_reportes'
+    get 'reporte_comentario/:rid' => 'owner_reporte#show', as: 'owner_reporte'
+    delete 'reporte_comentario/:rid' => 'owner_reporte#destroy', as: 'destroy_owner_reporte'
   end
 
   ### RUTAS CRUD SWIPERS ###

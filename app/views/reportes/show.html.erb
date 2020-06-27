@@ -15,6 +15,10 @@
     </p><br><br>
 
     <%= link_to 'Ver perfil swiper', swiper_path(@swiper.id) %><br><br>
-    <%= link_to 'Eliminar reporte', destroy_reporte_path(@reporte.id), method: :delete %>
+    <%= link_to 'Eliminar reporte', destroy_reporte_path(@reporte.id), method: :delete %><br>
+    <%= link_to 'Lista de reportes', reportes_path %>
     </div>
+
+<% else %>
+    <% controller.redirect_to new_admin_session_path %>
 <% end %>

@@ -1,0 +1,36 @@
+<% if current_owner %>
+    <p id="notice">
+        <% if (notice != 'Guardado') and (notice)%>
+            <% if notice["contenido"] %>
+                <%= notice["contenido"][0] %><br>
+            <% end %>
+        <% elsif notice == 'Guardado'%>
+            <%= 'Comentario publicado exitosamente.' %><br>
+        <% end %>
+    </p>
+
+    <h1>Reporte</h1>
+    <%= form_with(model: @reporte, local: true, method: :post, url: owner_reporta_path) do |form| %>
+        <div class="field">
+            <%= form.label :contenido %>
+            <%= form.text_field :contenido %>
+        </div>
+
+        <div class='field'>
+            <%= form.hidden_field :owner_id, :value => current_owner.id %>
+        </div>
+
+        <div class='field'>
+            <%= form.hidden_field :comentario_id, :value => @comentario_id %>
+        </div>
+
+        <div class="actions">
+            <%= form.submit "Enviar reporte" %>
+        </div>
+
+        <% end %>
+    <br>
+    <% link_to "Restaurante", restaurante_path(current_owner.restaurante.id) %>
+<% else %>
+    <% controller.redirect_to new_owner_session_path %>
+<% end %>

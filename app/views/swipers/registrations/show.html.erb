@@ -23,13 +23,22 @@
             <tr>
               <th>Cumpleaños</th><th><%= @swiper.cumpleanos.strftime("%d/%m")%></th>
             </tr>
-            <% if (current_swiper.id == @swiper.id) || current_admin %>
+            <% if current_admin %>
               <tr>
                 <th>Teléfono</th><th><%= @swiper.telefono%></th>
               </tr>
               <tr>
                 <th>Dirección</th><th><%= @swiper.direccion%></th>
               </tr>
+            <% elsif current_swiper %>
+              <% if current_swiper.id == @swiper.id %>
+                <tr>
+                  <th>Teléfono</th><th><%= @swiper.telefono%></th>
+                </tr>
+                <tr>
+                  <th>Dirección</th><th><%= @swiper.direccion%></th>
+                </tr>
+              <% end %>
             <% end %>
             <tr>
               <th>Comuna</th><th><%= @swiper.comuna.nombre %></th>
