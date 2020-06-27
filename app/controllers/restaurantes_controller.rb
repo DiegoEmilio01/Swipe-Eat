@@ -7,11 +7,12 @@ class RestaurantesController < ApplicationController
 
   def create
     restaurante_params = params.require(:restaurante).permit(:nombre, :owner_id, :comuna_id,
+                                                             :direccion, :telefono,
                                                              :descripcion, imagenes: [])
     restaurante_params['owner_id'] = current_owner.id
     @restaurante = Restaurante.create restaurante_params
     if @restaurante.save
-      redirect_to owner_root_path, notice: 'Guardado' # ARREGlAR DESPUES
+      redirect_to owner_root_path, notice: 'Restaurante creado exitosamente.'
     else
       redirect_to restaurante_new_path, notice: @restaurante.errors
     end
@@ -51,7 +52,7 @@ class RestaurantesController < ApplicationController
 
   def update
     restaurante_params = params.require(:restaurante).permit(:nombre, :owner_id, :comuna_id,
-                                                             :aceptado,
+                                                             :aceptado, :direccion, :telefono,
                                                              :descripcion, imagenes: [])
     @restaurante = Restaurante.find params[:id]
     restaurante_params['owner_id'] = @restaurante.owner.id

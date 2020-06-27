@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_26_200018) do
+ActiveRecord::Schema.define(version: 2020_06_26_233108) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -163,6 +163,8 @@ ActiveRecord::Schema.define(version: 2020_06_26_200018) do
     t.bigint "comuna_id"
     t.string "aceptado", default: "Pendiente"
     t.bigint "owner_id"
+    t.string "direccion"
+    t.string "telefono"
     t.index ["comuna_id"], name: "index_restaurantes_on_comuna_id"
     t.index ["owner_id"], name: "index_restaurantes_on_owner_id"
   end

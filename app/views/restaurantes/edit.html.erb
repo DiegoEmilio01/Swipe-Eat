@@ -9,6 +9,12 @@
             <% if notice["descripcion"] %>
                 <%= notice["descripcion"][0] %><br>
             <% end %>
+            <% if notice["telefono"] %>
+                <%= notice["telefono"][0] %><br>
+            <% end %>
+            <% if notice["direccion"] %>
+                <%= notice["direccion"][0] %><br>
+            <% end %>
         <% end %>
     </p>
 
@@ -18,6 +24,14 @@
         <div class="field">
             <%= form.label :nombre %>
             <%= form.text_field :nombre %>
+        </div>
+        <div class="field">
+            <%= form.label :teléfono %>
+            <%= form.text_field :telefono %>
+        </div>
+        <div class="field">
+            <%= form.label :dirección %>
+            <%= form.text_field :direccion %>
         </div>
         <div class="field">
             <%= form.label :descripción %>
