@@ -101,6 +101,7 @@
                                    descripcion: 'Restaurante solo para los mejores piratas',
                                    comuna_id: Comuna.find_by_nombre('Las Condes').id,
                                    owner_id: Owner.find_by_nombre('Gordon Ramsay').id,
+                                   direccion: 'Las Pailas 1325', telefono: '+56912345678',
                                    aceptado: 'Pendiente'
 @restaurante1.save
 
