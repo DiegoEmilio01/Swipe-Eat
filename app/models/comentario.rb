@@ -7,6 +7,8 @@ class Comentario < ApplicationRecord
   belongs_to :restaurante
   # Comenta Swiper-Comentario:1-n
   belongs_to :swiper
+  # Reporta Owner-Comentario:1-n
+  has_many :owner_reportes, dependent: :destroy
   #------------------------------------------------------
 
   validates :contenido, presence: { message: 'Ingresó un Contenido en blanco.' }

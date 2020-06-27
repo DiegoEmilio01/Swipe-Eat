@@ -1,0 +1,28 @@
+<% if current_admin %>
+    <div class="row text-center tall-tittle">
+        <h4><%= notice %></h4>
+    </div>
+    <div>
+    <p>
+        <strong>Nombre autor del comentario reportado:</strong><br>
+        <%=  @swiper.nombre %>
+    </p><br>
+
+    <p>
+        <strong>Contenido del comentario:</strong><br>
+        <%=  @comentario.contenido %>
+    </p><br>
+
+    <p>
+        <strong>Contenido reporte:</strong><br>
+        <%= @reporte.contenido %>
+    </p><br><br>
+
+    <%= link_to 'Ver perfil swiper', swiper_path(@swiper.id) %><br><br>
+    <%= link_to 'Ver comentario reportado', comentario_path(@comentario.id) %><br><br>
+    <%= link_to 'Eliminar reporte', destroy_owner_reporte_path(@reporte.id), method: :delete %><br><br>
+    <%= link_to 'Lista reportes', owner_reportes_path %>
+    </div>
+<% else %>
+    <% controller.redirect_to new_admin_session_path %>
+<% end %>

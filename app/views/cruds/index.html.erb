@@ -12,7 +12,8 @@
       <div class="row"><%= link_to 'Administrar Gustos', gustos_path, :class => "btn btn-primary btn-menu" %></div>
       <div class="row"><%= link_to 'Administrar Comentarios', lista_comentarios_path, :class => "btn btn-primary btn-menu" %></div>
       <div class="row"><%= link_to 'Administrar Restaurantes', lista_restaurantes_path, :class => "btn btn-primary btn-menu" %></div>
-      <div class="row"><%= link_to 'Ver Reportes', reportes_path, :class => "btn btn-primary btn-menu" %></div>
+      <div class="row"><%= link_to 'Ver Reportes Swiper', reportes_path, :class => "btn btn-primary btn-menu" %></div>
+      <div class="row"><%= link_to 'Ver Reportes Owner', owner_reportes_path, :class => "btn btn-primary btn-menu" %></div>
       <div class="row"><%= link_to 'Editar Admin logueado', edit_admin_registration_path, :class => "btn btn-primary btn-menu" %></div>
       <div class="row"><%= link_to 'Borrar Admin logueado', registration_path(resource_name), data: { confirm: "¿Estás seguro que quieres borrar tu cuenta?" }, method: :delete, :class => "btn btn-primary btn-menu" %></div>
       <div class="row"><%= link_to "Cerrar sesión", destroy_admin_session_path, method: :delete, data: {confirm: '¿Estás seguro que quieres cerrar sesión?'}, :class => "btn btn-primary btn-menu" %></div>
