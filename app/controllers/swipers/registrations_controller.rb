@@ -149,8 +149,6 @@ class Swipers::RegistrationsController < Devise::RegistrationsController
 
     @swiper = Swiper.find(current_swiper.id)
 
-    
-
     is_valid = if change_password
                  @swiper.update_with_password(new_params)
                else
