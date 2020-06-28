@@ -20,8 +20,8 @@
 
     <br>
 
-    <%= link_to "Lista comentarios", lista_comentarios_path %><br>
-    <%= link_to "Eliminar comentario", comentario_path(@comentario.id), method: :delete, data: {confirm: 'Estás seguro de querer eliminar el comentario?'} %><br>
+    <%= link_to "Lista comentarios", lista_comentarios_path %>
+    <%= link_to "Eliminar comentario", comentario_path(@comentario.id), method: :delete, data: {confirm: 'Estás seguro de querer eliminar el comentario?'} %>
 <% else %>
     <% controller.redirect_to new_admin_session_path %>
 <% end %>
