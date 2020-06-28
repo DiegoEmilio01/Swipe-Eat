@@ -15,9 +15,6 @@
               <th>Nombre</th><th><%= @swiper.nombre %></th>
             </tr>
             <tr>
-              <th>Email</th><th><%= @swiper.email%></th>
-            </tr>
-            <tr>
               <th>Edad</th><th><%= @swiper.edad%></th>
             </tr>
             <tr>
@@ -32,6 +29,9 @@
               </tr>
             <% elsif current_swiper %>
               <% if current_swiper.id == @swiper.id %>
+                <tr>
+                  <th>Email</th><th><%= @swiper.email%></th>
+                </tr>
                 <tr>
                   <th>Teléfono</th><th><%= @swiper.telefono%></th>
                 </tr>
