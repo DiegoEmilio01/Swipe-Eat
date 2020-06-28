@@ -28,7 +28,9 @@
 
   <%= link_to 'Lista Comunas', lista_comunas_path %><br>
   <%= link_to 'Editar Comuna', edit_comuna_path(@comuna.id) %><br>
-  <%= link_to 'Eliminar Comuna', comuna_path(@comuna.id), method: :delete, data: {confirm: '¿Estás seguro?'} %><br>
+  <% if @comuna.restaurantes.length == 0 && @comuna.swipers.length == 0 %>    
+    <%= link_to 'Eliminar Comuna', comuna_path(@comuna.id), method: :delete, data: {confirm: '¿Estás seguro?'} %><br>
+  <% end %>
 <% else %>
   <% controller.redirect_to new_admin_session_path %>
 <% end %>
