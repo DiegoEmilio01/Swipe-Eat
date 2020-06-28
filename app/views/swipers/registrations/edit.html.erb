@@ -94,7 +94,7 @@
 
               <div class="field">
                 <%= f.label :gustos %><br />
-                <div style="height:150px;overflow:auto;">
+                <div style="height:150px;overflow-y:auto;">
                 <% @gustos = Gusto.all %>
                 <% @gustos.each do |gusto| %>
                   <div class="box">
@@ -123,7 +123,7 @@
               <br>
             
               <div class="field">
-                <%= f.label :agregar_imágenes %>
+                <%= f.label :agregar_imágenes %><br>
                 <%= f.file_field :imagenes, multiple: true %>
               </div>
             
@@ -179,37 +179,29 @@
   </table>
 
   <br><br><br>
-
-  <table>
-      <thead>
-          <tr>
-            <th>
-              Eliminar Imágenes
-            </th>
-          </tr>
-          <tr>
-            <td>
-              <em>(Click para borrar)</em>
-            </td>
-          </tr>
-          <tr>
-              <% (0...current_swiper.imagenes.count).each do |numero| %>
-                  <th>Imagen <%= numero + 1 %> </th>
-              <% end %>
-          </tr>
-        </thead>
-      <tbody>
-          <tr>
-              <% current_swiper.imagenes.each do |imagen| %>
-              <td>            
-                  <div style="width:200px; height:250px;">
-                    <%= link_to image_tag(imagen, style:'width:180px; heigth: 170px'), delete_imagen_swiper_path(imagen.id, current_swiper.id), method: :delete, data: {confirm: "¿Estás seguro de querer eliminar esta imagen?"} %>
-                  </div>
-              <% end %>
-          </tr>
-      </tbody>
-  </table>
+  <div class="row">
+    <div class="col-md-6 text-center">
+      <h4><b>Eliminar Imágenes</b></h4>
+      <em>(Click para borrar)</em>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+      <div class="col-md-6 text-center" style="height:250px;overflow-y:auto;">
+        <% numero = 1 %>
+        <% current_swiper.imagenes.each do |imagen| %>
+            <div style="margin-top:25px">
+              <b>
+                Imagen <%= numero %>
+              </b> <br>
+              <% numero += 1 %> 
+              <%= link_to image_tag(imagen, style:'width:180px; heigth:170px'), delete_imagen_swiper_path(imagen.id, current_swiper.id), method: :delete, data: {confirm: "¿Estás seguro de querer eliminar esta imagen?"}, :class => "eliminar_foto" %>
+            </div>
+        <% end %>
+      </div>
+  </div><br><br>
 
 <% else %>
   <% controller.redirect_to new_swiper_session_path %>
 <% end %>
+

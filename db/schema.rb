@@ -142,7 +142,7 @@ ActiveRecord::Schema.define(version: 2020_06_26_233108) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "nombre", default: "Pendiente"
+    t.string "nombre"
     t.index ["email"], name: "index_owners_on_email", unique: true
     t.index ["reset_password_token"], name: "index_owners_on_reset_password_token", unique: true
   end

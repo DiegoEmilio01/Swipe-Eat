@@ -48,7 +48,7 @@
             </div>
         <% end %>
         <div class="field">
-            <%= form.label :agregar_imágenes %>
+            <%= form.label :agregar_imágenes %><br>
             <%= form.file_field :imagenes, multiple: true %>
         </div><br>
         <div class="actions">
@@ -57,43 +57,35 @@
     <% end %>
 
     <br>
+    <div class="row">
+        <div class="col-md-6 text-center">
+          <h4><b>Eliminar Imágenes</b></h4>
+          <em>(Click para borrar)</em>
+        </div>
+    </div>
+      <br>
+    <div class="row">
+        <div class="col-md-6 text-center" style="height:250px;overflow-y:auto;">
+        <% numero = 1 %>
+        <% @restaurante.imagenes.each do |imagen| %>
+            <div style="margin-top:25px">
+                <b>
+                Imagen <%= numero %>
+                </b> <br>
+                <% numero += 1 %> 
+                <%= link_to image_tag(imagen, style:'width:180px; heigth:170px'), delete_imagen_restaurante_path(imagen.id, @restaurante.id), method: :delete, data: {confirm: "¿Estás seguro de querer eliminar esta imagen?"}, :class => "eliminar_foto" %>
+            </div>
+        <% end %>
+        </div>
+    </div><br><br>
 
-    <table>
-        <thead>
-            <tr>
-                <th>
-                  Eliminar Imágenes
-                </th>
-            </tr>
-            <tr>
-                <td>
-                  <em>(Click para borrar)</em>
-                </td>
-            </tr>
-            <tr>
-                <% (0...@restaurante.imagenes.count).each do |numero| %>
-                    <th>Imagen <%= numero + 1 %> </th>
-                <% end %>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <% @restaurante.imagenes.each do |imagen| %>
-                <td>
-                    <div style="width:200px; height:300px;">
-                        <%= link_to image_tag(imagen, style:'width:150px; heigth: 100px'), delete_imagen_restaurante_path(imagen.id, @restaurante.id), method: :delete, data: {confirm: "¿Estás seguro de querer eliminar esta imagen?"} %>
-                    </div>
-                </td>
-                <% end %>
-            </tr>
-        </tbody>
-    </table>
-
-    <br>
     <% if current_admin %>
-        <%= link_to 'Lista Restaurantes', lista_restaurantes_path %>
+        <div class="row">
+            <div class="col-md-6 text-center">
+                <%= link_to 'Lista Restaurantes', lista_restaurantes_path %>
+            </div>
+        </div><br><br>
     <% end %>
-
 <% else %>
     <% controller.redirect_to new_owner_session_path %>
 <% end %>
