@@ -8,19 +8,24 @@
 </div>
 
 <div class="row">
-  <table align="center">
-    <tbody>
-    <tr>
-      <% @restaurante.imagenes.each do |imagen| %>
-        <td>
-          <div style="overflow-x: auto">
-            <%= image_tag(imagen, style:'height: 200px') %>
-          </div>
-        </td>
-      <% end %>
-    </tr>
-    </tbody>
-  </table>
+  <div class="col-md-2"></div>
+  <div class="col-md-8" style="overflow-x: auto; margin-bottom: 20px;">
+    <table align="center" >
+      <tbody>
+      <tr>
+        <% @restaurante.imagenes.each do |imagen| %>
+          <td>
+            <div >
+              <%= image_tag(imagen, style:'height: 200px') %>
+            </div>
+          </td>
+        <% end %>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-2"></div>
+
 </div>
 
 <div class = "row">
