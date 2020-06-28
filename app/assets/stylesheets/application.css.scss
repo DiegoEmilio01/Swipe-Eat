@@ -141,6 +141,10 @@ th, td {
   background-size: cover;
 }
 
+.eliminar_foto {
+  border: none !important;
+}
+
 a {
   padding: 5px;
   color: #333333;
@@ -150,4 +154,10 @@ a {
 a:hover {
   color: var(--main-rojo);
   text-decoration: none;
+}
+
+input[type="file"] {
+  display: inline;
+  border: 1px solid #333333;
+  border-radius: 1px;
 }

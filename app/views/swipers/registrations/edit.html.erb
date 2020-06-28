@@ -123,7 +123,7 @@
               <br>
             
               <div class="field">
-                <%= f.label :agregar_imágenes %>
+                <%= f.label :agregar_imágenes %><br>
                 <%= f.file_field :imagenes, multiple: true %>
               </div>
             
@@ -203,7 +203,7 @@
               <% current_swiper.imagenes.each do |imagen| %>
               <td>            
                   <div style="width:200px; height:250px;">
-                    <%= link_to image_tag(imagen, style:'width:180px; heigth: 170px'), delete_imagen_swiper_path(imagen.id, current_swiper.id), method: :delete, data: {confirm: "¿Estás seguro de querer eliminar esta imagen?"} %>
+                    <%= link_to image_tag(imagen, style:'width:180px; heigth: 170px'), delete_imagen_swiper_path(imagen.id, current_swiper.id), method: :delete, data: {confirm: "¿Estás seguro de querer eliminar esta imagen?"}, :class => "eliminar_foto" %>
                   </div>
               <% end %>
           </tr>

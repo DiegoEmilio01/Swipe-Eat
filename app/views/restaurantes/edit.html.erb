@@ -48,7 +48,7 @@
             </div>
         <% end %>
         <div class="field">
-            <%= form.label :agregar_imágenes %>
+            <%= form.label :agregar_imágenes %><br>
             <%= form.file_field :imagenes, multiple: true %>
         </div><br>
         <div class="actions">
@@ -81,7 +81,7 @@
                 <% @restaurante.imagenes.each do |imagen| %>
                 <td>
                     <div style="width:200px; height:300px;">
-                        <%= link_to image_tag(imagen, style:'width:150px; heigth: 100px'), delete_imagen_restaurante_path(imagen.id, @restaurante.id), method: :delete, data: {confirm: "¿Estás seguro de querer eliminar esta imagen?"} %>
+                        <%= link_to image_tag(imagen, style:'width:150px; heigth: 100px'), delete_imagen_restaurante_path(imagen.id, @restaurante.id), method: :delete, data: {confirm: "¿Estás seguro de querer eliminar esta imagen?"}, :class => "eliminar_foto" %>
                     </div>
                 </td>
                 <% end %>
