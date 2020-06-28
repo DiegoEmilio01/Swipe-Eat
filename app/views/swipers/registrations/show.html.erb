@@ -69,14 +69,16 @@
     </div>
 
     <div class="col-md-5">
-      <div class="align-w" style="height: 50vh">
-        <% @swiper.imagenes.each do |imagen| %>
-          <div style="padding: 10px 10px 0 10px">
-            <%= image_tag(imagen, style:'width:180px; heigth: 170px') %>
-          </div>
-        <% end %>
+      <div style="height:400px;overflow-y:auto;">
+        <div class="align-z" style="width: 20vw">
+          <% @swiper.imagenes.each do |imagen| %>
+            <div style="padding: 10px 10px 0 10px">
+              <%= image_tag(imagen, style:'width:400px; heigth: 400px') %>
+            </div>
+          <% end %>
+        </div>
       </div>
-      <div>
+      <div style="margin-top: 25px;">
         <ul class="nav nav-pills">
           <% if current_admin %>
             <li><%= link_to 'Editar Swiper', admin_edit_swiper_path(@swiper.id) %><br><br></li>
