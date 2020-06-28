@@ -107,4 +107,14 @@ class RestaurantesController < ApplicationController
     @swiper_cita_id = params[:id]
     @swiper_citado_id = params[:id_a]
   end
+
+  def stats
+    param = params[:rid]
+    @restaurante = Restaurante.find param
+    @citas_agendadas = Meet.where(@restaurante.id == 'restaurante_id').length
+    @citas_efectuadas = Meet.where(@restaurante.id == 'restaurante_id')
+                            .where('fecha < ?', DateTime.now).length
+    @n_comentarios = @restaurante.comentarios.length
+    @valoracion = (@restaurante.comentarios.sum(:valoracion).to_f / @restaurante.comentarios.length)
+  end
 end

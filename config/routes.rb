@@ -143,6 +143,7 @@ Rails.application.routes.draw do
   # READ
   get 'restaurantes', to: 'restaurantes#index', as: 'lista_restaurantes'
   get 'restaurantes/:id', to: 'restaurantes#show', as: 'restaurante'
+  get 'stats/:rid', to: 'restaurantes#stats', as: 'ver_stats'
   # UPDATE
   get 'restaurantes/:id/edit', to: 'restaurantes#edit', as: 'edit_restaurante'
   patch 'restaurantes/:id', to: 'restaurantes#update'
@@ -152,7 +153,6 @@ Rails.application.routes.draw do
                                                                               'imagen_restaurante'
   # FILTRO
   post 'restaurantes-filtrados' => 'restaurantes#filtro'
-
   # RUTAS EXTRA
   get 'pages/choose_login', to: 'pages#choose_login', as: 'choose_login'
   get 'pages/choose_registration', to: 'pages#choose_registration', as: 'choose_registration'

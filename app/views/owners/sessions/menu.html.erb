@@ -11,7 +11,7 @@
 
       <% if current_owner.restaurante %>
         <div class="row"><%= link_to "Ver restaurante", restaurante_path(current_owner.restaurante.id), :class => "btn btn-primary btn-menu" %></div>
-        <div class="row"><%= link_to "Ver Estadísticas", restaurante_path(current_owner.restaurante.id), :class => "btn btn-primary btn-menu" %></div>
+        <div class="row"><%= link_to "Ver Estadísticas", ver_stats_path(current_owner.restaurante.id), :class => "btn btn-primary btn-menu" %></div>
       <% else %>
         <div class="row"><%= link_to "Crear restaurante", restaurante_new_path, :class => "btn btn-primary btn-menu" %></div>
       <% end %>
