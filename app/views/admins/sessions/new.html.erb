@@ -20,16 +20,7 @@
             <%= f.label :password %><br />
             <%= f.password_field :password, autocomplete: "current-password" %>
           </div>
-        </div>
-
-
-        <div class="row">
-          <% if devise_mapping.rememberable? %>
-            <div class="field small">
-              <%= f.check_box :remember_me, :class => 'checkbox'%>
-              <%= f.label :remember_me %>
-            </div>
-          <% end %>
+          <br>
         </div>
 
         <div class="row">
@@ -39,7 +30,6 @@
         </div>
 
       <% end %>
-      <div class="row small"><%= render "admins/shared/links" %></div>
 
     </div>
     <div class="col-md-4 tall-content align-middle">
