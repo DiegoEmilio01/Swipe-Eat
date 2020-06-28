@@ -156,4 +156,6 @@ Rails.application.routes.draw do
   # RUTAS EXTRA
   get 'pages/choose_login', to: 'pages#choose_login', as: 'choose_login'
   get 'pages/choose_registration', to: 'pages#choose_registration', as: 'choose_registration'
+
+  get 'pendientes' => 'restaurantes#pendientes', as: 'pendientes'
 end
