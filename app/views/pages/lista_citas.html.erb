@@ -36,15 +36,17 @@
                 <td><%= link_to 'Ir al perfil', swiper_path(meet.swiper_citado.id)%></td>
                 <td><%= link_to 'Eliminar cita', eliminar_cita_path(current_swiper.id, meet.id, 1) %></td>
               <% else %>
-                <% i = 0 %>
-                <% meet.swiper_cita.imagenes.each do |imagen| %>
-                  <% if (i == 0) && meet.swiper_cita.imagenes.length > 0 %>
-                    <td><%= image_tag(imagen, style:'width:200px; heigth: 100px') %></td>
-                  <% else %>
-                    <td><%= "No hay imagenes disponibles" %></td>
+              <% if !meet.swiper_cita.imagenes.empty? %>
+                  <% i = 0 %>
+                  <% meet.swiper_cita.imagenes.each do |imagen| %>
+                    <% if (i == 0) && meet.swiper_cita.imagenes.length > 0 %>
+                      <td><%= image_tag(imagen, style:'width:200px; heigth: 100px') %></td>
+                    <% end %>
+                  <% i += 1 %>
                   <% end %>
-                <% i += 1 %>
-                <% end %></td>
+                <% else %>
+                  <td><%= "No hay imagenes disponibles" %></td>
+                <% end %>
                 <td><%= meet.swiper_cita.nombre %></td>
                 <td><%= meet.swiper_cita.edad %> años</td>
                 <td><%= meet.restaurante.nombre %></td>

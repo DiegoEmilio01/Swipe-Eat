@@ -24,6 +24,7 @@ main {
 
 a.titulo {
   color: white !important;
+  border: none !important;
 }
 .linkable:hover{
   background-color: var(--main-darko-rojo);
@@ -124,21 +125,29 @@ th, td {
 }
 .rating span label {
   display:inline-block;
-  width:30px;
+  width:40px;
   height:30px;
   text-align:center;
-  color:#FFF;
-  background:#ccc;
-  font-size:30px;
-  margin-right:2px;
-  line-height:30px;
-  border-radius:50%;
-  -webkit-border-radius:50%;
+  background: image-url("grey.png");
+  background-size: cover;
+
 }
 .rating span:hover ~ span label,
 .rating span:hover label,
 .rating span.checked label,
 .rating span.checked ~ span label {
-  background:#F90;
-  color:#FFF;
+
+  background: image-url("logo.png");
+  background-size: cover;
+}
+
+a {
+  padding: 5px;
+  color: #333333;
+  border-radius: 6px;
+  border: 2px solid var(--main-rojo);
+}
+a:hover {
+  color: var(--main-rojo);
+  text-decoration: none;
 }
