@@ -117,4 +117,8 @@ class RestaurantesController < ApplicationController
     @n_comentarios = @restaurante.comentarios.length
     @valoracion = (@restaurante.comentarios.sum(:valoracion).to_f / @restaurante.comentarios.length)
   end
+
+  def pendientes
+    @restaurantes = Restaurante.where('aceptado': 'Pendiente')
+  end
 end
