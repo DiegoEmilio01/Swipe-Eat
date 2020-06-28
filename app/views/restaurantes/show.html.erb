@@ -123,35 +123,40 @@
 
 <% if @restaurante.comentarios.length > 0 %>
     <h2>Comentarios</h2>
-    <div style="height:350px;overflow:auto;display:flex;flex-direction:column-reverse;">
-        <table class="table">
-            <tbody>
-                <% @restaurante.comentarios.each do |comentario| %>
-                        <tr>
-                            <% swiper = Swiper.find(comentario.swiper_id) %>
-                            <td>
-                                <%= swiper.nombre %>
-                            </td>
-                            <td>
-                                <%= comentario.valoracion %>
-                            </td>
-                            <td>
-                                <%= comentario.contenido %>
-                            </td>
-                            <% if current_admin %>
-                                <td>
-                                    <%= link_to 'Ver detalles', comentario_path(comentario.id) %>
-                                </td>
-                            <% elsif current_owner %>
-                                <td>
-                                    <%= link_to 'Reportar comentario', owner_reportando_path(comentario.id) %>
-                                </td>
+    <hr style="border: 1px solid;color: #566787;">
+    <div style="height:350px;overflow:auto;">
+        <% @restaurante.comentarios.each do |comentario| %>
+        <div class ="row align-left" style="margin-left: 20px;">
+            <div class="row ">
+                    <div class="col-md-2">
+                        <% swiper = Swiper.find(comentario.swiper_id) %>
+                        <%= swiper.nombre %>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <% (1..comentario.valoracion.to_i).each do |logo| %>
+                                    <div class="col-md-1 text-left" style="margin-left: -10px; margin-right: right -10px;">
+                                        <%= image_tag("logo.png", :alt => "Logo", style: "height: 20px; width: 40px;") %>
+                                    </div>
                             <% end %>
-                            <br>
-                        </tr>
-                <% end %>
-            </tbody>
-        </table>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <% if current_admin %>
+                            <%= link_to 'Ver detalles', comentario_path(comentario.id) %>
+                        <% elsif current_owner %>
+                            <%= link_to 'Reportar comentario', owner_reportando_path(comentario.id) %>
+                        <% end %>
+                    </div>
+            </div><br>
+            <div class="row" style="margin-left: 0px;margin-top: 1px;">
+                <div class="col-md-4">
+                    <%= comentario.contenido %>
+                </div>
+                
+            </div>
+        </div><hr style="border: 1px solid;color: #566787;"><br>
+        <% end %>
     </div>
     <br>
 <% end %>

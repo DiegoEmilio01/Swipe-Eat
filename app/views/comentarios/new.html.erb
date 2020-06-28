@@ -69,7 +69,7 @@
 
     $('input:radio').change(
       function(){
-        var userRating = this.value;
+        var userRating = parseFloat(this.value);
         document.getElementById("stars").value = userRating;
     }); 
 });
