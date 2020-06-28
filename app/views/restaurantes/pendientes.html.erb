@@ -1,53 +1,57 @@
-<hr style="border: 1px solid;color: #566787;">
-  <% @restaurantes.each do |restaurante| %>
-  <div class="row text-center">
-    <div class="col-md-2 align-middle" >
-      <% if !restaurante.imagenes.empty? %>
-        <%= image_tag(restaurante.imagenes[0], style:"max-width: 200px; max-height: 200px;") %>
-      <% end %>
-    </div>
-    <div class="col-md-10 align-middle" >
-      <div class="row text-left" style="margin-top: -25px;margin-left: 15px;">
-        <h2><%= restaurante.nombre %></h2>
+<% if current_admin %>
+  <hr style="border: 1px solid;color: #566787;">
+    <% @restaurantes.each do |restaurante| %>
+    <div class="row text-center">
+      <div class="col-md-2 align-middle" >
+        <% if !restaurante.imagenes.empty? %>
+          <%= image_tag(restaurante.imagenes[0], style:"max-width: 200px; max-height: 200px;") %>
+        <% end %>
       </div>
-      <div class="row" style="margin-top: 15px;">
-        <div class="col-md-2 text-left"><b>Comuna</b></div>
-        <div class="col-md-2 text-left"><b>Dueño</b></div>
-      </div>
-      <div class="row">
-        <div class="col-md-2 text-left"><%= restaurante.comuna.nombre %></div>
-        <div class="col-md-2 text-left"><%= restaurante.owner.nombre %></div>
-        <div class="col-md-6 text-right"><%= link_to 'Ver', restaurante_path(restaurante.id), :class => "btn btn-primary" %></div>
-      </div>
-      <div class="row" style="margin-top: -20px;">
-        <div class="col-md-2 text-left">
-          <b>Valoración</b>
+      <div class="col-md-10 align-middle" >
+        <div class="row text-left" style="margin-top: -25px;margin-left: 15px;">
+          <h2><%= restaurante.nombre %></h2>
         </div>
-        <div class="col-md-2 text-left">
-          <b>Descripción</b>
+        <div class="row" style="margin-top: 15px;">
+          <div class="col-md-2 text-left"><b>Comuna</b></div>
+          <div class="col-md-2 text-left"><b>Dueño</b></div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-2 text-left">
-          <% if restaurante.comentarios.length > 0 %>
-                  <div class="row" style="margin-left: -15px;">
-                      <% (0...(restaurante.comentarios.sum(:valoracion).to_f / restaurante.comentarios.length).round).each do |i| %>
-                          <div class="col-md-1 text-left" style="margin-left: -10px; margin-right: right: -10px;">
-                              <%= image_tag("logo.png", :alt => "Logo", style: "height: 20px; width: 40px;") %>
-                          </div>
+        <div class="row">
+          <div class="col-md-2 text-left"><%= restaurante.comuna.nombre %></div>
+          <div class="col-md-2 text-left"><%= restaurante.owner.nombre %></div>
+          <div class="col-md-6 text-right"><%= link_to 'Ver', restaurante_path(restaurante.id), :class => "btn btn-primary" %></div>
+        </div>
+        <div class="row" style="margin-top: -20px;">
+          <div class="col-md-2 text-left">
+            <b>Valoración</b>
+          </div>
+          <div class="col-md-2 text-left">
+            <b>Descripción</b>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2 text-left">
+            <% if restaurante.comentarios.length > 0 %>
+                    <div class="row" style="margin-left: -15px;">
+                        <% (0...(restaurante.comentarios.sum(:valoracion).to_f / restaurante.comentarios.length).round).each do |i| %>
+                            <div class="col-md-1 text-left" style="margin-left: -10px; margin-right: right: -10px;">
+                                <%= image_tag("logo.png", :alt => "Logo", style: "height: 20px; width: 40px;") %>
+                            </div>
+                        <% end %>
+                      <% (0...(5 - (restaurante.comentarios.sum(:valoracion).to_f / restaurante.comentarios.length).round)).each do |i| %>
+                        <div class="col-md-1 text-left" style="margin-left: -10px; margin-right: right: -10px;">
+                          <%= image_tag("grey.png", :alt => "Logo", style: "height: 20px; width: 40px;") %>
+                        </div>
                       <% end %>
-                    <% (0...(5 - (restaurante.comentarios.sum(:valoracion).to_f / restaurante.comentarios.length).round)).each do |i| %>
-                      <div class="col-md-1 text-left" style="margin-left: -10px; margin-right: right: -10px;">
-                        <%= image_tag("grey.png", :alt => "Logo", style: "height: 20px; width: 40px;") %>
-                      </div>
-                    <% end %>
-                  </div>
-          <% else %>
-              <p>No disp</p>
-          <% end %>
+                    </div>
+            <% else %>
+                <p>No disp</p>
+            <% end %>
+          </div>
+          <div class="col-md-2 text-left"><%= restaurante.descripcion %></div>
         </div>
-        <div class="col-md-2 text-left"><%= restaurante.descripcion %></div>
       </div>
-    </div>
-  </div><hr style="border: 1px solid;color: #566787;">
+    </div><hr style="border: 1px solid;color: #566787;">
+  <% end %>
+<% else %>
+  <% controller.redirect_to new_admin_session_path %>
 <% end %>
