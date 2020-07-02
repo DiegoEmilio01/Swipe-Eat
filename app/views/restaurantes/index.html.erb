@@ -211,18 +211,18 @@
       <div class="row">
         <div class="col-md-2 text-left">
           <% if restaurante.comentarios.length > 0 %>
-                  <div class="row" style="margin-left: -15px;">
-                      <% (0...(restaurante.comentarios.sum(:valoracion).to_f / restaurante.comentarios.length).round).each do |i| %>
-                          <div class="col-md-1 text-left" style="margin-left: -10px; margin-right: right: -10px;">
-                              <%= image_tag("logo.png", :alt => "Logo", style: "height: 20px; width: 40px;") %>
-                          </div>
-                      <% end %>
-                    <% (0...(5 - (restaurante.comentarios.sum(:valoracion).to_f / restaurante.comentarios.length).round)).each do |i| %>
-                      <div class="col-md-1 text-left" style="margin-left: -10px; margin-right: right: -10px;">
-                        <%= image_tag("grey.png", :alt => "Logo", style: "height: 20px; width: 40px;") %>
-                      </div>
-                    <% end %>
+              <div class="row" style="margin-left: -15px;">
+                <% (0...(restaurante.comentarios.sum(:valoracion).to_f / restaurante.comentarios.length).round).each do |i| %>
+                    <div class="col-md-1 text-left" style="margin-left: -10px; margin-right: right: -10px;">
+                        <%= image_tag("logo.png", :alt => "Logo", style: "height: 20px; width: 40px;") %>
+                    </div>
+                <% end %>
+                <% (0...(5 - (restaurante.comentarios.sum(:valoracion).to_f / restaurante.comentarios.length).round)).each do |i| %>
+                  <div class="col-md-1 text-left" style="margin-left: -10px; margin-right: right: -10px;">
+                    <%= image_tag("grey.png", :alt => "Logo", style: "height: 20px; width: 40px;") %>
                   </div>
+                <% end %>
+              </div>
           <% else %>
               <p>No disp</p>
           <% end %>
