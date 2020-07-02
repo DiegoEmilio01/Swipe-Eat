@@ -78,6 +78,15 @@
         </p>
       <% end %>
 
+      <% if current_owner %>
+        <% if current_owner.id == @restaurante.owner.id %>
+          <p>
+            <strong>Estado:</strong>
+            <%= @restaurante.aceptado %>
+          </p>
+        <% end %>
+      <% end %>
+
       <% if current_admin %>
         <p>
           <strong>Estado:</strong>
