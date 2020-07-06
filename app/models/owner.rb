@@ -4,7 +4,7 @@ class Owner < ApplicationRecord
   #------------------------------------------------------
   # Relaciones
   # Owns Owner-Restaurante:1-1
-  has_one :restaurante
+  has_one :restaurante, dependent: :destroy
   #------------------------------------------------------
 
   # Include default devise modules. Others available are:

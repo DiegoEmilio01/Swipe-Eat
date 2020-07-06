@@ -1,0 +1,10 @@
+ id |    nombre    |                            descripcion                             |         created_at         |         updated_at         | comuna_id | aceptado  | owner_id |         direccion          |   telefono   
+----+--------------+--------------------------------------------------------------------+----------------------------+----------------------------+-----------+-----------+----------+----------------------------+--------------
+  2 | KFC          | Comida rápida para toda la familia.                                | 2020-06-28 22:24:14.545477 | 2020-06-28 22:36:37.898895 |         1 | Aceptado  |        2 | Hernando de magallanes 123 | +56912345678
+  1 | Barba negra  | Restaurante solo para los mejores piratas                          | 2020-06-27 00:29:30.139537 | 2020-06-28 22:37:03.079922 |         1 | Aceptado  |        1 | Las Pailas 1325            | +56912345678
+  3 | Mc Donalds   | Comida rápida para toda la familia.                                | 2020-06-28 22:28:56.621839 | 2020-06-28 23:00:28.264506 |         3 | Aceptado  |        3 | Av Chile España 1000       | +56912345678
+  4 | el goloso    | Restaurante italiano que está en el hall                           | 2020-06-30 21:22:24.111317 | 2020-06-30 21:26:46.688057 |         6 | Aceptado  |        4 | Av matta 123               | +56912345678
+  5 | Fuente Suiza | Ricos sandwishes y tablas                                          | 2020-07-06 21:26:47.657625 | 2020-07-06 21:26:47.773682 |         3 | Pendiente |        5 | Av Irrarázabal 111         | +56912345678
+  6 | Luna China   | Restaurante familiar de comida china. Se puede pedir para retirar. | 2020-07-06 21:33:36.47627  | 2020-07-06 21:36:33.890266 |         5 | Pendiente |        6 | Av Tobalaba 200            | +56912345678
+(6 rows)
+
