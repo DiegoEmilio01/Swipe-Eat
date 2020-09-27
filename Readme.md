@@ -1,21 +1,21 @@
-# Proyecto Software
-Repositorio del proyecto de Ingeniería de Software.
+# Software Engineering Project
 
-Profesor: José Benedetto.
+## Course at Pontificia Universidad Católica de Chile (IIC2143)
 
-Estudiantes: Diego Emilio, Lucas Muñoz y Elías Sabja.
+Pofessor: José Benedetto.
 
-Ayudante: Rodrigo Alonso.
+Students: [Diego Emilio](https://github.com/DiegoEmilio01), [Lucas Muñoz](https://github.com/Luckbox314) y [Elías Sabja](https://github.com/EliasSabja).
 
-### Link de la [aplicación](https://swipe-eat.herokuapp.com/) en Heroku
+Aide: Rodrigo Alonso.
 
-### Diagrama Entidad-Relación en: 
+### [Application](https://swipe-eat.herokuapp.com/) en [Heroku](https://www.heroku.com/)
+
+### Entity–Relationship model:
 
 `grupo4-proyecto/Archivos_utiles/Diagrama/Diagrama_IS.png`
 
-### Link de los [relatos de usuarios](https://trello.com/b/1NwNDwc7/todo-list-relatos-de-usuario) en Trello
-
-### Configuración de Rubocop en:
+### Rubocop configuration:
 
 `grupo4-proyecto/.rubocop.yml`
 
+### [User stories](https://trello.com/b/1NwNDwc7/todo-list-relatos-de-usuario) (only for collaborators)
