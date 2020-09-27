@@ -4,11 +4,11 @@
 
 Pofessor: José Benedetto.
 
-Students: [Diego Emilio](https://github.com/DiegoEmilio01), [Lucas Muñoz](https://github.com/Luckbox314) y [Elías Sabja](https://github.com/EliasSabja).
+Students: [Diego Emilio](https://github.com/DiegoEmilio01), [Lucas Muñoz](https://github.com/Luckbox314) and [Elías Sabja](https://github.com/EliasSabja).
 
 Aide: Rodrigo Alonso.
 
-### [Application](https://swipe-eat.herokuapp.com/) en [Heroku](https://www.heroku.com/)
+### [Application](https://swipe-eat.herokuapp.com/) in [Heroku](https://www.heroku.com/)
 
 ### Entity–Relationship model:
 
